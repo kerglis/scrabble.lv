@@ -1,0 +1,6 @@
+#login_form
+  %h3= message if message rescue ""
+
+  =# fb_login_and_redirect(session[:return_to], :perms => User::FACEBOOK_SCOPE, :display => 'popup')
+  
+  = link_to "Sign in with Facebook", user_omniauth_authorize_path(:facebook)

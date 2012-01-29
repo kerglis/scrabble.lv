@@ -1,0 +1,9 @@
+site_fullname:          "Scrabble"
+site_name:              "Scrabble.lv"
+host:                   "Scrabble.lv"
+host_nice:              "Scrabble.lv"
+email_from:             "Scrabble <info@scrabble>"
+rpp:                    20
+locales:                "lv"
+
+ga_account:             "UA-xxxxxx-1"

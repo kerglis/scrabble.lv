@@ -1,0 +1,9 @@
+.topbar-wrapper
+  .topbar
+    .topbar-inner
+      .container
+        #logo
+          = link_to AppConfig[:site_fullname], root_url({:locale => @locale})
+        = render :partial => "shared/toolbar_pages"
+        = render :partial => "shared/toolbar_user"
+        = render :partial => "shared/toolbar_search"

@@ -1,0 +1,9 @@
+.topbar-wrapper
+  .topbar
+    .topbar-inner
+      .container-fluid
+        #logo.admin
+          = link_to AppConfig[:site_fullname], admin_url
+        %ul.nav
+          = tab :users
+        = render :partial => "shared/toolbar_user"

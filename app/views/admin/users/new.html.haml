@@ -1,0 +1,6 @@
+%h1= tN(User)
+
+= form_for(:user, :url => collection_url) do |f| 
+  = error_messages_for :user 
+  = render :partial => "form", :locals => { :f => f, :is_new => true } 
+  = render :partial => "admin/shared/new_resource_links"

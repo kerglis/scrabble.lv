@@ -1,0 +1,49 @@
+.clearfix
+  = f.label :first_name
+  .input= f.text_field :first_name
+
+.clearfix
+  = f.label :last_name
+  .input= f.text_field :last_name 
+
+- if is_new
+  .clearfix
+    = f.label :password
+    .input
+      = f.password_field :password  
+
+.clearfix
+  = f.label :email
+  .input
+    = f.text_field :email  
+
+.clearfix
+  = f.label :gender
+  .input
+    %ul.inputs-list
+      %li
+        %label
+          = f.radio_button :gender, "m"
+          %span= t("male")
+      %li
+        %label
+          = f.radio_button :gender, "f"
+          %span= t("female")
+  
+.clearfix
+  = f.label :birth_date
+  .input= f.text_field :birth_date, :year_range => -90.years.from_now..0.years.from_now, :class => "date_select"
+
+- unless object.new_record?
+  .clearfix
+    = f.label :last_seen
+    .input
+      %span= object.last_sign_in_at
+
+.clearfix
+  .input
+    %ul.inputs-list
+      %li
+        %label
+          = f.check_box :admin
+          %span= t("admin")

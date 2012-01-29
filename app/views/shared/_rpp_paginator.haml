@@ -1,0 +1,17 @@
+- rpps = [ [20, 20], [50, 50], [100, 100] ]
+- form_num ||= 1
+
+- @collection_count ||= @collection.size rescue 0
+
+- unless (form_num > 1 and @collection_count <= 20)
+  .alert-message.block-message.condensed
+    .row
+      .span5
+        = form_tag(rpp_path, :id => "rpp_form#{form_num}") do
+          RPP:
+          = select_tag "rpp", options_for_select(rpps, @rpp.to_i), :class => "small", :onchange => "$('rpp_form#{form_num}').submit()", :id => "rpp_#{form_num}"
+          - if @collection_count > 0
+            #{t("total_filtered")}:
+            %b(id="batch_filtered#{form_num}")
+              = @collection_count
+      = will_paginate(@collection)

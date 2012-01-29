@@ -1,0 +1,4 @@
+- if @locales.count > 1
+  - @locales.each do |locale|
+    %li{:class => (locale == @locale) && "active"}
+      = link_to flag(locale), root_url(:locale => locale)

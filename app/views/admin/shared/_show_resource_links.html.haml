@@ -1,0 +1,4 @@
+.actions
+  = link_to t("edit"), edit_object_url, :class => "btn primary"
+  = link_to t("delete"), object_url, :confirm => t("confirm_delete"), :method => :delete, :class => "btn danger"
+  = link_to t("back_to_collection"), collection_url

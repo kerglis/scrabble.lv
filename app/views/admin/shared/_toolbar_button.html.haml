@@ -1,0 +1,7 @@
+- @butt = buttons rescue nil
+
+.fr
+  = link_to text, link, :class => 'btn primary'
+  - if @butt
+    - @butt.each do |text, link, icon|
+      %li= link_to text, link, :class => "btn"

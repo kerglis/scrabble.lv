@@ -1,0 +1,36 @@
+.clearfix
+  = f.label :email
+  .input
+    %span.uneditable-input
+      = @object.email
+
+.clearfix
+  .input
+    = link_to t("devise.passwords.change_password"), edit_user_password_path(), :class => "btn"
+
+.clearfix
+  = f.label :first_name
+  .input
+    = f.text_field :first_name  
+
+.clearfix
+  = f.label :last_name
+  .input= f.text_field :last_name  
+  
+.clearfix
+  = f.label :gender
+  .input
+    %label.inline
+      = f.radio_button :gender, "m"
+      %span= t("male")
+    %label.inline
+      = f.radio_button :gender, "f"
+      %span= t("female")
+    
+.clearfix
+  = f.label :birth_date
+  .input
+    = f.text_field :birth_date, :year_range => -90.years.from_now..0.years.from_now, :class => "date_select"
+
+.actions
+  = f.submit t("save"), :class => "btn primary"

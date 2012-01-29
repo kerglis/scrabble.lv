@@ -1,0 +1,17 @@
+%h1= t1(User)
+
+%table.index.form
+  %tr
+    %th= t("first_name")
+    %td= @user.first_name
+  %tr
+    %th= t("last_name")
+    %td= @user.last_name
+  %tr
+    %th= t("email")
+    %td= @user.email
+  %tr
+    %th= t("admin")
+    %td= (@user.admin?) ? t("yes") : t("no")
+
+= render :partial => "admin/shared/show_resource_links"
