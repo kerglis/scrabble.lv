@@ -1,0 +1,24 @@
+development: &dev
+  adapter: mysql2
+  encoding: utf8
+  database: scrabble_dev
+  username: scrabble_dev 
+  password: bvAETBM4ayhRG5sJ
+  host: localhost
+
+demo:
+  <<: *dev
+
+test:
+  adapter: sqlite3
+  database: db/test.sqlite3
+  pool: 5
+  timeout: 5000
+
+production:
+  adapter: mysql2
+  encoding: utf8
+  database: scrabble
+  username: scrabble
+  password: bvAETBM4ayhRG5sJ
+  host: localhost
