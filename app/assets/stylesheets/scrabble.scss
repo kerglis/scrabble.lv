@@ -1,0 +1,78 @@
+@import "my_constants";
+
+.topbar-inner
+{
+  background-image: -moz-linear-gradient(center bottom , #333, #000);
+}
+
+#content
+{
+  margin-top: 150px;
+  height: auto !important;
+  min-height: 500px;
+  &.admin { margin-top: 50px; }
+}
+
+#footer
+{
+  border-top: 1px solid $gray_md;
+  padding: 1em 0;
+  background-image: -moz-linear-gradient(center top , #eee, #fff);
+}
+
+#logo
+{
+  a
+  {
+    background: url("/assets/scrabble-logo-80px.png") no-repeat 0 0;
+    display: block;
+    width: 260px;
+    height: 80px;
+    margin: 10px 0 5px 0;
+    outline: none;
+    text-indent: -9999px;
+  }
+  
+  &.admin
+  {
+    a
+    {
+      float: left;
+      background: url("/assets/scrabble-logo-24px.png") no-repeat 0 8px;
+      height: 40px;
+      margin: 0;
+    }
+  }
+}
+
+.actions
+{
+  background-image: -moz-linear-gradient(center top , #eee, #fff);
+}
+
+.sidebar, .well
+{
+  padding: 5px 10px;
+}
+
+ul.page_boxes
+{
+  margin: 0;
+  width: 730px;
+  
+  .well
+  {
+    margin-bottom: 5px;
+  }
+
+  li
+  {
+    display: inline-block;
+    margin: 0 20px 50px 0; // 20px 10px 0;
+  }
+}
+
+.page_box
+{
+  height: 180px;
+}
