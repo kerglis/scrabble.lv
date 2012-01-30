@@ -1,0 +1,6 @@
+lv:
+  resource_controller:
+    member_object_not_found: "Objekts nav atrasts"
+    successfully_created: "Veiksmīgi izveidots"
+    successfully_updated: "Veiksmīgi saglabāts"
+    successfully_removed: "Veiksmīgi dzēsts"
