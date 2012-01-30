@@ -1,6 +1,6 @@
 class CreatePlayers < ActiveRecord::Migration
   def change
-    create_table :players do |t|
+    create_table :players, :options => 'ENGINE MyISAM' do |t|
       t.integer     :game_id
       t.integer     :user_id
       t.integer     :position

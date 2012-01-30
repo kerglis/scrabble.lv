@@ -11,7 +11,15 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120130194246) do
+ActiveRecord::Schema.define(:version => 20120130214506) do
+
+  create_table "dictionaries", :force => true do |t|
+    t.string "word",   :limit => 20
+    t.string "locale", :limit => 2,  :default => "lv"
+  end
+
+  add_index "dictionaries", ["locale"], :name => "index_dictionaries_on_locale"
+  add_index "dictionaries", ["word"], :name => "index_dictionaries_on_word"
 
   create_table "games", :force => true do |t|
     t.string   "locale",        :limit => 2,  :default => "lv"
@@ -73,13 +81,5 @@ ActiveRecord::Schema.define(:version => 20120130194246) do
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
   add_index "users", ["reset_password_token"], :name => "index_users_on_reset_password_token", :unique => true
-
-  create_table "word_lv_forms", :force => true do |t|
-    t.string "word",      :limit => 20
-    t.string "dict_data", :limit => 20
-    t.string "state",     :limit => 20
-  end
-
-  add_index "word_lv_forms", ["state"], :name => "index_word_lv_forms_on_state"
 
 end
