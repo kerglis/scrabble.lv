@@ -11,21 +11,26 @@ describe Game do
     it "should have correct statuses upon creation" do
       @game = Game.create(:locale => :lv)
 
-      @game.locale.should_be :lv
-      @game.players.count.should_be 0
-      @game.status.should_be "new"
+      @game.locale.should == :lv
+      @game.players.count.should == 0
+      @game.state.should == "new"
+      @game.max_players.should == 4
+      @game.max_move_time.should == 3.minutes
 
       @game.add_player(@user_1)
-      @game.players.count.should_be 1
-      @game.can_start?.should_be false
-      
+      @game.players.count.should == 1
+      @game.players.first.position.should == 1
+      @game.can_start?.should == false
+
       # try to add the same @user
       @game.add_player(@user_1)
-      @game.players.count.should_be 1
+      @game.players.count.should == 1
 
       @game.add_player(@user_2)
-      @game.players.count.should_be 2
-      @game.can_start?.should_be true
+      @game.players.count.should == 2
+      @game.players.last.position.should == 2
+
+      @game.can_start?.should == true
     end
   end
 end

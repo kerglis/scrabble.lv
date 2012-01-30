@@ -3,6 +3,7 @@ class CreateGames < ActiveRecord::Migration
     create_table :games do |t|
       t.string      :locale, :limit => 2, :default => "lv"
       t.string      :state, :limit => 20
+      t.integer     :max_move_time
       t.timestamps
     end
 

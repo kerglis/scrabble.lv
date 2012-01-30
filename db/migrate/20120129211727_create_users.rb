@@ -36,6 +36,15 @@ class CreateUsers < ActiveRecord::Migration
       :last_name => "Erglis"
     })
 
+    User.create({
+      :email => "test@scrabble.lv",
+      :password => "123456",
+      :password_confirmation => "123456",
+      :admin => true,
+      :first_name => "Test",
+      :last_name => "Scrabble"
+    })
+
   end
 
   def down

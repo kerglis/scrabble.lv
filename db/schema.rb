@@ -11,13 +11,14 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120130070935) do
+ActiveRecord::Schema.define(:version => 20120130194246) do
 
   create_table "games", :force => true do |t|
-    t.string   "locale",     :limit => 2,  :default => "lv"
-    t.string   "state",      :limit => 20
-    t.datetime "created_at",                                 :null => false
-    t.datetime "updated_at",                                 :null => false
+    t.string   "locale",        :limit => 2,  :default => "lv"
+    t.string   "state",         :limit => 20
+    t.integer  "max_move_time"
+    t.datetime "created_at",                                    :null => false
+    t.datetime "updated_at",                                    :null => false
   end
 
   add_index "games", ["locale"], :name => "index_games_on_locale"
@@ -72,5 +73,13 @@ ActiveRecord::Schema.define(:version => 20120130070935) do
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
   add_index "users", ["reset_password_token"], :name => "index_users_on_reset_password_token", :unique => true
+
+  create_table "word_lv_forms", :force => true do |t|
+    t.string "word",      :limit => 20
+    t.string "dict_data", :limit => 20
+    t.string "state",     :limit => 20
+  end
+
+  add_index "word_lv_forms", ["state"], :name => "index_word_lv_forms_on_state"
 
 end
