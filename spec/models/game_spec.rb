@@ -4,8 +4,8 @@ describe Game do
   
   describe "initialize" do
     before(:each) do
-      @user_1 = User.create(:email => "one@one.lv", :first_name => "One", :last_name => "First")
-      @user_2 = User.create(:email => "two@two.lv", :first_name => "Two", :last_name => "Second")
+      @user_1 = User.create(:email => "one@one.lv", :first_name => "One", :last_name => "First", :password => "123456")
+      @user_2 = User.create(:email => "two@two.lv", :first_name => "Two", :last_name => "Second", :password => "123456")
     end
 
     it "should have correct statuses upon creation" do

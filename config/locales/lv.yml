@@ -1,4 +1,5 @@
 lv:
+
   save: "Saglabāt"
   welcome: "Sveiki, %{name}"
   profile_name: "Profils: %{name}"

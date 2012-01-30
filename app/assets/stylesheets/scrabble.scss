@@ -2,7 +2,7 @@
 
 .topbar-inner
 {
-  background-image: -moz-linear-gradient(center bottom , #333, #000);
+  background-image: -moz-linear-gradient(center bottom , #003300, #006600);
 }
 
 #content
@@ -24,24 +24,13 @@
 {
   a
   {
-    background: url("/assets/scrabble-logo-80px.png") no-repeat 0 0;
-    display: block;
-    width: 260px;
-    height: 80px;
-    margin: 10px 0 5px 0;
+    background: url("/assets/scrabble-logo.png") no-repeat 0 0;
+    float: left;
+    width: 195px;
+    height: 33px;
+    margin: 4px 10px 0 0;
     outline: none;
     text-indent: -9999px;
-  }
-  
-  &.admin
-  {
-    a
-    {
-      float: left;
-      background: url("/assets/scrabble-logo-24px.png") no-repeat 0 8px;
-      height: 40px;
-      margin: 0;
-    }
   }
 }
 

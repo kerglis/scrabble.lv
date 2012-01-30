@@ -12,6 +12,16 @@ en:
         other: "%{count} errors prohibited this %{resource} from being saved:"
 
   devise:
+    sign_in: "Sign in"
+    sign_up: "Sign up"
+    sign_in_with: "Sign in with: %{provider}"
+    remember_me: "Remember me"
+
+    oauth_callbacks:
+      user:
+        success: 'Successfully authorized from %{kind} account.'
+        failure: 'Could not authorize you from %{kind} because "%{reason}".'
+
     failure:
       already_authenticated: 'You are already signed in.'
       unauthenticated: 'You need to sign in or sign up before continuing.'

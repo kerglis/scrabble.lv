@@ -26,14 +26,14 @@ module ApplicationHelper
 
   def link_to_edit(resource, options = {})
     editable = resource.editable? rescue true # ja nav f-cija - ļaujam rediģēt
-    options.reverse_merge! :url => edit_object_url(resource) unless options.key? :url
+    options.reverse_merge! :url => edit_resource_url(resource) unless options.key? :url
     text = options[:text] rescue ""
     link_to(text.to_s + icon('edit', :title => I18n.t("edit")), options[:url], options.update(:class => 'iconlink')) if editable
   end
 
   def link_to_destroy(resource, options = {})
     options.assert_valid_keys(:url, :confirm, :label)
-    options.reverse_merge! :url => object_url(resource) unless options.key? :url
+    options.reverse_merge! :url => resource_url(resource) unless options.key? :url
     options.reverse_merge! :confirm => t("confirm_delete")
     options.reverse_merge! :label => icon("minus-circle", :title => I18n.t("delete")) unless  options.key? :label
 
@@ -71,7 +71,7 @@ module ApplicationHelper
   end
 
   def link_to_swap(resource, options = {})
-    options.reverse_merge! :url =>      object_path(resource)       unless options.key? :url
+    options.reverse_merge! :url =>      resource_url(resource)      unless options.key? :url
     options.reverse_merge! :confirm =>  t("confirm_deactivate")     unless options.key? :confirm
     options.reverse_merge! :state =>    resource.state == "active"  unless options.key? :state
     options.reverse_merge! :action =>   :swap                       unless options.key? :action
@@ -87,7 +87,7 @@ module ApplicationHelper
   end
 
   def link_to_swap_field(resource, options = {}, html = {})
-    options.reverse_merge! :url =>      object_path(resource)       unless options.key? :url
+    options.reverse_merge! :url =>      resource_url(resource)      unless options.key? :url
     options.reverse_merge! :action =>   :swap_field                 unless options.key? :action
     options.reverse_merge! :html => {}                              unless options.key? :html
 

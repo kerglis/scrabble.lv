@@ -1,14 +1,21 @@
 class Admin::UsersController < Admin::BaseController
-  resource_controller                                                             
 
-  create.wants.html { redirect_to edit_object_url(@object) }
-  update.wants.html { redirect_to edit_object_url(@object) }
+  inherit_resources
+  #resource_controller                                                             
+
+  def create
+    create! { edit_resource_url(resource) }
+  end
+
+  def update
+    update! { edit_resource_url(resource) }
+  end
 
   def destroy
     destroy_object
   end
 
-private
+protected
 
   def collection
     load_filters

@@ -14,10 +14,13 @@ gem "app_config"
 gem "haml"
 gem "devise"
 gem "omniauth-facebook"
+gem 'dynamic_form'
 
 gem "prefered"
 gem 'state_machine'
-gem 'rd_resource_controller', :require => 'resource_controller'
+gem 'meta_search'
+gem 'inherited_resources'
+#gem 'rd_resource_controller', :require => 'resource_controller'
 gem "will_paginate"
 
 group :assets do

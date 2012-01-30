@@ -1,6 +1,6 @@
 %h1= tE(User)
 
-= form_for(:user, :url => object_url, :html => { :method => :put }) do |f| 
+= form_for(:user, :url => resource_url, :html => { :method => :put }) do |f| 
   = error_messages_for :user 
   = render :partial => "form", :locals => { :f => f, :is_new => false } 
   = render :partial => "admin/shared/edit_resource_links"

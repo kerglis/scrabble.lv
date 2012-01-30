@@ -1,6 +1,7 @@
 ScrabbleLv::Application.routes.draw do
 
   match '/users/auth/:provider' => 'oauth_callbacks#passthru'
+  match '/admin' => 'admin/users#index', :locale => :lv
 
   scope "/:locale", :locale => /lv/ do
 
@@ -21,7 +22,7 @@ ScrabbleLv::Application.routes.draw do
 
       resources :games
 
-      root :to => 'games#index'
+      root :to => 'users#index'
     end
 
     resource :user

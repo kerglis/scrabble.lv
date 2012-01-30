@@ -1,10 +1,12 @@
 class UsersController < BaseController
-  resource_controller
-  
+
+  inherit_resources
+  #resource_controller
+
   before_filter :authenticate_user!
 
-  update.wants.html do
-    redirect_to user_url
+  def update
+    update!{ user_url }
   end
 
   def show
@@ -12,11 +14,10 @@ class UsersController < BaseController
     render :edit
   end
 
-
-private
+protected
   
-  def object
-    @object ||= current_user
+  def resource
+    @user ||= current_user
   end
   
 end

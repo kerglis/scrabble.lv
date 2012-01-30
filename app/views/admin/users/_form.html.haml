@@ -15,7 +15,7 @@
 .clearfix
   = f.label :email
   .input
-    = f.text_field :email  
+    = f.text_field :email
 
 .clearfix
   = f.label :gender
@@ -34,7 +34,7 @@
   = f.label :birth_date
   .input= f.text_field :birth_date, :year_range => -90.years.from_now..0.years.from_now, :class => "date_select"
 
-- unless object.new_record?
+- unless resource.new_record?
   .clearfix
     = f.label :last_seen
     .input
