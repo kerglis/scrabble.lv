@@ -25,7 +25,7 @@ ScrabbleLv::Application.routes.draw do
       root :to => 'users#index'
     end
 
-    resource :user
+    resource :user, :only => [ :show, :update ]
     resources :games
 
     match "/*path" => "contents#index"

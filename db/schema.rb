@@ -11,15 +11,15 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120130214506) do
+ActiveRecord::Schema.define(:version => 20120131140541) do
 
   create_table "dictionaries", :force => true do |t|
-    t.string "word",   :limit => 20
+    t.string "word",   :limit => 25
     t.string "locale", :limit => 2,  :default => "lv"
   end
 
   add_index "dictionaries", ["locale"], :name => "index_dictionaries_on_locale"
-  add_index "dictionaries", ["word"], :name => "index_dictionaries_on_word"
+  add_index "dictionaries", ["word"], :name => "word"
 
   create_table "games", :force => true do |t|
     t.string   "locale",        :limit => 2,  :default => "lv"
@@ -31,6 +31,15 @@ ActiveRecord::Schema.define(:version => 20120130214506) do
 
   add_index "games", ["locale"], :name => "index_games_on_locale"
   add_index "games", ["state"], :name => "index_games_on_state"
+
+  create_table "moves", :force => true do |t|
+    t.integer  "game_id"
+    t.integer  "player_id"
+    t.integer  "position"
+    t.string   "state",      :limit => 20
+    t.datetime "created_at",               :null => false
+    t.datetime "updated_at",               :null => false
+  end
 
   create_table "players", :force => true do |t|
     t.integer  "game_id"

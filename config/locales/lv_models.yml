@@ -1,0 +1,21 @@
+lv:
+  activerecord:
+    models:
+      user:
+        one: "Lietotājs"
+        other: "Lietotāji"
+      page:
+        one: "Lapa"
+        other: "Lapas"
+
+    attributes:
+      user:
+        first_name: "Vārds"
+        last_name: "Uzvārds"
+        email: "E-pasts"
+        password: "Parole"
+        gender: "Dzimums"
+        birth_date: "Dzimšanas datums"
+      page:
+        name: "Nosaukums"
+        content: "Saturs"

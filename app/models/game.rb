@@ -1,20 +1,20 @@
 class Game < ActiveRecord::Base
 
-  has_many              :players
+  has_many            :players
+  has_many            :moves
+  before_validation   :setup_defaults
 
   state_machine :initial => :new do
-    after_transition do |o, t|
-      mm = "do_after_#{t.to_name.to_s}".to_sym
-      o.send(mm) if o.respond_to?(mm)
-    end
-
-    event :play do
+    event :start do
       transition :to => :in_progress, :from => :new, :if => lambda { |game| game.can_start? }
     end
-
     event :finish do
       transition :to => :finished
     end
+  end
+
+  def min_players
+    2
   end
 
   def max_players
@@ -23,7 +23,8 @@ class Game < ActiveRecord::Base
 
   def can_start?
     return false unless valid?
-    return true if players.count > 1 and players.count <= max_players
+    return false unless new?
+    return true if players.count >= min_players and players.count <= max_players
     false
   end
 
@@ -33,8 +34,21 @@ class Game < ActiveRecord::Base
     elsif self.players.count >= max_players
       errors.add(:game, "too many players - max = #{max_players}")
     else
-      self.players << Player.create(:game => self, :user => user)
+      player = Player.create(:game => self, :user => user)
+      self.players << player
+      player
     end
+  end
+
+  def scrabble
+
+  end
+
+private
+
+  def setup_defaults
+    self.locale ||= :lv
+    self.max_move_time ||= 3.minutes
   end
 
 end

@@ -1,42 +1,56 @@
 @import "my_constants";
 
+
+body
+{
+  background: $green_lt;
+}
+
 .topbar-inner
 {
-  background-image: -moz-linear-gradient(center bottom , #003300, #006600);
+  background-image: -moz-linear-gradient(center bottom , $green_dk, $green);
 }
 
 #content
 {
-  margin-top: 150px;
+  margin-top: 60px;
   height: auto !important;
   min-height: 500px;
-  &.admin { margin-top: 50px; }
 }
 
 #footer
 {
-  border-top: 1px solid $gray_md;
-  padding: 1em 0;
-  background-image: -moz-linear-gradient(center top , #eee, #fff);
+  border-top: 1px solid $green_mid;
+  padding: 0.5em 0;
+  p { font-size: 11px; }
 }
 
 #logo
 {
   a
   {
-    background: url("/assets/scrabble-logo.png") no-repeat 0 0;
+    background: url("/assets/scrabble-logo-shaded.png") no-repeat 0 0;
     float: left;
-    width: 195px;
-    height: 33px;
-    margin: 4px 10px 0 0;
+    width: 235px;
+    height: 51px;
+    margin: 0 10px 0 0;
     outline: none;
     text-indent: -9999px;
   }
 }
 
+.topbar
+{
+  div > ul.secondary-nav, .nav.secondary-nav
+  {
+    margin-top: 11px;
+  }
+}
+
 .actions
 {
-  background-image: -moz-linear-gradient(center top , #eee, #fff);
+  border: none;
+  background-image: -moz-linear-gradient(center top , $green_mid, $green_lt);
 }
 
 .sidebar, .well
