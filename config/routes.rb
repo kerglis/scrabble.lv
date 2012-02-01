@@ -3,7 +3,7 @@ ScrabbleLv::Application.routes.draw do
   match '/users/auth/:provider' => 'oauth_callbacks#passthru'
   match '/admin' => 'admin/users#index', :locale => :lv
 
-  scope "/:locale", :locale => /lv/ do
+  scope "/:locale", :locale => /lv|en/ do
 
     devise_for :users, :controllers => { :omniauth_callbacks => "oauth_callbacks" }
 
@@ -26,9 +26,10 @@ ScrabbleLv::Application.routes.draw do
     end
 
     resource :user, :only => [ :show, :update ]
-    resources :games
+    match "/chk" => "words#check"
 
-    match "/*path" => "contents#index"
+    #resources :games
+    #match "/*path" => "contents#index"
     root :to => 'welcome#index'
   end
 

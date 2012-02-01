@@ -51,4 +51,12 @@ lv:
   confirm_deactivate: "Tiešām deaktivizēt?"
   server_error: "Serveris atgrieza kļūdu"
 
-  save_object_first: "Sākumā saglabājiet objektu"  
+  save_object_first: "Sākumā saglabājiet objektu"
+  all_rights_reserved: "Visas tiesības piepaturētas"
+  
+  enter_word: "Ievadi vārdu"
+  check_word: "Pārbaudīt"
+  check_words: "Pārbaudīt vārdus"
+  word_found: "Vārds <span>%{word}</span> ir atrasts mūsu vārdnīcā"
+  word_not_found: "Vārds <span>%{word}</span> NAV atrasts mūsu vārdnīcā"
+  

@@ -45,6 +45,11 @@ body
   {
     margin-top: 11px;
   }
+
+  div > ul.nav
+  {
+    margin-top: 11px;
+  }
 }
 
 .actions
@@ -53,29 +58,11 @@ body
   background-image: -moz-linear-gradient(center top , $green_mid, $green_lt);
 }
 
-.sidebar, .well
+.msg
 {
-  padding: 5px 10px;
-}
-
-ul.page_boxes
-{
-  margin: 0;
-  width: 730px;
-  
-  .well
+  span
   {
-    margin-bottom: 5px;
+    font-size: 24px;
+    font-weight: bold;
   }
-
-  li
-  {
-    display: inline-block;
-    margin: 0 20px 50px 0; // 20px 10px 0;
-  }
-}
-
-.page_box
-{
-  height: 180px;
 }
