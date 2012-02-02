@@ -2,7 +2,7 @@
 
 = form_for :search, :url => chk_path, :html => { :method => :post, :class => "form-horizontal"} do |f| 
   .control-group
-    = f.text_field :word, :placeholder => t("enter_word")
+    = f.text_field :word, :placeholder => t("enter_word"), :class => "span4"
     = f.submit t("check_word"), :class => "btn btn-success"
 
 .row
