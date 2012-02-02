@@ -1,13 +1,14 @@
 %h1= t("check_words")
 
-= form_for :search, :url => chk_path, :html => { :method => :post } do |f| 
-  .clearfix
+= form_for :search, :url => chk_path, :html => { :method => :post, :class => "form-horizontal"} do |f| 
+  .control-group
     = f.text_field :word, :placeholder => t("enter_word")
-    = f.submit t("check_word"), :class => "btn"
+    = f.submit t("check_word"), :class => "btn btn-success"
 
-- if @word
-  .alert-message.success.span8
-    .msg= t("word_found", :word => @word.word).html_safe
-- elsif @search.word.present?
-  .alert-message.error.span8
-    .msg= t("word_not_found", :word => @search.word).html_safe
+.row
+  - if @word
+    .alert.alert-success.alert-block.span6
+      .msg= t("word_found", :word => @word.word).html_safe
+  - elsif @search.word.present?
+    .alert.alert-error.alert-block.span6
+      .msg= t("word_not_found", :word => @search.word).html_safe

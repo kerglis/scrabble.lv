@@ -1,5 +1,5 @@
 %h1= t("devise.profile")
 
-= form_for :user, :url => user_url, :html => { :id => "profile_form", :class => "short", :method => :put } do |f|
+= form_for :user, :url => user_url, :html => { :id => "profile_form", :class => "short form-horizontal", :method => :put } do |f|
   = error_messages_for :user
   = render :partial => "form", :locals => { :f => f }

@@ -11,7 +11,7 @@ set :deploy_via, :remote_cache
 
 set :application, "scrabble"
 set :rvm_bin_path, "/usr/local/rvm/bin"
-set :rvm_ruby_string, "ree@#{application}"
+set :rvm_ruby_string, "ree-1.8.7-2011.03@#{application}"
 
 set :keep_releases, 5
 after "deploy", "deploy:cleanup"

@@ -1,15 +1,16 @@
 - msg = []; cl = []
 - flash.each do |f|
-  - cl << f[0]; msg << f[1]
+  - cl << "alert-#{f[0]}"; msg << f[1]
 
 - msg_str = msg.compact.join("<br/>")
 - cl_str = cl.compact.join(" ").gsub!("notice", "success")
 - cl = (msg_str.present?) ? "" : "hide"
 
 #flash_panel{:class => cl}
-  .alert-message{:class => cl_str, :"data-alert" => true }
+  .alert.alert-block{:class => cl_str, :"data-dismiss" => "alert" }
     %a.close{:href =>"#"}×
-    .flash-message= msg_str
+    .flash-message
+      = msg_str
 
 :javascript
   $(function() {

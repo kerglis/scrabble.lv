@@ -3,17 +3,17 @@
 
 body
 {
-  background: $green_lt;
+//  background: $green_lt;
 }
 
-.topbar-inner
+.navbar-inner
 {
   background-image: -moz-linear-gradient(center bottom , $green_dk, $green);
 }
 
 #content
 {
-  margin-top: 60px;
+  margin-top: 90px;
   height: auto !important;
   min-height: 500px;
 }
@@ -39,23 +39,20 @@ body
   }
 }
 
-.topbar
+.navbar
 {
-  div > ul.secondary-nav, .nav.secondary-nav
-  {
-    margin-top: 11px;
-  }
-
   div > ul.nav
   {
     margin-top: 11px;
   }
 }
 
-.actions
+h1, h2 { margin-bottom: 0.5em }
+
+.form-actions
 {
-  border: none;
-  background-image: -moz-linear-gradient(center top , $green_mid, $green_lt);
+  border-top: 1px solid $green_mid;
+  background: none;
 }
 
 .msg
