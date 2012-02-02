@@ -58,5 +58,5 @@ lv:
   check_word: "Pārbaudīt"
   check_words: "Pārbaudīt vārdus"
   word_found: "Vārds <span>%{word}</span> ir atrasts mūsu vārdnīcā"
-  word_not_found: "Vārds <span>%{word}</span> NAV atrasts mūsu vārdnīcā"
+  word_not_found: "Vārds <span>%{word}</span> nav atrasts mūsu vārdnīcā"
   

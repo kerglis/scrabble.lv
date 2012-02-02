@@ -3,7 +3,7 @@
 = form_for :search, :url => chk_path, :html => { :method => :post } do |f| 
   .clearfix
     = f.text_field :word, :placeholder => t("enter_word")
-    = f.submit t("check_word"), :class => "btn success"
+    = f.submit t("check_word"), :class => "btn"
 
 - if @word
   .alert-message.success.span8

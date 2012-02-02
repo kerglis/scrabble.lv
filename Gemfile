@@ -15,12 +15,12 @@ gem "haml"
 gem "devise"
 gem "omniauth-facebook"
 gem 'dynamic_form'
+gem 'jquery-rails'
 
 gem "prefered"
 gem 'state_machine'
 gem 'meta_search'
 gem 'inherited_resources'
-#gem 'rd_resource_controller', :require => 'resource_controller'
 gem "will_paginate"
 
 group :assets do
@@ -35,5 +35,8 @@ group :test do
   gem 'sqlite3'
 end
 
-gem 'jquery-rails'
-gem 'capistrano'
+group :development do
+  # Deploy with Capistrano
+  gem 'capistrano', '~> 2.9.0'
+  gem 'capistrano-ext', '~> 1.2.1'
+end
