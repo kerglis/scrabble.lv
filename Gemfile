@@ -23,6 +23,7 @@ gem 'state_machine'
 gem 'meta_search'
 gem 'inherited_resources'
 gem "will_paginate"
+gem 'progressbar'
 
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'

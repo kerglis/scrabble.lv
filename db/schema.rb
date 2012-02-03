@@ -11,7 +11,12 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120131140541) do
+ActiveRecord::Schema.define(:version => 20120203085415) do
+
+  create_table "char_counts", :force => true do |t|
+    t.string  "char",       :limit => 1
+    t.integer "char_count"
+  end
 
   create_table "dictionaries", :force => true do |t|
     t.string "word",   :limit => 25
