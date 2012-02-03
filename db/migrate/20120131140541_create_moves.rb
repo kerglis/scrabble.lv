@@ -7,5 +7,11 @@ class CreateMoves < ActiveRecord::Migration
       t.string    :state, :limit => 20
       t.timestamps
     end
+
+    add_index :moves, :game_id
+    add_index :moves, :player_id
+    add_index :moves, :position
+    add_index :moves, :state
+
   end
 end
