@@ -2,8 +2,10 @@
 
 = form_for :search, :url => chk_path, :html => { :method => :post, :class => "form-horizontal"} do |f| 
   .control-group
-    = f.text_field :word, :placeholder => t("enter_word"), :class => "span4"
+    = f.text_field :word, :placeholder => t("enter_word"), :class => "span4 key_watcher", :data => { :min_length => 2, :max_length => 15, :allowed_symbols => Game.char_list(@locale), :url => chk_path }
     = f.submit t("check_word"), :class => "btn btn-success"
+
+#word_exposer
 
 .row
   - if @word

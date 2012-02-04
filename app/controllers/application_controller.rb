@@ -7,9 +7,6 @@ class ApplicationController < ActionController::Base
 
   def set_locale
     @locales = AppConfig[:locales].split(/[\/,]/).map(&:to_sym)
-    
-    p @locales
-    
     I18n.locale = params[:locale].to_sym if @locales.include?(params[:locale].to_sym)
     I18n.locale ||= @locales.first
     @locale = I18n.locale

@@ -3,7 +3,6 @@ class BaseController < ApplicationController
   layout :get_layout
 
   helper_method :title, :set_title
-  helper_method :title, :set_title
 
   def get_layout
     return (params[:layout]) ? params[:layout] : "application"
@@ -63,7 +62,7 @@ protected
   def render_404(exception = nil)
     respond_to do |type|
       type.html { render :file    => "#{RAILS_ROOT}/public/404.html", :status => "404 Not Found" }
-      type.all  { render :nothing => true,              :status => "404 Not Found" }
+      type.all  { render :nothing => true, :status => "404 Not Found" }
     end
   end
 end

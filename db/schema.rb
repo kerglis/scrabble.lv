@@ -11,15 +11,25 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120203085415) do
+ActiveRecord::Schema.define(:version => 20120204130338) do
 
   create_table "char_counts", :force => true do |t|
     t.string  "char",       :limit => 1
     t.integer "char_count"
+    t.string  "locale",     :limit => 2, :default => "lv", :null => false
   end
 
+  create_table "chars", :force => true do |t|
+    t.string  "char",   :limit => 1
+    t.string  "locale", :limit => 2, :default => "lv"
+    t.integer "pts"
+    t.integer "total"
+  end
+
+  add_index "chars", ["char", "locale"], :name => "index_chars_on_char_and_locale", :unique => true
+
   create_table "dictionaries", :force => true do |t|
-    t.string "word",   :limit => 25
+    t.string "word",   :limit => 15
     t.string "locale", :limit => 2,  :default => "lv"
   end
 
@@ -45,6 +55,11 @@ ActiveRecord::Schema.define(:version => 20120203085415) do
     t.datetime "created_at",               :null => false
     t.datetime "updated_at",               :null => false
   end
+
+  add_index "moves", ["game_id"], :name => "game_id"
+  add_index "moves", ["player_id"], :name => "player_id"
+  add_index "moves", ["position"], :name => "position"
+  add_index "moves", ["state"], :name => "state"
 
   create_table "players", :force => true do |t|
     t.integer  "game_id"
