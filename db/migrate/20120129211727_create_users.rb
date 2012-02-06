@@ -26,25 +26,6 @@ class CreateUsers < ActiveRecord::Migration
     add_index "users", ["email"], :unique => true
     add_index "users", ["reset_password_token"], :unique => true
 
-    User.reset_column_information
-    User.create({
-      :email => "kristaps.erglis@gmail.com",
-      :password => "123456",
-      :password_confirmation => "123456",
-      :admin => true,
-      :first_name => "Kristaps",
-      :last_name => "Erglis"
-    })
-
-    User.create({
-      :email => "test@scrabble.lv",
-      :password => "123456",
-      :password_confirmation => "123456",
-      :admin => true,
-      :first_name => "Test",
-      :last_name => "Scrabble"
-    })
-
   end
 
   def down

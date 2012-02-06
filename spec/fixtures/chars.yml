@@ -1,0 +1,202 @@
+%YAML 1.1
+---
+# scrabble_dev.chars
+-
+  id: 1
+  char: "a"
+  locale: "lv"
+  pts: 1
+  total: 11
+-
+  id: 2
+  char: "i"
+  locale: "lv"
+  pts: 1
+  total: 9
+-
+  id: 3
+  char: "e"
+  locale: "lv"
+  pts: 1
+  total: 6
+-
+  id: 4
+  char: "s"
+  locale: "lv"
+  pts: 1
+  total: 8
+-
+  id: 5
+  char: "n"
+  locale: "lv"
+  pts: 2
+  total: 4
+-
+  id: 6
+  char: "o"
+  locale: "lv"
+  pts: 3
+  total: 3
+-
+  id: 7
+  char: "ā"
+  locale: "lv"
+  pts: 2
+  total: 4
+-
+  id: 8
+  char: "t"
+  locale: "lv"
+  pts: 1
+  total: 6
+-
+  id: 9
+  char: "m"
+  locale: "lv"
+  pts: 2
+  total: 4
+-
+  id: 10
+  char: "j"
+  locale: "lv"
+  pts: 4
+  total: 2
+-
+  id: 11
+  char: "u"
+  locale: "lv"
+  pts: 1
+  total: 5
+-
+  id: 12
+  char: "p"
+  locale: "lv"
+  pts: 2
+  total: 3
+-
+  id: 13
+  char: "š"
+  locale: "lv"
+  pts: 6
+  total: 1
+-
+  id: 14
+  char: "r"
+  locale: "lv"
+  pts: 1
+  total: 5
+-
+  id: 15
+  char: "ē"
+  locale: "lv"
+  pts: 4
+  total: 2
+-
+  id: 16
+  char: "k"
+  locale: "lv"
+  pts: 2
+  total: 4
+-
+  id: 17
+  char: "z"
+  locale: "lv"
+  pts: 3
+  total: 2
+-
+  id: 18
+  char: "l"
+  locale: "lv"
+  pts: 2
+  total: 3
+-
+  id: 19
+  char: "d"
+  locale: "lv"
+  pts: 3
+  total: 3
+-
+  id: 20
+  char: "ī"
+  locale: "lv"
+  pts: 4
+  total: 2
+-
+  id: 21
+  char: "v"
+  locale: "lv"
+  pts: 3
+  total: 3
+-
+  id: 22
+  char: "g"
+  locale: "lv"
+  pts: 5
+  total: 1
+-
+  id: 23
+  char: "b"
+  locale: "lv"
+  pts: 5
+  total: 1
+-
+  id: 24
+  char: "c"
+  locale: "lv"
+  pts: 5
+  total: 1
+-
+  id: 25
+  char: "ķ"
+  locale: "lv"
+  pts: 10
+  total: 1
+-
+  id: 26
+  char: "ū"
+  locale: "lv"
+  pts: 6
+  total: 1
+-
+  id: 27
+  char: "ļ"
+  locale: "lv"
+  pts: 8
+  total: 1
+-
+  id: 28
+  char: "ņ"
+  locale: "lv"
+  pts: 6
+  total: 1
+-
+  id: 29
+  char: "ž"
+  locale: "lv"
+  pts: 8
+  total: 1
+-
+  id: 30
+  char: "f"
+  locale: "lv"
+  pts: 10
+  total: 1
+-
+  id: 31
+  char: "č"
+  locale: "lv"
+  pts: 10
+  total: 1
+-
+  id: 32
+  char: "ģ"
+  locale: "lv"
+  pts: 10
+  total: 1
+-
+  id: 33
+  char: "h"
+  locale: "lv"
+  pts: 10
+  total: 1
+...

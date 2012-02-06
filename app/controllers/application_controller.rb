@@ -1,9 +1,21 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
 
-  before_filter :instantiate_controller_and_action_names
+  #respond_to :xml, :json, :html, :iphone
+
   after_filter  :store_location, :only => [ :index, :show ]
   before_filter :set_locale
+  before_filter :adjust_format_for_iphone
+
+  def adjust_format_for_iphone
+    request.format = :iphone if iphone_request?
+  end
+
+  def iphone_request?
+    request.host == "m.localhost"   ||
+    request.subdomains.first == "m" || 
+    (Rails.env.development? && request.env["HTTP_USER_AGENT"] && request.env["HTTP_USER_AGENT"] =~ /iPhone|iPod/ )
+  end
 
   def set_locale
     @locales = AppConfig[:locales].split(/[\/,]/).map(&:to_sym)
@@ -19,13 +31,6 @@ class ApplicationController < ActionController::Base
   def redirect_back_or_default(default)
     redirect_to(session[:return_to] || default)
     session[:return_to] = nil
-  end
-
-private
-
-  def instantiate_controller_and_action_names
-    @current_action = action_name
-    @current_controller = controller_name
   end
 
 end
