@@ -12,6 +12,9 @@ class ApplicationController < ActionController::Base
   end
 
   def iphone_request?
+    p ">>>>>>>>>>>>>>>>>>"
+    p request.env["HTTP_USER_AGENT"]
+
     request.host == "m.localhost"   ||
     request.subdomains.first == "m" || 
     (request.env["HTTP_USER_AGENT"] && request.env["HTTP_USER_AGENT"] =~ /iPhone|iPod/ )
