@@ -14,7 +14,7 @@ class ApplicationController < ActionController::Base
   def iphone_request?
     request.host == "m.localhost"   ||
     request.subdomains.first == "m" || 
-    (Rails.env.development? && request.env["HTTP_USER_AGENT"] && request.env["HTTP_USER_AGENT"] =~ /iPhone|iPod/ )
+    (request.env["HTTP_USER_AGENT"] && request.env["HTTP_USER_AGENT"] =~ /iPhone|iPod/ )
   end
 
   def set_locale
