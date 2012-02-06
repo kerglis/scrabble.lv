@@ -14,3 +14,7 @@
   - elsif @search.word.present?
     .alert.alert-error.alert-block.span6
       .msg= t("word_not_found", :word => @search.word).html_safe
+
+
+
+%p= request.env["HTTP_USER_AGENT"]
