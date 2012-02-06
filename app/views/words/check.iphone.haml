@@ -1,8 +1,9 @@
 %h1= t("check_words")
 
 = form_for :search, :url => chk_path, :html => { :method => :post, :class => "form-horizontal"} do |f| 
-  %p= f.text_field :word, :placeholder => t("enter_word"), :class => "span4 key_watcher", :data => { :min_length => 2, :max_length => 15, :allowed_symbols => Game.char_list(@locale), :url => chk_path }
-  %p= f.submit t("check_word"), :class => "btn btn-success"
+  .row
+    = f.text_field :word, :placeholder => t("enter_word"), :style => "width:65%",:data => { :min_length => 2, :max_length => 15, :allowed_symbols => Game.char_list(@locale), :url => chk_path }
+    = f.submit t("check_word"), :class => "btn btn-success", :style => "width: 30%"
 
 #word_exposer
 - if @word

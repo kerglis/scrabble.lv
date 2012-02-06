@@ -8,7 +8,7 @@ class WordsController < BaseController
     in_params = params["search"] || { :word => "" }
 
     @search = OpenStruct.new(in_params)
-    @word = Dictionary.find_by_word_and_locale(@search.word, @locale)
+    @word = Dictionary.find_by_word_and_locale(@search.word.mb_chars.downcase, @locale)
     @error = t("search_word_out_of_boundries") if @search.word.length < 2 or @search.word.length > 15
 
     respond_to do |format|
