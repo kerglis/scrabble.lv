@@ -49,9 +49,28 @@ describe Game do
       @game.chars.empty?.should == false
     end
 
-    it "should have moves" do
+    it "should have empty moves" do
       @game.moves.empty?.should == true
     end
 
+    it "should have cells" do
+      @game.cells.empty?.should == false
+      @game.cells.count.should == Game.board.flatten.count
+    end
+
   end
+
+  describe "gameplay" do
+
+    before(:each) do
+      @game.add_player(@user_1)
+      @game.add_player(@user_2)
+    end
+
+    it "users shall have moves" do
+      @game.whos_move.user.should == @user_1
+    end
+
+  end
+
 end

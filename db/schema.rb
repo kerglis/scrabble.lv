@@ -11,7 +11,18 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120204130338) do
+ActiveRecord::Schema.define(:version => 20120211204053) do
+
+  create_table "cells", :force => true do |t|
+    t.integer "game_id"
+    t.integer "x"
+    t.integer "y"
+    t.string  "cell_type", :limit => 2
+    t.string  "state",     :limit => 10
+  end
+
+  add_index "cells", ["game_id", "x", "y"], :name => "index_cells_on_game_id_and_x_and_y", :unique => true
+  add_index "cells", ["state"], :name => "index_cells_on_state"
 
   create_table "char_counts", :force => true do |t|
     t.string  "char",       :limit => 1

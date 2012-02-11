@@ -4,7 +4,10 @@ class Game < ActiveRecord::Base
 
   has_many            :players
   has_many            :moves
+  has_many            :cells
+
   before_validation   :setup_defaults
+  after_create        :setup_cells
 
   state_machine :initial => :new do
     event :start do
@@ -13,6 +16,36 @@ class Game < ActiveRecord::Base
     event :finish do
       transition :to => :finished
     end
+  end
+
+  def self.board
+    # cc - center cell
+    # l2 - letter x 2
+    # l3 - letter x 3
+    # w2 - word x 2
+    # w3 - word x 3
+
+    out = []
+    out << %w{ w3 __ __ l2 __ __ __ w3 __ __ __ l2 __ __ w3 }
+    out << %w{ __ w2 __ __ __ l3 __ __ __ l3 __ __ __ w2 __ }
+    out << %w{ __ __ w2 __ __ __ l2 __ l2 __ __ __ w2 __ __ }
+    out << %w{ l2 __ __ w2 __ __ __ l2 __ __ __ w2 __ __ l2 }
+    out << %w{ __ __ __ __ w2 __ __ __ __ __ w2 __ __ __ __ }
+    out << %w{ __ l3 __ __ __ l3 __ __ __ l3 __ __ __ l3 __ }
+    out << %w{ __ __ l2 __ __ __ l2 __ l2 __ __ __ l2 __ __ }
+    out << %w{ w3 __ __ l2 __ __ __ cc __ __ __ l2 __ __ w3 }
+    out << %w{ __ __ l2 __ __ __ l2 __ l2 __ __ __ l2 __ __ }
+    out << %w{ __ l3 __ __ __ l3 __ __ __ l3 __ __ __ l3 __ }
+    out << %w{ __ __ __ __ w2 __ __ __ __ __ w2 __ __ __ __ }
+    out << %w{ l2 __ __ w2 __ __ __ l2 __ __ __ w2 __ __ l2 }
+    out << %w{ __ __ w2 __ __ __ l2 __ l2 __ __ __ w2 __ __ }
+    out << %w{ __ w2 __ __ __ l3 __ __ __ l3 __ __ __ w2 __ }
+    out << %w{ w3 __ __ l2 __ __ __ w3 __ __ __ l2 __ __ w3 }
+    out
+  end
+
+  def self.cell_type(str)
+    (str == "__") ? "" : str
   end
 
   def chars
@@ -47,6 +80,10 @@ class Game < ActiveRecord::Base
     4
   end
 
+  def cell(x, y) # x, y -- zero-based
+    board[y][x] rescue nil
+  end
+
   def can_start?
     return false unless valid?
     return false unless new?
@@ -66,8 +103,8 @@ class Game < ActiveRecord::Base
     end
   end
 
-  def scrabble
-
+  def whos_move
+    players.first
   end
 
 private
@@ -75,6 +112,14 @@ private
   def setup_defaults
     self.locale ||= :lv
     self.max_move_time ||= 3.minutes
+  end
+  
+  def setup_cells
+    Game.board.each_with_index do |line, y|
+      line.each_with_index do |cell, x|
+        Cell.create :game => self, :x => x, :y => y, :cell_type => Game.cell_type(cell)
+      end
+    end
   end
 
 end
