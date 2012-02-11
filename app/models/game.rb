@@ -16,11 +16,11 @@ class Game < ActiveRecord::Base
   end
 
   def chars
-    Char.loc(locale)
+    Char.for_locale(locale)
   end
 
   def self.char_list(locale = nil)
-    Char.loc(locale).map(&:char)
+    Char.for_locale(locale).map(&:char)
   end
 
   def char(ch)

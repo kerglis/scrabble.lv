@@ -1,6 +1,6 @@
 class Char < ActiveRecord::Base
 
-  def self.loc(locale)
+  def self.for_locale(locale)
     where(:locale => locale)
   end
 

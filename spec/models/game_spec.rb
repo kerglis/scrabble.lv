@@ -2,6 +2,8 @@ require 'spec_helper'
 
 describe Game do
 
+  fixtures :chars
+
   before(:each) do
     @game = Game.create(:locale => :lv)
     @user_1 = User.create(:email => "one@one.lv", :first_name => "One", :last_name => "First", :password => "123456")
@@ -9,7 +11,6 @@ describe Game do
   end
 
   describe "on initialization" do
-
     it "should have correct statuses upon creation" do
       @game.locale.should == :lv
       @game.players.count.should == 0
