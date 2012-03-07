@@ -1,23 +1,20 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rake db:seed (or created alongside the db with db:setup).
+# encoding: UTF-8
 
-User.create({
-  :email => "kristaps.erglis@gmail.com",
-  :password => "123456",
-  :password_confirmation => "123456",
-  :admin => true,
+u = User.create({
   :first_name => "Kristaps",
-  :last_name => "Erglis"
+  :last_name => "Ērglis",
+  :email => "kristaps.erglis@gmail.com",
+  :password => "123456"
 })
+u.update_attribute(:admin, true)
 
-User.create({
-  :email => "test@scrabble.lv",
-  :password => "123456",
-  :password_confirmation => "123456",
-  :admin => true,
+u = User.create({
   :first_name => "Test",
-  :last_name => "Scrabble"
+  :last_name => "Scrabble",
+  :email => "test@scrabble.lv",
+  :password => "123456"
 })
+u.update_attribute(:admin, true)
 
 
 sql = ActiveRecord::Base.connection()

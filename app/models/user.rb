@@ -48,7 +48,7 @@ class User < ActiveRecord::Base
   end
 
   def deletable?
-    ! admin? and ! deleted?
+    ! admin?
   end
 
   def greeting

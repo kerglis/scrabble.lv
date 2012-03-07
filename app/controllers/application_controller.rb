@@ -1,8 +1,6 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
 
-  #respond_to :xml, :json, :html, :iphone
-
   after_filter  :store_location, :only => [ :index, :show ]
   before_filter :set_locale
   before_filter :adjust_format_for_iphone

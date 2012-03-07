@@ -1,6 +1,8 @@
 class Cell < ActiveRecord::Base
-  
+
   belongs_to      :game
+  belongs_to      :char
+  belongs_to      :player
 
   state_machine :initial => :free do
     event :try do
@@ -16,5 +18,4 @@ class Cell < ActiveRecord::Base
     end
   end
 
-  
 end

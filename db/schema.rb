@@ -11,17 +11,21 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120211204053) do
+ActiveRecord::Schema.define(:version => 20120220195631) do
 
   create_table "cells", :force => true do |t|
     t.integer "game_id"
     t.integer "x"
     t.integer "y"
+    t.integer "char_id"
+    t.integer "player_id"
     t.string  "cell_type", :limit => 2
     t.string  "state",     :limit => 10
   end
 
+  add_index "cells", ["char_id"], :name => "index_cells_on_char_id"
   add_index "cells", ["game_id", "x", "y"], :name => "index_cells_on_game_id_and_x_and_y", :unique => true
+  add_index "cells", ["player_id"], :name => "index_cells_on_player_id"
   add_index "cells", ["state"], :name => "index_cells_on_state"
 
   create_table "char_counts", :force => true do |t|
@@ -46,6 +50,19 @@ ActiveRecord::Schema.define(:version => 20120211204053) do
 
   add_index "dictionaries", ["locale"], :name => "index_dictionaries_on_locale"
   add_index "dictionaries", ["word"], :name => "word"
+
+  create_table "game_chars", :force => true do |t|
+    t.integer "game_id"
+    t.integer "player_id"
+    t.integer "move_id"
+    t.string  "char",      :limit => 1
+    t.integer "pts"
+    t.string  "state",     :limit => 20
+  end
+
+  add_index "game_chars", ["game_id"], :name => "index_game_chars_on_game_id"
+  add_index "game_chars", ["move_id"], :name => "index_game_chars_on_move_id"
+  add_index "game_chars", ["player_id"], :name => "index_game_chars_on_player_id"
 
   create_table "games", :force => true do |t|
     t.string   "locale",        :limit => 2,  :default => "lv"

@@ -35,8 +35,8 @@ a
   &.switch
   {
     padding-left: 16px;
-    &.open { background: url(/assets/icons/arrow-315-small.png) no-repeat top left; }
-    &.closed { background: url(/assets/icons/arrow-000-small.png) no-repeat top left; }
+    &.open { background: url(icons/arrow-315-small.png) no-repeat top left; }
+    &.closed { background: url(icons/arrow-000-small.png) no-repeat top left; }
   }
 }
 
@@ -81,7 +81,7 @@ a.active_field_clear
 {
   display: inline-block;
   margin: 0 5px;
-  background: url(/assets/icons/filter_x.png) no-repeat top left;
+  background: url(icons/filter_x.png) no-repeat top left;
   text-indent: -9999px; 
   width: 16px;
   height: 16px;

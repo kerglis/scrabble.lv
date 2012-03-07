@@ -1,6 +1,5 @@
 @import "my_constants";
 
-
 body
 {
   &.iphone
@@ -41,7 +40,7 @@ body
 {
   a
   {
-    background: url("/assets/scrabble-logo-shaded.png") no-repeat 0 0;
+    background: url("scrabble-logo-shaded.png") no-repeat 0 0;
     float: left;
     width: 235px;
     height: 51px;
@@ -54,7 +53,7 @@ body
   {
     a
     {
-      background: url("/assets/scrabble-logo.png") no-repeat 0 0;
+      background: url("scrabble-logo.png") no-repeat 0 0;
       display: block;
       float: none;
       clear: both;

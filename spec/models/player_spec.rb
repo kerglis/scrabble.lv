@@ -4,7 +4,7 @@ describe Player do
 
   before(:each) do
     @game = Game.create(:locale => :lv)
-    @user_1 = User.create(:email => "one@one.lv", :first_name => "One", :last_name => "First", :password => "123456")
+    @user_1 = User.create(:email => "one@one.lv", :first_name => "One", :last_name => "First",  :password => "123456")
     @user_2 = User.create(:email => "two@two.lv", :first_name => "Two", :last_name => "Second", :password => "123456")
   end
   

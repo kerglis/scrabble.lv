@@ -1,18 +1,21 @@
-# encoding: UTF-8
-
 class Game < ActiveRecord::Base
 
-  has_many            :players
-  has_many            :moves
-  has_many            :cells
+  has_many            :players,     :dependent => :destroy
+  has_many            :moves,       :dependent => :destroy
+  has_many            :cells,       :dependent => :destroy
+  has_many            :game_chars,  :dependent => :destroy
 
   before_validation   :setup_defaults
   after_create        :setup_cells
+  after_create        :setup_chars
 
   state_machine :initial => :new do
     event :start do
-      transition :to => :in_progress, :from => :new, :if => lambda { |game| game.can_start? }
+      transition :to => :playing, :from => :new, :if => lambda { |game| game.can_start? }
     end
+
+    after_transition :on => :start, :do => :first_move
+
     event :finish do
       transition :to => :finished
     end
@@ -80,6 +83,10 @@ class Game < ActiveRecord::Base
     4
   end
 
+  def chars_per_move
+    7
+  end
+
   def cell(x, y) # x, y -- zero-based
     board[y][x] rescue nil
   end
@@ -103,23 +110,69 @@ class Game < ActiveRecord::Base
     end
   end
 
-  def whos_move
-    players.first
+  def current_move
+    moves.last
+  end
+
+  def get_random_chars(player, move)
+    add_count = chars_per_move - player.chars_on_hand.count
+    add_count.times do
+      char = game_chars.free.order("rand()").first
+      char.add_to_player(player, move)
+    end
+  end
+
+  def next_player
+    return players.first unless current_move
+    next_player_position = current_move.player.position + 1
+    next_player_position = 1 if next_player_position > players.count
+    players.find_by_position(next_player_position)
+  end
+
+  def next_move
+    player = next_player
+    create_move_for_player(player)
+  end
+
+  def create_move_for_player(player)
+    if player
+      move = Move.create :game => self, :player => player
+      get_random_chars(player, move)
+      move
+    end
   end
 
 private
 
   def setup_defaults
     self.locale ||= :lv
-    self.max_move_time ||= 3.minutes
+    self.max_move_time ||= 5.minutes
   end
-  
+
   def setup_cells
     Game.board.each_with_index do |line, y|
       line.each_with_index do |cell, x|
         Cell.create :game => self, :x => x, :y => y, :cell_type => Game.cell_type(cell)
       end
     end
+  end
+
+  def setup_chars
+    the_chars = Char.for_locale(locale)
+    
+    the_chars.each do |char|
+      char.total.times do
+        GameChar.create :game => self, :char => char.char, :pts => char.pts
+      end
+    end
+  end
+
+  def first_move
+    # each player gets their chars
+    players.each do |player|
+      next_move
+    end
+    next_move
   end
 
 end
