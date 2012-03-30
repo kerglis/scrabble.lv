@@ -55,14 +55,19 @@ ActiveRecord::Schema.define(:version => 20120220195631) do
     t.integer "game_id"
     t.integer "player_id"
     t.integer "move_id"
-    t.string  "char",      :limit => 1
+    t.string  "char",        :limit => 1
     t.integer "pts"
-    t.string  "state",     :limit => 20
+    t.integer "pos_on_hand"
+    t.integer "pos_x"
+    t.integer "pos_y"
+    t.string  "state",       :limit => 20
   end
 
   add_index "game_chars", ["game_id"], :name => "index_game_chars_on_game_id"
   add_index "game_chars", ["move_id"], :name => "index_game_chars_on_move_id"
   add_index "game_chars", ["player_id"], :name => "index_game_chars_on_player_id"
+  add_index "game_chars", ["pos_on_hand"], :name => "index_game_chars_on_pos_on_hand"
+  add_index "game_chars", ["pos_x", "pos_y"], :name => "index_game_chars_on_pos_x_and_pos_y"
 
   create_table "games", :force => true do |t|
     t.string   "locale",        :limit => 2,  :default => "lv"
