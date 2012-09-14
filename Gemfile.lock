@@ -33,8 +33,6 @@ GEM
       activerecord (>= 2.1.0)
       activesupport (>= 2.1.0)
       rdiscount (>= 1.2.7)
-    acts_as_tree (1.1.0)
-      activerecord (>= 3.0.0)
     app_config (1.0.2)
     arel (3.0.2)
     awesome_nested_set (2.1.4)
@@ -208,7 +206,6 @@ PLATFORMS
 DEPENDENCIES
   acts_as_list
   acts_as_markdown
-  acts_as_tree
   app_config
   awesome_nested_set
   capistrano (~> 2.9.0)

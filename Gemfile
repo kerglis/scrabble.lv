@@ -8,7 +8,7 @@ gem 'json'
 gem "ruby-prolog", "~> 0.0.5"
 
 gem 'acts_as_list'
-gem 'acts_as_tree'
+#gem 'acts_as_tree'
 gem 'acts_as_markdown'
 gem 'awesome_nested_set'
 gem "app_config"
