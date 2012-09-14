@@ -1,10 +1,11 @@
 source 'https://rubygems.org'
 
-gem 'rails', '3.2.1'
+gem 'rails', '3.2.8'
 gem 'rake', '0.9.2'
 gem 'mysql2'
 
 gem 'json'
+gem "ruby-prolog", "~> 0.0.5"
 
 gem 'acts_as_list'
 gem 'acts_as_tree'
@@ -30,6 +31,7 @@ group :assets do
   gem 'coffee-rails', '~> 3.2.1'
   gem 'uglifier', '>= 1.0.3'
   gem 'therubyracer'
+  gem 'quiet_assets', :group => :development
 end
 
 group :test do
@@ -40,4 +42,5 @@ group :development do
   # Deploy with Capistrano
   gem 'capistrano', '~> 2.9.0'
   gem 'capistrano-ext', '~> 1.2.1'
+  gem 'thin'
 end

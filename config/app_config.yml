@@ -4,6 +4,7 @@ host:                   "Scrabble.lv"
 host_nice:              "Scrabble.lv"
 email_from:             "Scrabble <info@scrabble>"
 rpp:                    20
-locales:                "lv"
+locales:
+  - lv
 
 ga_account:             "UA-xxxxxx-1"

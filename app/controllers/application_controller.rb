@@ -11,12 +11,12 @@ class ApplicationController < ActionController::Base
 
   def iphone_request?
     request.host == "m.localhost"   ||
-    request.subdomains.first == "m" || 
+    request.subdomains.first == "m" ||
     (request.env["HTTP_USER_AGENT"] && request.env["HTTP_USER_AGENT"] =~ /iPhone|iPod|Android/ )
   end
 
   def set_locale
-    @locales = AppConfig[:locales].split(/[\/,]/).map(&:to_sym)
+    @locales = AppConfig[:locales].map(&:to_sym)
     I18n.locale = params[:locale].to_sym if @locales.include?(params[:locale].to_sym)
     I18n.locale ||= @locales.first
     @locale = I18n.locale

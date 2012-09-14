@@ -10,7 +10,7 @@ Devise.setup do |config|
   # config.mailer = "Devise::Mailer"
 
   # Automatically apply schema changes in tableless databases
-  config.apply_schema = false
+  # config.apply_schema = false
 
   # ==> ORM configuration
   # Load and configure the ORM. Supports :active_record (default) and
@@ -113,7 +113,7 @@ Devise.setup do |config|
 
   # If true, uses the password salt as remember token. This should be turned
   # to false if you are not using database authenticatable.
-  config.use_salt_as_remember_token = true
+  # config.use_salt_as_remember_token = true
 
   # Options to be passed to the created cookie. For instance, you can set
   # :secure => true in order to force SSL only cookies.
@@ -202,7 +202,7 @@ Devise.setup do |config|
   # should add them to the navigational formats lists.
   #
   # The "*/*" below is required to match Internet Explorer requests.
-  
+
   config.navigational_formats = [ "*/*", :html, :iphone ]
 
   # The default HTTP method used to sign out a resource. Default is :delete.
@@ -213,7 +213,7 @@ Devise.setup do |config|
   # up on your models and hooks.
   # config.omniauth :github, 'APP_ID', 'APP_SECRET', :scope => 'user,public_repo'
 
-  config.omniauth :facebook, "282544095144850", "7733523886d90f7996c4b84cadb6b3af"#, {:client_options => {:ssl => {:ca_path => '/etc/ssl/certs'}}} 
+  config.omniauth :facebook, "282544095144850", "7733523886d90f7996c4b84cadb6b3af"#, {:client_options => {:ssl => {:ca_path => '/etc/ssl/certs'}}}
 
   # ==> Warden configuration
   # If you want to use other strategies, that are not supported by Devise, or
