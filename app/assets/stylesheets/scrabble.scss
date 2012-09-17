@@ -1,33 +1,7 @@
-@import "my_constants";
-
-body
-{
-  &.iphone
-  {
-    width: 100%;
-  }
-}
-
-.navbar-inner
-{
-  background-image: -moz-linear-gradient(bottom, $green_dk, $green);
-  background-image: -webkit-linear-gradient(bottom, $green_dk, $green);
-  background-image: -ms-linear-gradient(bottom, $green_dk, $green);
-  background-image: -o-linear-gradient(bottom, $green_dk, $green);
-}
-
-#content
-{
-  margin-top: 90px;
-  height: auto !important;
-  min-height: 500px;
-  
-  &.iphone
-  {
-    margin: 0px;
-    min-height: auto;
-  }
-}
+$green_lt: #e6f8dd;
+$green_mid: #99cc99;
+$green_dk: #003300;
+$green: #006600;
 
 #footer
 {
@@ -36,38 +10,12 @@ body
   p { font-size: 11px; }
 }
 
-#logo
-{
-  a
-  {
-    background: url("scrabble-logo-shaded.png") no-repeat 0 0;
-    float: left;
-    width: 235px;
-    height: 51px;
-    margin: 0 10px 0 0;
-    outline: none;
-    text-indent: -9999px;
-  }
-  
-  &.iphone
-  {
-    a
-    {
-      background: url("scrabble-logo.png") no-repeat 0 0;
-      display: block;
-      float: none;
-      clear: both;
-      margin: 0 auto;
-    }
-    margin-bottom: 1em;
-  }
-}
-
 .navbar
 {
-  div > ul.nav
+  .brand
   {
-    margin-top: 11px;
+    margin-top: -17px;
+    margin-left: -45px;
   }
 }
 

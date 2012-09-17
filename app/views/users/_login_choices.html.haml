@@ -1,6 +1,0 @@
-.login-choices
-  = link_to "Sign in", new_session_path(:user), :class => "btn large"
-  = link_to "Sign up", new_registration_path(:user), :class => "btn large"
-
-  - User.omniauth_providers.each do |provider|
-    = link_to "Sign in with #{provider.to_s.titleize}", omniauth_authorize_path(:user, provider), :class => "btn large primary"

@@ -1,5 +1,5 @@
 //= require jquery
 //= require jquery-ui
 //= require jquery_ujs
-//= require bootstrap
+//= require keg_engine
 //= require scrabble

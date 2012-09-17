@@ -1,4 +1,4 @@
-class WordsController < BaseController
+class WordsController < ApplicationController
 
   require 'ostruct'
 

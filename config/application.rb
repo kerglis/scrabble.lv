@@ -9,6 +9,8 @@ if defined?(Bundler)
   # Bundler.require(:default, :assets, Rails.env)
 end
 
+require "keg_engine"
+
 module ScrabbleLv
   class Application < Rails::Application
     # Settings in config/environments/* take precedence over those specified here.
@@ -55,5 +57,13 @@ module ScrabbleLv
 
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'
+
+    config.generators do |g|
+      g.template_engine :haml
+      g.test_framework :rspec, :fixture => false
+      g.fixture_replacement :factory_girl
+      g.stylesheets   false
+      g.helper        false
+    end
   end
 end

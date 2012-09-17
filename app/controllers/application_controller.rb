@@ -1,34 +1,5 @@
 class ApplicationController < ActionController::Base
-  protect_from_forgery
 
-  after_filter  :store_location, :only => [ :index, :show ]
-  before_filter :set_locale
-  before_filter :adjust_format_for_iphone
-
-  def adjust_format_for_iphone
-    request.format = :iphone if iphone_request?
-  end
-
-  def iphone_request?
-    request.host == "m.localhost"   ||
-    request.subdomains.first == "m" ||
-    (request.env["HTTP_USER_AGENT"] && request.env["HTTP_USER_AGENT"] =~ /iPhone|iPod|Android/ )
-  end
-
-  def set_locale
-    @locales = AppConfig[:locales].map(&:to_sym)
-    I18n.locale = params[:locale].to_sym if @locales.include?(params[:locale].to_sym)
-    I18n.locale ||= @locales.first
-    @locale = I18n.locale
-  end
-
-  def store_location
-    session[:return_to] = request.path
-  end
-
-  def redirect_back_or_default(default)
-    redirect_to(session[:return_to] || default)
-    session[:return_to] = nil
-  end
+  include KegController
 
 end
