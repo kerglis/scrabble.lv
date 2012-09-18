@@ -1,5 +1,6 @@
-PATH
-  remote: vendor/engines/keg_engine
+GIT
+  remote: git@bitbucket.org:kristaps_erglis/keg_engine.git
+  revision: 7504961062d8cd2fcf10f1528c2e90b424d52a8e
   specs:
     keg_engine (0.0.1)
       acts_as_list

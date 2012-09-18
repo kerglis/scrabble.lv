@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
-#gem 'keg_engine', :git => 'git@bitbucket.org:kristaps_erglis/keg_engine.git'
-gem 'keg_engine', :path => 'vendor/engines/keg_engine'
+gem 'keg_engine', :git => 'git@bitbucket.org:kristaps_erglis/keg_engine.git'
+#gem 'keg_engine', :path => 'vendor/engines/keg_engine'
 
 gem 'ruby-prolog', '~> 0.0.5'
 
