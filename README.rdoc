@@ -23,3 +23,7 @@ By the moment - it allows to check, whether the word is usable or not.
 
 6. Run tests
     rspec spec
+
+== Demo
+
+Try online on: http://demo.scrabble.lv (in latvian)
