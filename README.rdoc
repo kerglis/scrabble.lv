@@ -20,3 +20,6 @@ By the moment - it allows to check, whether the word is usable or not.
 5. Setup database
     rake db:migrate
     rake db:test:prepare
+
+6. Run tests
+    rspec spec
