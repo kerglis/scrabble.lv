@@ -6,7 +6,7 @@ set :default_stage, "demo"
 require "capistrano/ext/multistage"
 
 set :scm, :git
-set :repository, "ssh://git@bitbucket.org/kristaps_erglis/scrabble.lv.git"
+set :repository, "https://github.com/kerglis/scrabble.lv.git"
 
 set :deploy_via, :remote_cache
 
