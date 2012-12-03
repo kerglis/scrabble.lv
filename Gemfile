@@ -27,8 +27,8 @@ group :assets do
 end
 
 group :development do
-  gem 'capistrano', '~> 2.9.0'
-  gem 'capistrano-ext', '~> 1.2.1'
+  gem 'rvm-capistrano'
+  gem 'capistrano'
   gem 'thin'
   gem 'pry'
 end
