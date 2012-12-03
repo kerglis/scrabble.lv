@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
-gem 'keg_engine', :git => 'git@bitbucket.org:kristaps_erglis/keg_engine.git'
-#gem 'keg_engine', :path => 'vendor/engines/keg_engine'
+gem 'keg_engine', :git => 'https://github.com/kerglis/keg_engine.git'
+# gem 'keg_engine', :path => 'vendor/engines/keg_engine'
 
 gem 'ruby-prolog', '~> 0.0.5'
 
@@ -10,6 +10,7 @@ gem 'jquery-rails'
 gem 'haml-rails'
 gem 'stringex'
 gem 'cancan'
+gem 'redactor-rails'
 
 gem 'omniauth-facebook'
 
@@ -18,6 +19,7 @@ gem 'prefered'
 group :assets do
   gem 'sass-rails'
   gem 'coffee-rails'
+  gem 'less-rails'
   gem 'uglifier'
   gem 'therubyracer'
   gem 'twitter-bootstrap-rails'
