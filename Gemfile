@@ -22,7 +22,7 @@ group :assets do
   gem 'uglifier'
   gem 'therubyracer'
   gem 'less-rails'
-  gem 'twitter-bootstrap-rails', :git => 'git://github.com/seyhunak/twitter-bootstrap-rails.git'
+  gem 'twitter-bootstrap-rails', '2.1.4'
   gem 'quiet_assets', :group => :development
 end
 
