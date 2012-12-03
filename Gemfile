@@ -15,14 +15,14 @@ gem 'redactor-rails'
 gem 'omniauth-facebook'
 
 gem 'prefered'
+gem 'less-rails'
+gem 'twitter-bootstrap-rails', '~> 2.1.6'
 
 group :assets do
   gem 'sass-rails'
   gem 'coffee-rails'
   gem 'uglifier'
   gem 'therubyracer'
-  gem 'less-rails'
-  gem 'twitter-bootstrap-rails', '2.1.4'
   gem 'quiet_assets', :group => :development
 end
 
