@@ -16,13 +16,13 @@ gem 'omniauth-facebook'
 
 gem 'prefered'
 
-gem 'twitter-bootstrap-rails'
-
 group :assets do
   gem 'sass-rails'
   gem 'coffee-rails'
   gem 'uglifier'
   gem 'therubyracer'
+  gem 'less-rails'
+  gem 'twitter-bootstrap-rails', :git => 'git://github.com/seyhunak/twitter-bootstrap-rails.git'
   gem 'quiet_assets', :group => :development
 end
 
