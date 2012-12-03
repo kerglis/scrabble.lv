@@ -3,6 +3,8 @@ require "bundler/capistrano"
 
 set :stages, %w{demo production}
 set :default_stage, "demo"
+require "capistrano/ext/multistage"
+
 set :scm, :git
 set :repository, "ssh://git@bitbucket.org/kristaps_erglis/scrabble.lv.git"
 
