@@ -36,6 +36,6 @@ end
 group :test do
   gem 'rspec-rails'
   gem 'awesome_print'
-  gem 'factory_girl_rails'
+  gem 'factory_girl_rails', '~> 1.6.0'
 end
 

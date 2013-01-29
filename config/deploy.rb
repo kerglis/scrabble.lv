@@ -7,7 +7,6 @@ require "capistrano/ext/multistage"
 
 set :scm, :git
 set :repository, "git@bitbucket.org:kristaps_erglis/scrabble.lv.git"
-# https://kristaps_erglis@bitbucket.org/kristaps_erglis/scrabble.lv.git
 
 set :deploy_via, :remote_cache
 
