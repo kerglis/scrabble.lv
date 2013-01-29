@@ -16,7 +16,7 @@ gem 'omniauth-facebook'
 
 gem 'prefered'
 gem 'less-rails'
-gem 'twitter-bootstrap-rails', '~> 2.1.6'
+gem 'twitter-bootstrap-rails'
 
 group :assets do
   gem 'sass-rails'
@@ -36,6 +36,6 @@ end
 group :test do
   gem 'rspec-rails'
   gem 'awesome_print'
-  gem 'factory_girl_rails', '~> 1.6.0'
+  gem 'factory_girl_rails'
 end
 
