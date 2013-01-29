@@ -14,12 +14,15 @@ $green: #006600;
 {
   .brand
   {
-    margin-top: -17px;
-    margin-left: -45px;
+    img { height: 26px; }
   }
 }
 
-h1, h2 { margin-bottom: 0.5em }
+h1, h2
+{
+  margin-bottom: 0.5em;
+  font-size: 1.5em;
+}
 
 .form-actions
 {

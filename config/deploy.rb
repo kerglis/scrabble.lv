@@ -6,13 +6,12 @@ set :default_stage, "demo"
 require "capistrano/ext/multistage"
 
 set :scm, :git
-set :repository, "https://github.com/kerglis/scrabble.lv.git"
+set :repository, "git@bitbucket.org:kristaps_erglis/scrabble.lv.git"
+# https://kristaps_erglis@bitbucket.org/kristaps_erglis/scrabble.lv.git
 
 set :deploy_via, :remote_cache
 
 set :application, "scrabble"
-# set :rvm_bin_path, "/usr/local/rvm/bin"
-# set :rvm_ruby_string, "ree-1.8.7-2011.03@#{application}"
 
 set :keep_releases, 5
 after "deploy", "deploy:cleanup"
