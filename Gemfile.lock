@@ -60,7 +60,7 @@ GEM
     bcrypt-ruby (3.0.1)
     builder (3.0.4)
     cancan (1.6.8)
-    capistrano (2.14.1)
+    capistrano (2.13.5)
       highline
       net-scp (>= 1.0.0)
       net-sftp (>= 2.0.0)
@@ -261,7 +261,7 @@ PLATFORMS
 DEPENDENCIES
   awesome_print
   cancan
-  capistrano
+  capistrano (= 2.13.5)
   coffee-rails
   factory_girl_rails (~> 1.6.0)
   haml-rails
