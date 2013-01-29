@@ -22,7 +22,8 @@ group :assets do
   gem 'sass-rails'
   gem 'coffee-rails'
   gem 'uglifier'
-  gem 'therubyracer'
+  gem 'libv8', '~> 3.11.8'
+  gem 'therubyracer', '~> 0.11.1'
   gem 'quiet_assets', :group => :development
 end
 

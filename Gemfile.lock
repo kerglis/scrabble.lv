@@ -268,6 +268,7 @@ DEPENDENCIES
   jquery-rails
   keg_engine!
   less-rails
+  libv8 (~> 3.11.8)
   mysql2
   omniauth-facebook
   prefered
@@ -279,7 +280,7 @@ DEPENDENCIES
   rvm-capistrano
   sass-rails
   stringex
-  therubyracer
+  therubyracer (~> 0.11.1)
   thin
   twitter-bootstrap-rails
   uglifier
