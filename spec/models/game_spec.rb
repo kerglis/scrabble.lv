@@ -68,7 +68,6 @@ describe Game do
       specify { @game.current_move.player.should == @game.players.first }
       specify { @game.current_move.player.chars_on_hand.count.should == @game.chars_per_move }
     end
-
   end
 
 end

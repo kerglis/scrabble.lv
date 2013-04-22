@@ -63,10 +63,10 @@ class Game < ActiveRecord::Base
     ch = ch.mb_chars.downcase.to_s[0]
     chars.where(:char => ch)
     {
-      :char => char.ch, 
-      :total => char.total, 
-      :pts => char.pts, 
-      :used => char_use_times(ch), 
+      :char => char.ch,
+      :total => char.total,
+      :pts => char.pts,
+      :used => char_use_times(ch),
       :left => char.total - char_use_times(ch)
     } if char
   end
@@ -114,6 +114,10 @@ class Game < ActiveRecord::Base
     moves.last
   end
 
+  def current_player
+    current_move.player
+  end
+
   def get_random_chars(player, move)
     add_count = chars_per_move - player.chars_on_hand.count
     add_count.times do
@@ -130,6 +134,10 @@ class Game < ActiveRecord::Base
   end
 
   def next_move
+    if current_move and !current_move.finished?
+      return unless current_move.finish
+    end
+
     player = next_player
     create_move_for_player(player)
   end
@@ -159,7 +167,7 @@ private
 
   def setup_chars
     the_chars = Char.for_locale(locale)
-    
+
     the_chars.each do |char|
       char.total.times do
         GameChar.create :game => self, :char => char.char, :pts => char.pts
@@ -170,7 +178,8 @@ private
   def first_move
     # each player gets their chars
     players.each do |player|
-      next_move
+      move = create_move_for_player(player)
+      move.finish
     end
     next_move
   end

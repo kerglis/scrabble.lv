@@ -8,11 +8,11 @@ describe Player do
     @user_2 = FactoryGirl.create :user
   end
 
-  context "shall clone user >> player values" do
-    let(:player_1) { @game.add_player(@user_1) }
+  context "clone user >> player values" do
+    before { @player_1 = @game.add_player(@user_1) }
 
-    specify { player_1.full_name.should == @user_1.full_name }
-    specify { player_1.email.should == @user_1.email }
+    specify { @player_1.full_name.should == @user_1.full_name }
+    specify { @player_1.email.should == @user_1.email }
   end
 
 end

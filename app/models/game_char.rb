@@ -6,7 +6,7 @@ class GameChar < ActiveRecord::Base
 
   state_machine :initial => :free do
     event :to_player do
-      transition :to => :on_hand, :from => :free
+      transition :to => :on_hand, :from => [ :free, :on_hand ]
     end
 
     event :to_board do
@@ -36,7 +36,13 @@ class GameChar < ActiveRecord::Base
   end
 
   def board_pos?
-    x && y
+    pos_x && pos_y
+  end
+
+  def put_on_board(x, y)
+    self.pos_x = x
+    self.pos_y = y
+    self.to_board
   end
 
   def add_to_player(player, move)

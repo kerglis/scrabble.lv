@@ -6,10 +6,5 @@ FactoryGirl.define do
     first_name
     last_name
     password    "123456"
-
-    # after(:create) do |user|
-    #   user.confirm!
-    # end
-
   end
 end
