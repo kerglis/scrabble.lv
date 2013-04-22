@@ -19,23 +19,23 @@ class User < ActiveRecord::Base
     else
       # Create a new user
 
-      # data = {"name"=>"Kristaps Ērglis", "timezone"=>2, "gender"=>"male", 
-      # "inspirational_people"=>[{"name"=>"Mozart", "id"=>"106554719381817"}, {"name"=>"Carlos Castaneda", "id"=>"32205633205"}, {"name"=>"Osho", "id"=>"57072960268"}], 
-      # "id"=>"1514824144", "birthday"=>"09/04/1973", "last_name"=>"Ērglis", "updated_time"=>"2010-10-30T17:04:46+0000", "verified"=>true, "locale"=>"lv_LV", 
-      # "hometown"=>{"name"=>"Riga, Latvia", "id"=>"111536985531661"}, "link"=>"http://www.facebook.com/kristaps.erglis", 
-      # "sports"=>[{"name"=>"Speedminton", "id"=>"102180736490825"}, {"name"=>"Karting", "id"=>"182782171739071"}, {"name"=>"Squash", "id"=>"109469199070946"}], 
+      # data = {"name"=>"Kristaps Ērglis", "timezone"=>2, "gender"=>"male",
+      # "inspirational_people"=>[{"name"=>"Mozart", "id"=>"106554719381817"}, {"name"=>"Carlos Castaneda", "id"=>"32205633205"}, {"name"=>"Osho", "id"=>"57072960268"}],
+      # "id"=>"1514824144", "birthday"=>"09/04/1973", "last_name"=>"Ērglis", "updated_time"=>"2010-10-30T17:04:46+0000", "verified"=>true, "locale"=>"lv_LV",
+      # "hometown"=>{"name"=>"Riga, Latvia", "id"=>"111536985531661"}, "link"=>"http://www.facebook.com/kristaps.erglis",
+      # "sports"=>[{"name"=>"Speedminton", "id"=>"102180736490825"}, {"name"=>"Karting", "id"=>"182782171739071"}, {"name"=>"Squash", "id"=>"109469199070946"}],
       # "email"=>"kristaps.erglis@gmail.com", "first_name"=>"Kristaps"}
 
       params = User.read_oauth_params(data)
-      User.create!(params) 
+      User.create!(params)
     end
   end
 
   def self.read_oauth_params(data)
     params = {
-      :email =>       data["email"], 
+      :email =>       data["email"],
       :password =>    Devise.friendly_token[0,20],
-      :gender =>      data["gender"].first,
+      :gender =>      data["gender"].try(:first),
       :first_name =>  data["first_name"],
       :last_name =>   data["last_name"],
       :birth_date =>  data["birthday"].try(:to_date),
