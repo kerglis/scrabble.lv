@@ -17,6 +17,7 @@ gem 'omniauth-facebook'
 gem 'prefered'
 gem 'less-rails'
 gem 'twitter-bootstrap-rails'
+gem 'pry'
 
 group :assets do
   gem 'sass-rails'
@@ -31,12 +32,10 @@ group :development do
   gem 'rvm-capistrano'
   gem 'capistrano', '2.13.5'
   gem 'thin'
-  gem 'pry'
 end
 
 group :test do
   gem 'rspec-rails'
+  gem 'factory_girl_rails'
   gem 'awesome_print'
-  gem 'factory_girl_rails', '~> 1.6.0'
 end
-
