@@ -21,13 +21,6 @@ describe Move do
   end
 
   context "user move" do
-    before do
-
-
-
-    end
-
-
   end
 
 end

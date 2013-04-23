@@ -4,6 +4,9 @@ class GameChar < ActiveRecord::Base
   belongs_to :player
   belongs_to :move
 
+  acts_as_list :column => :pos_on_hand, :scope => [:game_id, :player_id]
+  default_scope :order => :pos_on_hand
+
   state_machine :initial => :free do
     event :to_player do
       transition :to => :on_hand, :from => [ :free, :on_hand ]
@@ -39,9 +42,10 @@ class GameChar < ActiveRecord::Base
     pos_x && pos_y
   end
 
-  def put_on_board(x, y)
+  def put_on_board(move, x, y)
     self.pos_x = x
     self.pos_y = y
+    self.move = move
     self.to_board
   end
 
@@ -49,6 +53,7 @@ class GameChar < ActiveRecord::Base
     self.player = player
     self.move = move
     self.to_player
+    # self.move_to_bottom
   end
 
 end
