@@ -17,7 +17,10 @@ gem 'omniauth-facebook'
 gem 'prefered'
 gem 'less-rails'
 gem 'twitter-bootstrap-rails'
-gem 'pry'
+
+group :development, :test do
+  gem 'pry'
+end
 
 group :assets do
   gem 'sass-rails'

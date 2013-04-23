@@ -8,15 +8,26 @@ describe Move do
     @game = FactoryGirl.create :game
     @user_1 = FactoryGirl.create :user
     @user_2 = FactoryGirl.create :user
-    @game.add_player(@user_1)
-    @game.add_player(@user_2)
+    @p1 = @game.add_player(@user_1)
+    @p2 = @game.add_player(@user_2)
     @game.start
   end
 
-  context "first moves" do
+  context "first move" do
     specify { @game.moves.count.should == @game.players.count + 1 }
     specify { @game.current_move.should == @game.moves.last }
+    specify { @game.current_player.should == @p1 }
     specify { @game.current_move.should be_new }
+  end
+
+  context "user move" do
+    before do
+
+
+
+    end
+
+
   end
 
 end
