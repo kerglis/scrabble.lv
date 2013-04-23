@@ -17,11 +17,11 @@ class GameChar < ActiveRecord::Base
       transition :to => :on_board, :from => :on_hand, :if => :find_cell?
     end
 
-    event :recall do
-      transition :to => :on_hand, :from => :on_board
+    event :from_board do
+      transition :to => :on_hand, :from => :on_board, :if => :find_cell?
     end
 
-    after_transition :on => :on_hand, :do => :free_cell
+    after_transition any => :on_hand, :do => :free_cell
 
     event :finalize do
       transition :to => :finished, :from => :on_board, :if => :find_cell?
@@ -51,7 +51,6 @@ class GameChar < ActiveRecord::Base
 
   def free_cell
     cell.free if cell
-    self.cell = nil
   end
 
   def put_on_board(move, x, y)

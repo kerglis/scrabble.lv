@@ -12,7 +12,6 @@ class Move < ActiveRecord::Base
     end
 
     after_transition :on => :finished, :do => :finish_move
-
   end
 
   def valid_move?
