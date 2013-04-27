@@ -3,6 +3,7 @@ source 'https://rubygems.org'
 gem 'keg_engine', :git => 'https://github.com/kerglis/keg_engine.git'
 # gem 'keg_engine', :path => 'vendor/engines/keg_engine'
 
+gem 'ffi-hunspell'
 gem 'ruby-prolog', '~> 0.0.5'
 
 gem 'mysql2'
@@ -20,6 +21,7 @@ gem 'twitter-bootstrap-rails'
 
 group :development, :test do
   gem 'pry'
+  gem 'better_errors'
 end
 
 group :assets do

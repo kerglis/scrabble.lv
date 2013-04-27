@@ -59,6 +59,9 @@ GEM
       activerecord (>= 3.0.0)
     awesome_print (1.1.0)
     bcrypt-ruby (3.0.1)
+    better_errors (0.8.0)
+      coderay (>= 1.0.0)
+      erubis (>= 2.6.6)
     builder (3.0.4)
     cancan (1.6.9)
     capistrano (2.13.5)
@@ -96,6 +99,9 @@ GEM
       railties (>= 3.0.0)
     faraday (0.8.7)
       multipart-post (~> 1.1)
+    ffi (1.8.1)
+    ffi-hunspell (0.2.6)
+      ffi (~> 1.0)
     haml (4.0.2)
       tilt
     haml-rails (0.4)
@@ -262,10 +268,12 @@ PLATFORMS
 
 DEPENDENCIES
   awesome_print
+  better_errors
   cancan
   capistrano (= 2.13.5)
   coffee-rails
   factory_girl_rails
+  ffi-hunspell
   haml-rails
   jquery-rails
   keg_engine!
