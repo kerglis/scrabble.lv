@@ -31,6 +31,7 @@ group :assets do
   gem 'libv8', '~> 3.11.8'
   gem 'therubyracer', '~> 0.11.1'
   gem 'quiet_assets', :group => :development
+  gem 'turbo-sprockets-rails3'
 end
 
 group :development do
