@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120220195631) do
+ActiveRecord::Schema.define(:version => 20130427134153) do
 
   create_table "cells", :force => true do |t|
     t.integer "game_id"
@@ -42,14 +42,6 @@ ActiveRecord::Schema.define(:version => 20120220195631) do
   end
 
   add_index "chars", ["char", "locale"], :name => "index_chars_on_char_and_locale", :unique => true
-
-  create_table "dictionaries", :force => true do |t|
-    t.string "word",   :limit => 15
-    t.string "locale", :limit => 2,  :default => "lv"
-  end
-
-  add_index "dictionaries", ["locale"], :name => "index_dictionaries_on_locale"
-  add_index "dictionaries", ["word"], :name => "word"
 
   create_table "game_chars", :force => true do |t|
     t.integer "game_id"

@@ -1,9 +1,9 @@
 %h1= t("check_words")
 
 .row
-  - if @word
+  - if @found
     .alert.alert-success.alert-block.span6
-      .msg= t("word_found", :word => @word.word).html_safe
+      .msg= t("word_found", :word => @word).html_safe
   - elsif @search.word.present?
     .alert.alert-error.alert-block.span6
       .msg= t("word_not_found", :word => @search.word).html_safe

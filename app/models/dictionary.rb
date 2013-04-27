@@ -1,14 +1,16 @@
-class Dictionary < ActiveRecord::Base
+class Dictionary
 
-  def self.[](word, locale = nil)
+  attr_reader :dict
+
+  delegate    :check?, :stem, :suggest, :add, :remove, :to => :dict
+
+  def initialize(locale = nil)
+    @dict = FFI::Hunspell.dict(Dictionary.language_code(locale))
+  end
+
+  def self.language_code(locale = nil)
     locale ||= I18n.locale
-    if word[0] == "/" 
-      op = "rlike"
-      word.gsub!("/", "")
-    else
-      op = "="
-    end
-    where(:locale => locale).where("word #{op} ?", word)
+    "#{locale.downcase}_#{locale.upcase}"
   end
 
 end
