@@ -10,7 +10,7 @@ class Dictionary
 
   def self.language_code(locale = nil)
     locale ||= I18n.locale
-    "#{locale.downcase}_#{locale.upcase}"
+    "#{locale.to_s.downcase}_#{locale.to_s.upcase}"
   end
 
 end
