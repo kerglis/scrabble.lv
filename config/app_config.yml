@@ -8,3 +8,8 @@ locales:
   - lv
 
 ga_account:             "UA-xxxxxx-1"
+
+
+facebook:
+  key:      "282544095144850"
+  secret:   "7733523886d90f7996c4b84cadb6b3af"
