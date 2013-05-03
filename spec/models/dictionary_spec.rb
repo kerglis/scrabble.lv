@@ -4,7 +4,7 @@ require 'spec_helper'
 describe Dictionary do
 
   before :all do
-    @dict = Dictionary.new
+    @dict = Dictionary.new(:lv)
 
     @dict.add("āēīū")
     @dict.add("aeiu")
@@ -34,8 +34,10 @@ describe Dictionary do
     specify { Dictionary.apply_prepositions("te", {:chars => { "k" => 2, "i" => 5 }}).should == ["tek"] }
     specify { Dictionary.apply_prepositions("te", {:chars => { "ļ" => 2, "ā" => 3 }}).should == ["teļā"] }
     specify { Dictionary.apply_prepositions("te", {:chars => { "a" => 0, "s" => 1 }}).should == ["aste"] }
-    specify { Dictionary.apply_prepositions("te", {:chars => { "a" => 0, "s" => 1 }}).should == ["aste"] }
     specify { Dictionary.apply_prepositions("xyz", {:chars => { "a" => 0, "b" => 2, "c" => 4 }, :from => 0, :to => 2}).should == ["axbycz", "xaybzc", "xyazb"] }
+
+    specify { @dict.valid_words_from_chars("test", :chars => {"p" => 0, "a" => 1}).include?("pats").should be_true }
+
   end
 
 end
