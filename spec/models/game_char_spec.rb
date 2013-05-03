@@ -27,9 +27,9 @@ describe GameChar do
       before do
         @move = @game.current_move
         @on_hand = @move.player.chars_on_hand
-        @on_hand[0].put_on_board(@move, 8,8)
-        @on_hand[1].put_on_board(@move, 8,9)
-        @on_hand[2].put_on_board(@move, 8,10)
+        @move.char_to_board(@on_hand[0], 8,8)
+        @move.char_to_board(@on_hand[1], 8,9)
+        @move.char_to_board(@on_hand[2], 8,10)
         @next_move = @game.next_move
         @next_move = @game.next_move
       end

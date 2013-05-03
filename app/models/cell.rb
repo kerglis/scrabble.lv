@@ -27,11 +27,24 @@ class Cell < ActiveRecord::Base
     where(:state => :used)
   end
 
+  def self.by_pos(x, y)
+    find_by_x_and_y(x, y)
+  end
+
   def have_char?
     game_char.present?
   end
 
+  def add_char(game_char)
+    if free?
+      self.game_char = game_char
+      game_char.to_board
+      self.use
+    end
+  end
+
   def remove_char
+    game_char.from_board
     self.update_attribute(:char_id, nil)
   end
 

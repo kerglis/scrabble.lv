@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130427134153) do
+ActiveRecord::Schema.define(:version => 20130503072709) do
 
   create_table "cells", :force => true do |t|
     t.integer "game_id"
@@ -50,8 +50,6 @@ ActiveRecord::Schema.define(:version => 20130427134153) do
     t.string  "char",        :limit => 1
     t.integer "pts"
     t.integer "pos_on_hand"
-    t.integer "pos_x"
-    t.integer "pos_y"
     t.string  "state",       :limit => 20
   end
 
@@ -59,7 +57,6 @@ ActiveRecord::Schema.define(:version => 20130427134153) do
   add_index "game_chars", ["move_id"], :name => "index_game_chars_on_move_id"
   add_index "game_chars", ["player_id"], :name => "index_game_chars_on_player_id"
   add_index "game_chars", ["pos_on_hand"], :name => "index_game_chars_on_pos_on_hand"
-  add_index "game_chars", ["pos_x", "pos_y"], :name => "index_game_chars_on_pos_x_and_pos_y"
 
   create_table "games", :force => true do |t|
     t.string   "locale",        :limit => 2,  :default => "lv"

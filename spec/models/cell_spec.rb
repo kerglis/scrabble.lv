@@ -20,7 +20,7 @@ describe Cell do
       @on_hand = @move.player.chars_on_hand
 
       (0..2).each do |i|
-        @on_hand[i].put_on_board(@move, 8, 8+i)
+        @move.char_to_board(@on_hand[i], 8, 8+i)
       end
     end
 
@@ -30,12 +30,11 @@ describe Cell do
 
     context "recall char from board" do
       before do
-        @on_hand[0].from_board
+        @move.char_from_board(@on_hand[0])
       end
 
       specify { @game.cells.free.count.should == 223 }
       specify { @game.cells.used.count.should == 2 }
-
     end
 
   end
