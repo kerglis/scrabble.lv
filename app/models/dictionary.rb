@@ -10,11 +10,33 @@ class Dictionary
       "#{locale.to_s.downcase}_#{locale.to_s.upcase}"
     end
 
-    def find_possible_words_from_chars(chars, pre_positioned = {})
+    def find_possible_words_from_chars(chars, prepositions = {})
       chars = chars.chars.to_a unless chars.is_a?(Array)
       2.upto(chars.length).flat_map do |l|
-        chars.permutation(l).to_a.map{|x| x.join }.uniq
+        chars.permutation(l).to_a.flat_map{|x| apply_prepositions(x.join, prepositions) }.uniq
       end.uniq
+    end
+
+    def apply_prepositions(word, prepositions = {})
+      # options for prepositions
+      # :from - from offset, default - 0
+      # :to - to offset, default - 0
+      # :chars => {"a" => 1, "s" => 3, ... char => position (zero based) }
+
+      if prepositions[:chars].present?
+        from = prepositions[:from] || 0
+        to = prepositions[:to] || 0
+        (from..to).map do |offset|
+          new_word = word.dup
+          prepositions[:chars].each do |ch, pos|
+            new_pos = pos + offset
+            new_word = new_word.chars.to_a.insert(new_pos, ch).join if new_pos <= new_word.length
+          end
+          new_word
+        end
+      else
+        word
+      end
     end
   end
 
@@ -22,9 +44,9 @@ class Dictionary
     @dict = FFI::Hunspell.dict(Dictionary.language_code(locale))
   end
 
-  def valid_words_from_chars(chars, pre_positioned = {})
+  def valid_words_from_chars(chars, prepositions = {})
     chars = chars.chars.to_a unless chars.is_a?(Array)
-    Dictionary.find_possible_words_from_chars(chars, pre_positioned).select do |word|
+    Dictionary.find_possible_words_from_chars(chars, prepositions).select do |word|
       check?(word)
     end
   end
