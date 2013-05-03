@@ -46,7 +46,8 @@ class Cell < ActiveRecord::Base
       :w3 => "red",
       :w2 => "magenta",
       :l3 => "blue",
-      :l2 => "cyan"
+      :l2 => "cyan",
+      :cc => "yellow"
     }
 
     color = colors[cell_type.to_sym]

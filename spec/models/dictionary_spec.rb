@@ -24,6 +24,7 @@ describe Dictionary do
     specify { @dict.check?("ģķļņ").should be_true }
     specify { @dict.check?("āēiu").should be_false }
     specify { @dict.check?("ģķln").should be_false }
+    specify { @dict.valid_words_from_chars("āēīū").count.should == 1 }
   end
 
 end
