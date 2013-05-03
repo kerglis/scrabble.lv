@@ -47,6 +47,30 @@ class Game < ActiveRecord::Base
     out
   end
 
+  def self.board_size_x
+    board.first.size
+  end
+
+  def self.board_size_y
+    board.size
+  end
+
+  def board
+    out = []
+    (0..Game.board_size_y-1).each do |y|
+      out[y] = ["<gray>#{y + 1}</gray>".termcolor]
+    end
+
+    cells.each do |cell|
+      out[cell.y][cell.x+1] = cell.char.termcolor
+    end
+    out
+  end
+
+  def draw_board_txt
+    puts Hirb::Helpers::AutoTable.render( board )
+  end
+
   def self.cell_type(str)
     (str == "__") ? "" : str
   end

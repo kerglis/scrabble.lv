@@ -19,6 +19,11 @@ gem 'prefered'
 gem 'less-rails'
 gem 'twitter-bootstrap-rails'
 
+gem 'hirb'
+gem 'hirb-unicode'
+gem 'hirb-colors'
+gem 'termcolor'
+
 group :development, :test do
   gem 'pry'
   gem 'better_errors'
