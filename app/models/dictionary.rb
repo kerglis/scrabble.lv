@@ -12,6 +12,10 @@ class Dictionary
 
     def find_possible_words_from_chars(chars, prepositions = {})
       chars = chars.chars.to_a unless chars.is_a?(Array)
+
+      # trim chars to max possible limit (7)
+      chars = chars[0, Game.chars_per_move]
+
       2.upto(chars.length).flat_map do |l|
         chars.permutation(l).to_a.flat_map{|x| apply_prepositions(x.join, prepositions) }.uniq
       end.uniq

@@ -20,8 +20,8 @@ describe GameChar do
     end
 
     specify { @game.current_player.should == @p1 }
-    specify { @chars_1.size.should == @game.chars_per_move }
-    specify { @chars_2.size.should == @game.chars_per_move }
+    specify { @chars_1.size.should == Game.chars_per_move }
+    specify { @chars_2.size.should == Game.chars_per_move }
 
     context "use some of chars" do
       before do
@@ -43,7 +43,7 @@ describe GameChar do
 
   context "char position" do
     specify { @p1.chars_on_hand.first.pos_on_hand.should == 1 }
-    specify { @p1.chars_on_hand.last.pos_on_hand.should == @game.chars_per_move }
+    specify { @p1.chars_on_hand.last.pos_on_hand.should == Game.chars_per_move }
   end
 
 end

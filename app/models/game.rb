@@ -21,38 +21,60 @@ class Game < ActiveRecord::Base
     end
   end
 
-  def self.board
-    # cc - center cell
-    # l2 - letter x 2
-    # l3 - letter x 3
-    # w2 - word x 2
-    # w3 - word x 3
+  class << self
+    def min_players
+      2
+    end
 
-    out = []
-    out << %w{ w3 __ __ l2 __ __ __ w3 __ __ __ l2 __ __ w3 }
-    out << %w{ __ w2 __ __ __ l3 __ __ __ l3 __ __ __ w2 __ }
-    out << %w{ __ __ w2 __ __ __ l2 __ l2 __ __ __ w2 __ __ }
-    out << %w{ l2 __ __ w2 __ __ __ l2 __ __ __ w2 __ __ l2 }
-    out << %w{ __ __ __ __ w2 __ __ __ __ __ w2 __ __ __ __ }
-    out << %w{ __ l3 __ __ __ l3 __ __ __ l3 __ __ __ l3 __ }
-    out << %w{ __ __ l2 __ __ __ l2 __ l2 __ __ __ l2 __ __ }
-    out << %w{ w3 __ __ l2 __ __ __ cc __ __ __ l2 __ __ w3 }
-    out << %w{ __ __ l2 __ __ __ l2 __ l2 __ __ __ l2 __ __ }
-    out << %w{ __ l3 __ __ __ l3 __ __ __ l3 __ __ __ l3 __ }
-    out << %w{ __ __ __ __ w2 __ __ __ __ __ w2 __ __ __ __ }
-    out << %w{ l2 __ __ w2 __ __ __ l2 __ __ __ w2 __ __ l2 }
-    out << %w{ __ __ w2 __ __ __ l2 __ l2 __ __ __ w2 __ __ }
-    out << %w{ __ w2 __ __ __ l3 __ __ __ l3 __ __ __ w2 __ }
-    out << %w{ w3 __ __ l2 __ __ __ w3 __ __ __ l2 __ __ w3 }
-    out
-  end
+    def max_players
+      4
+    end
 
-  def self.board_size_x
-    board.first.size
-  end
+    def chars_per_move
+      7
+    end
 
-  def self.board_size_y
-    board.size
+    def board
+      # cc - center cell
+      # l2 - letter x 2
+      # l3 - letter x 3
+      # w2 - word x 2
+      # w3 - word x 3
+
+      out = []
+      out << %w{ w3 __ __ l2 __ __ __ w3 __ __ __ l2 __ __ w3 }
+      out << %w{ __ w2 __ __ __ l3 __ __ __ l3 __ __ __ w2 __ }
+      out << %w{ __ __ w2 __ __ __ l2 __ l2 __ __ __ w2 __ __ }
+      out << %w{ l2 __ __ w2 __ __ __ l2 __ __ __ w2 __ __ l2 }
+      out << %w{ __ __ __ __ w2 __ __ __ __ __ w2 __ __ __ __ }
+      out << %w{ __ l3 __ __ __ l3 __ __ __ l3 __ __ __ l3 __ }
+      out << %w{ __ __ l2 __ __ __ l2 __ l2 __ __ __ l2 __ __ }
+      out << %w{ w3 __ __ l2 __ __ __ cc __ __ __ l2 __ __ w3 }
+      out << %w{ __ __ l2 __ __ __ l2 __ l2 __ __ __ l2 __ __ }
+      out << %w{ __ l3 __ __ __ l3 __ __ __ l3 __ __ __ l3 __ }
+      out << %w{ __ __ __ __ w2 __ __ __ __ __ w2 __ __ __ __ }
+      out << %w{ l2 __ __ w2 __ __ __ l2 __ __ __ w2 __ __ l2 }
+      out << %w{ __ __ w2 __ __ __ l2 __ l2 __ __ __ w2 __ __ }
+      out << %w{ __ w2 __ __ __ l3 __ __ __ l3 __ __ __ w2 __ }
+      out << %w{ w3 __ __ l2 __ __ __ w3 __ __ __ l2 __ __ w3 }
+      out
+    end
+
+    def board_size_x
+      board.first.size
+    end
+
+    def board_size_y
+      board.size
+    end
+
+    def cell_type(str)
+      (str == "__") ? "" : str
+    end
+
+    def char_list(locale = nil)
+      Char.for_locale(locale).map(&:char)
+    end
   end
 
   def board
@@ -71,16 +93,8 @@ class Game < ActiveRecord::Base
     puts Hirb::Helpers::AutoTable.render( board )
   end
 
-  def self.cell_type(str)
-    (str == "__") ? "" : str
-  end
-
   def chars
     Char.for_locale(locale)
-  end
-
-  def self.char_list(locale = nil)
-    Char.for_locale(locale).map(&:char)
   end
 
   def char(ch)
@@ -99,18 +113,6 @@ class Game < ActiveRecord::Base
     0
   end
 
-  def min_players
-    2
-  end
-
-  def max_players
-    4
-  end
-
-  def chars_per_move
-    7
-  end
-
   def cell(x, y) # x, y -- zero-based
     board[y][x] rescue nil
   end
@@ -118,15 +120,15 @@ class Game < ActiveRecord::Base
   def can_start?
     return false unless valid?
     return false unless new?
-    return true if players.count >= min_players and players.count <= max_players
+    return true if players.count >= Game.min_players and players.count <= Game.max_players
     false
   end
 
   def add_player(user)
     if self.players.map(&:user).include?(user)
       errors.add(:game, "player with user.id = #{user.id} already added")
-    elsif self.players.count >= max_players
-      errors.add(:game, "too many players - max = #{max_players}")
+    elsif self.players.count >= Game.max_players
+      errors.add(:game, "too many players - max = #{Game.max_players}")
     else
       player = Player.create(:game => self, :user => user)
       self.players << player
@@ -143,7 +145,7 @@ class Game < ActiveRecord::Base
   end
 
   def get_random_chars(player, move)
-    add_count = chars_per_move - player.chars_on_hand.count
+    add_count = Game.chars_per_move - player.chars_on_hand.count
     add_count.times do
       char = game_chars.free.order("rand()").first
       char.add_to_player(player, move)

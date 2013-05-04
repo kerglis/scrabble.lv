@@ -27,6 +27,7 @@ describe Dictionary do
   end
 
   specify { @dict.valid_words_from_chars("āēīūxyw").count.should == 1 }
+  specify { Dictionary.find_possible_words_from_chars("abcdefgi").count.should == Dictionary.find_possible_words_from_chars("abcdefg").count }
 
   context "apply prepositions" do
     specify { Dictionary.apply_prepositions("test").should == "test" }

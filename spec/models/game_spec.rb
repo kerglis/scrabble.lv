@@ -12,12 +12,13 @@ describe Game do
     @user_4 = FactoryGirl.create :user
   end
 
+  specify { Game.min_players.should == 2 }
+  specify { Game.max_players.should == 4 }
+
   context "on initialization" do
     specify { @game.locale.should == :lv }
     specify { @game.players.count.should == 0 }
     specify { @game.new?.should == true }
-    specify { @game.min_players.should == 2 }
-    specify { @game.max_players.should == 4 }
     specify { @game.max_move_time.should == 5.minutes }
 
     specify { @game.players.empty?.should == true }
@@ -66,7 +67,7 @@ describe Game do
       before { @game.start }
       specify { @game.moves.count.should == @game.players.count + 1 }
       specify { @game.current_move.player.should == @game.players.first }
-      specify { @game.current_move.player.chars_on_hand.count.should == @game.chars_per_move }
+      specify { @game.current_move.player.chars_on_hand.count.should == Game.chars_per_move }
     end
   end
 
