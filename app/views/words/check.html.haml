@@ -11,5 +11,10 @@
 = form_for :search, :url => chk_path, :html => { :method => :post, :class => "form-horizontal"} do |f|
   .control-group
     = f.text_field :word, :placeholder => t("enter_word"), :data => { :min_length => 2, :max_length => 15, :allowed_symbols => Game.char_list(@locale), :url => chk_path, :"select-all" => true }
-  .control-group
     = f.submit t("check_word"), :class => "btn btn-success"
+
+.row
+  - unless @possible_words.blank?
+    .alert.alert-info.alert-block.span6
+      %b= "#{t("possible_words")}: "
+      = @possible_words.join(", ")

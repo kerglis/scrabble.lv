@@ -1,62 +1,12 @@
 lv:
 
-  save: "Saglabāt"
-  welcome: "Sveiki, %{name}"
-  profile_name: "Profils: %{name}"
-  male: "vīr."
-  female: "siev."
-  
-  page_edit: "Lapas labošana"
-  page_tree_error: "Pieprasītā izmaiņa netika pieņemta un koks tika atgriezts uz iepriekšējo stāvokli. Mēģiniet vēlreiz."
-  page_tree_instruction: "* Right-click uz mapi - lai piekļūtu izvēlnei"
-  tree: "Koks"
-  content: "Saturs"
-  show_in_menu: "Rādīt iekš menu"
+  navi:
+    chk: "<i class='icon-search'></i><span> Pārbaudīt</span>"
 
-  public_area: "Publiskā daļa"
-  admin_area: "Admin daļa"
 
-  state: "Statuss"
-  active: "Aktīvs"
-  ready: "Sagatavots"
-  approved: "Apstiprināts"
-  inactive: "Neaktīvs"
-  deleted: "Dzēsts"
-  canceled: "Atcelts"
-  accepted: "Akceptēts"
-  archived: "Arhivēts"
-  editing: "Rediģēšana"
-  restored: "Atjaunots"
-  activate: "Aktivizēt"
-  deactivate: "Deaktivizēt"
-  loading: "Ielādē"
-  
-  back: "« Atpakaļ"
-  back_to_collection: "« Atpakaļ uz sarakstu"
-  
-  create: "Izveidot jaunu"
-  create_new: "Jauns: %{model}"
-  edit: "Rediģēt"
-  edit_existing: "Rediģēt: %{model}"
-  search: "Meklēt"
-
-  rename: "Pārsaukt"
-  swap_state: "Mainīt statusu"
-  cut: "Izgriezt"
-  paste: "Ielīmēt"
-  delete: "Dzēst"
-  confirm_deletion: "Dzēšanas apstiprināšana"
-  confirm_delete: "Tiešām dzēst?"
-  confirm_restore: "Tiešām atjaunot?"
-  confirm_deactivate: "Tiešām deaktivizēt?"
-  server_error: "Serveris atgrieza kļūdu"
-
-  save_object_first: "Sākumā saglabājiet objektu"
-  all_rights_reserved: "Visas tiesības piepaturētas"
-  
-  enter_word: "Ievadi vārdu"
-  check_word: "Pārbaudīt"
-  check_words: "Pārbaudīt vārdus"
+  enter_word: Ievadi vārdu
+  check_word: Pārbaudīt
+  check_words: Pārbaudīt vārdus
+  possible_words: Iespējamie vārdi
   word_found: "Vārds <span>%{word}</span> ir atrasts mūsu vārdnīcā"
   word_not_found: "Vārds <span>%{word}</span> nav atrasts mūsu vārdnīcā"
-  

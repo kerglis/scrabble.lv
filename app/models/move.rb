@@ -3,6 +3,7 @@ class Move < ActiveRecord::Base
   belongs_to    :game
   belongs_to    :player
   has_many      :game_chars
+  has_many      :cells, :through => :game_chars
 
   acts_as_list   :scope => :game
 

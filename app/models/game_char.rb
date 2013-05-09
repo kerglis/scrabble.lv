@@ -21,6 +21,10 @@ class GameChar < ActiveRecord::Base
       transition :to => :on_hand, :from => :on_board
     end
 
+    event :finalize do
+      transition :to => :permanent, :from => :on_board
+    end
+
   end
 
   def self.free

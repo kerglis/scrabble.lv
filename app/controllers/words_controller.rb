@@ -15,6 +15,7 @@ class WordsController < ApplicationController
       @error = t("search_word_out_of_boundries")
     else
       @found = @dict.check?(@word)
+      @possible_words = @dict.valid_words_from_chars(@word)
     end
 
     respond_to do |format|

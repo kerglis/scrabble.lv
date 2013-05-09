@@ -3,6 +3,11 @@ $green_mid: #99cc99;
 $green_dk: #003300;
 $green: #006600;
 
+body
+{
+  margin-top: 1em;
+}
+
 #footer
 {
   border-top: 1px solid $green_mid;
@@ -14,8 +19,13 @@ $green: #006600;
 {
   .brand
   {
-    img { height: 26px; }
+    padding-left: 30px;
   }
+}
+
+.navbar-inner
+{
+  padding: 0;
 }
 
 h1, h2

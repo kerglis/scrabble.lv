@@ -1,5 +1,6 @@
 .navbar
   .navbar-inner
-    = render :partial => "shared/brand"
-    = render :partial => "shared/toolbar"
+    .brand.hidden-phone
+      Scrabble
+    = render_navigation :expand_all => true, :renderer => :bootstrap
     = render :partial => "shared/toolbar_user"
