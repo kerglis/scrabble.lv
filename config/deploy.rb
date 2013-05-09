@@ -1,16 +1,16 @@
 require "rvm/capistrano"
 require "bundler/capistrano"
 
+set :application, "scrabble"
+set :repository, "git@bitbucket.org:kristaps_erglis/scrabble.lv.git"
+set :scm, :git
+set :deploy_via, :remote_cache
+set :rvm_type, :system
+
 set :stages, %w{demo production}
 set :default_stage, "demo"
+
 require "capistrano/ext/multistage"
-
-set :scm, :git
-set :repository, "git@bitbucket.org:kristaps_erglis/scrabble.lv.git"
-
-set :deploy_via, :remote_cache
-
-set :application, "scrabble"
 
 set :keep_releases, 5
 after "deploy", "deploy:cleanup"

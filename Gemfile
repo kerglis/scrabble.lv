@@ -42,7 +42,7 @@ end
 
 group :development do
   gem 'rvm-capistrano'
-  gem 'capistrano', '2.13.5'
+  gem 'capistrano', '~> 2.13'
   gem 'thin'
 end
 

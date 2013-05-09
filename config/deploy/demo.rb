@@ -1,4 +1,4 @@
-server "xcodus.com", :web, :app, :db, :primary => true
+server "sz.lv", :web, :app, :db, :primary => true
 set :user, "rails"
 set :use_sudo, false
 set :branch, "develop"
