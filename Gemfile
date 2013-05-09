@@ -18,6 +18,7 @@ gem 'omniauth-facebook'
 gem 'prefered'
 gem 'less-rails'
 gem 'twitter-bootstrap-rails'
+gem 'simple-navigation-bootstrap'
 
 gem 'hirb'
 gem 'hirb-unicode'

@@ -234,6 +234,10 @@ GEM
       railties (~> 3.2.0)
       sass (>= 3.1.10)
       tilt (~> 1.3)
+    simple-navigation (3.10.1)
+      activesupport (>= 2.3.2)
+    simple-navigation-bootstrap (0.0.4)
+      simple-navigation (>= 3.7.0)
     simple_form (2.1.0)
       actionpack (~> 3.0)
       activemodel (~> 3.0)
@@ -304,6 +308,7 @@ DEPENDENCIES
   ruby-prolog (~> 0.0.5)
   rvm-capistrano
   sass-rails
+  simple-navigation-bootstrap
   stringex
   termcolor
   therubyracer (~> 0.11.1)
