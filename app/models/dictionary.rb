@@ -25,14 +25,15 @@ class Dictionary
       # options for prepositions
       # :from - from offset, default - 0
       # :to - to offset, default - 0
-      # :chars => {"a" => 1, "s" => 3, ... char => position (zero based) }
+      # :chars => {1 => "a", 3 => "s", ... position => char (zero based) }
 
       if prepositions[:chars].present?
         from = prepositions[:from] || 0
         to = prepositions[:to] || 0
+
         (from..to).map do |offset|
           new_word = word.dup
-          prepositions[:chars].each do |ch, pos|
+          prepositions[:chars].each do |pos, ch|
             new_pos = pos + offset
             new_word = new_word.chars.to_a.insert(new_pos, ch).join if new_pos <= new_word.length
           end

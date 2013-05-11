@@ -10,6 +10,8 @@ describe Dictionary do
     @dict.add("aeiu")
     @dict.add("ģķļņ")
     @dict.add("gkln")
+    @dict.add("axbycz")
+    @dict.add("xaybzc")
   end
 
   after :all do
@@ -17,6 +19,8 @@ describe Dictionary do
     @dict.remove("aeiu")
     @dict.remove("ģķļņ")
     @dict.remove("gkln")
+    @dict.remove("axbycz")
+    @dict.remove("xaybzc")
   end
 
   context "distinct a from ā, etc" do
@@ -31,13 +35,14 @@ describe Dictionary do
 
   context "apply prepositions" do
     specify { Dictionary.apply_prepositions("test").should == "test" }
-    specify { Dictionary.apply_prepositions("test", {:chars => { "k" => 2, "i" => 5 }}).should == ["teksti"] }
-    specify { Dictionary.apply_prepositions("te", {:chars => { "k" => 2, "i" => 5 }}).should == ["tek"] }
-    specify { Dictionary.apply_prepositions("te", {:chars => { "ļ" => 2, "ā" => 3 }}).should == ["teļā"] }
-    specify { Dictionary.apply_prepositions("te", {:chars => { "a" => 0, "s" => 1 }}).should == ["aste"] }
-    specify { Dictionary.apply_prepositions("xyz", {:chars => { "a" => 0, "b" => 2, "c" => 4 }, :from => 0, :to => 2}).should == ["axbycz", "xaybzc", "xyazb"] }
+    specify { Dictionary.apply_prepositions("test", { chars: { 2 => "k", 5 => "i" }}).should == ["teksti"] }
+    specify { Dictionary.apply_prepositions("te",   { chars: { 2 => "k", 5 => "i" }}).should == ["tek"] }
+    specify { Dictionary.apply_prepositions("te",   { chars: { 2 => "ļ", 3 => "ā" }}).should == ["teļā"] }
+    specify { Dictionary.apply_prepositions("te",   { chars: { 0 => "a", 1 => "s" }}).should == ["aste"] }
+    specify { Dictionary.apply_prepositions("xyz",  { chars: { 0 => "a", 2 => "b", 4 => "c" }, from: 0, to: 2}).should == ["axbycz", "xaybzc", "xyazb"] }
+    specify { Dictionary.apply_prepositions("xyz",  { chars: { 0 => "a", 2 => "b", 4 => "c" }, from: 1, to: 3}).should == ["xaybzc", "xyazb", "xyza" ] }
 
-    specify { @dict.valid_words_from_chars("test", :chars => {"p" => 0, "a" => 1}).include?("pats").should be_true }
+    specify { @dict.valid_words_from_chars("xyz", { chars: { 0 => "a", 2 => "b", 4 => "c" }, from: 0, to: 2 }).include?("axbycz").should be_true }
 
   end
 
