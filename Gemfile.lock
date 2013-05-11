@@ -62,6 +62,8 @@ GEM
     better_errors (0.8.0)
       coderay (>= 1.0.0)
       erubis (>= 2.6.6)
+    binding_of_caller (0.7.1)
+      debug_inspector (>= 0.0.1)
     builder (3.0.4)
     cancan (1.6.9)
     capistrano (2.15.4)
@@ -82,6 +84,7 @@ GEM
     config_spartan (1.0.1)
       hashie
     daemons (1.1.9)
+    debug_inspector (0.0.2)
     devise (2.2.3)
       bcrypt-ruby (~> 3.0)
       orm_adapter (~> 0.1)
@@ -285,6 +288,7 @@ PLATFORMS
 DEPENDENCIES
   awesome_print
   better_errors
+  binding_of_caller
   cancan
   capistrano (~> 2.13)
   coffee-rails
@@ -309,6 +313,7 @@ DEPENDENCIES
   rvm-capistrano
   sass-rails
   simple-navigation-bootstrap
+  simple_form
   stringex
   termcolor
   therubyracer (~> 0.11.1)

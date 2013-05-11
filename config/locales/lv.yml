@@ -1,12 +1,14 @@
 lv:
 
   navi:
-    chk: "<i class='icon-search'></i><span> Pārbaudīt</span>"
+    check_word: "<i class='icon-search'></i><span> Pārbaudīt</span>"
+    find_words: "<i class='icon-eye-open'></i><span> Piemeklēt</span>"
 
-
-  enter_word: Ievadi vārdu
-  check_word: Pārbaudīt
-  check_words: Pārbaudīt vārdus
-  possible_words: Iespējamie vārdi
-  word_found: "Vārds <span>%{word}</span> ir atrasts mūsu vārdnīcā"
-  word_not_found: "Vārds <span>%{word}</span> nav atrasts mūsu vārdnīcā"
+  word:
+    enter: Ievadi vārdu
+    check_title: Pārbaudīt vārdu
+    check: Pārbaudīt
+    find_possible: Iespējamie vārdi
+    out_of_boundries: Vārda garums 2 līdz 15 simoli
+    found: "Vārds <span>%{word}</span> ir atrasts mūsu vārdnīcā"
+    not_found: "Vārds <span>%{word}</span> nav atrasts mūsu vārdnīcā"

@@ -8,6 +8,8 @@ $ ->
   #     $this.on "keyup", (e) ->
   #       console.log $(this), url, $(this).val()
 
+  $('.slider').slider()
+
   $("[data-select-all]").focus ->
     @select()
 

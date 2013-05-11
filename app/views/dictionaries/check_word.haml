@@ -1,0 +1,14 @@
+%h1= t("word.check_title")
+
+.row
+  - if @found
+    .alert.alert-success.alert-block.span6
+      .msg= t("word.found", word: @word).html_safe
+  - elsif @search.word.present?
+    .alert.alert-error.alert-block.span6
+      .msg= t("word.not_found", word: @search.word).html_safe
+
+= form_for :search, url: check_word_dictionary_path, html: { method: :post, class: "form-horizontal"} do |f|
+  .control-group
+    = f.text_field :word, placeholder: t("word.enter"), data: { min_length: 2, max_length: 15, allowed_symbols: Game.char_list(@locale), url: check_word_dictionary_path, :"select-all" => true }
+    = f.submit t("word.check"), class: "btn btn-success"

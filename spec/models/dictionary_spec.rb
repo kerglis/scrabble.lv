@@ -10,7 +10,6 @@ describe Dictionary do
     @dict.add("aeiu")
     @dict.add("ģķļņ")
     @dict.add("gkln")
-    @dict.add("axbycz")
     @dict.add("xaybzc")
   end
 
@@ -19,7 +18,6 @@ describe Dictionary do
     @dict.remove("aeiu")
     @dict.remove("ģķļņ")
     @dict.remove("gkln")
-    @dict.remove("axbycz")
     @dict.remove("xaybzc")
   end
 
@@ -34,15 +32,14 @@ describe Dictionary do
   specify { Dictionary.find_possible_words_from_chars("abcdefgi").count.should == Dictionary.find_possible_words_from_chars("abcdefg").count }
 
   context "apply prepositions" do
-    specify { Dictionary.apply_prepositions("test").should == "test" }
-    specify { Dictionary.apply_prepositions("test", { chars: { 2 => "k", 5 => "i" }}).should == ["teksti"] }
-    specify { Dictionary.apply_prepositions("te",   { chars: { 2 => "k", 5 => "i" }}).should == ["tek"] }
-    specify { Dictionary.apply_prepositions("te",   { chars: { 2 => "ļ", 3 => "ā" }}).should == ["teļā"] }
-    specify { Dictionary.apply_prepositions("te",   { chars: { 0 => "a", 1 => "s" }}).should == ["aste"] }
-    specify { Dictionary.apply_prepositions("xyz",  { chars: { 0 => "a", 2 => "b", 4 => "c" }, from: 0, to: 2}).should == ["axbycz", "xaybzc", "xyazb"] }
-    specify { Dictionary.apply_prepositions("xyz",  { chars: { 0 => "a", 2 => "b", 4 => "c" }, from: 1, to: 3}).should == ["xaybzc", "xyazb", "xyza" ] }
+    specify { Dictionary.apply_prepositions("abcd").should == "abcd" }
+    specify { Dictionary.apply_prepositions("abcd", { chars: { 2 => "x", 5 => "y" }, from: 0, to: 5}).should == ["abxcdy"] }
+    specify { Dictionary.apply_prepositions("ab",   { chars: { 2 => "x", 5 => "y" }, from: 0, to: 5}).should == ["abx", "axb", "xaby"] }
+    specify { Dictionary.apply_prepositions("ab",   { chars: { 2 => "x", 3 => "y" }, from: 0, to: 3}).should == ["abxy"] }
+    specify { Dictionary.apply_prepositions("ab",   { chars: { 0 => "x", 1 => "y" }, from: 0, to: 3}).should == ["xyab"] }
+    specify { Dictionary.apply_prepositions("abc",  { chars: { 0 => "x", 2 => "y", 4 => "z" }, from: 0, to: 5}).should == ["xaybzc", "aybzc"] }
 
-    specify { @dict.valid_words_from_chars("xyz", { chars: { 0 => "a", 2 => "b", 4 => "c" }, from: 0, to: 2 }).include?("axbycz").should be_true }
+    specify { @dict.valid_words_from_chars("abc", { chars: { 0 => "x", 2 => "y", 4 => "z" }, from: 0, to: 5 }).include?("xaybzc").should be_true }
 
   end
 

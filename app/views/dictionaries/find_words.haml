@@ -1,0 +1,30 @@
+- from,to = @search.from_to.try(:split, ",")
+- from ||= 1
+- to ||= 15
+
+%h1= t("word.find_words")
+
+= simple_form_for :search, url: find_words_dictionary_path, html: { method: :post, class: "form-horizontal"} do |f|
+  = f.text_field :chars, maxlength: Game.chars_per_move
+
+  %table.table.table-condensed.scrabble-find{style: "width: 0px"}
+    %thead
+      %tr
+        - (1..15).each do |pos|
+          %th.c{style: "width: 0px"}= pos
+    %tbody
+      %tr
+        - (1..15).each do |pos|
+          %td.c
+            = f.text_field "ch_#{pos}", maxlength: 1, style: "width: 30px"
+
+  %div{style: "margin-left:30px"}
+    = f.text_field :from_to, class: "slider", :"data-slider-min" => 1, :"data-slider-max" => 15, :"data-slider-step" => "1", :"data-slider-value" => "[#{from},#{to}]", :"data-slider-orientation" => "horizontal", :"data-slider-handle" => "triangle", style: "width:740px"
+
+  %p= f.submit t("word.find"), class: "btn btn-success"
+
+
+.well
+  = @prepositions.inspect
+  %br
+  = @words.inspect

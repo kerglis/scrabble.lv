@@ -6,7 +6,8 @@ SimpleNavigation::Configuration.run do |navigation|
 
   navigation.items do |primary|
 
-    primary.item :chk, t('navi.chk'), chk_path
+    primary.item :check_word, t('navi.check_word'), check_word_dictionary_path, hilghights_on: /check_word/
+    primary.item :find_words, t('navi.find_words'), find_words_dictionary_path, highlights_on: /find_words/
 
     primary.dom_class = 'nav'
   end

@@ -18,6 +18,7 @@ gem 'omniauth-facebook'
 gem 'prefered'
 gem 'less-rails'
 gem 'twitter-bootstrap-rails'
+gem 'simple_form'
 gem 'simple-navigation-bootstrap'
 
 gem 'hirb'
@@ -28,6 +29,7 @@ gem 'termcolor'
 group :development, :test do
   gem 'pry'
   gem 'better_errors'
+  gem 'binding_of_caller'
 end
 
 group :assets do
