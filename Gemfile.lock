@@ -1,6 +1,5 @@
-GIT
-  remote: https://github.com/kerglis/keg_engine.git
-  revision: 098cb57ca3f9c26ee0d87f2521c35bda2bd6e20a
+PATH
+  remote: vendor/engines/keg_engine
   specs:
     keg_engine (0.1.3)
       acts_as_list
@@ -103,7 +102,7 @@ GEM
     faraday (0.8.7)
       multipart-post (~> 1.1)
     ffi (1.8.1)
-    ffi-hunspell (0.2.6)
+    ffi-hunspell (0.3.0)
       ffi (~> 1.0)
     haml (4.0.2)
       tilt
@@ -229,7 +228,6 @@ GEM
       rspec-core (~> 2.13.0)
       rspec-expectations (~> 2.13.0)
       rspec-mocks (~> 2.13.0)
-    ruby-prolog (0.0.5)
     rvm-capistrano (1.3.0)
       capistrano (>= 2.0.0)
     sass (3.2.7)
@@ -293,7 +291,7 @@ DEPENDENCIES
   capistrano (~> 2.13)
   coffee-rails
   factory_girl_rails
-  ffi-hunspell
+  ffi-hunspell (~> 0.3.0)
   haml-rails
   hirb
   hirb-colors
@@ -309,7 +307,6 @@ DEPENDENCIES
   quiet_assets
   redactor-rails
   rspec-rails
-  ruby-prolog (~> 0.0.5)
   rvm-capistrano
   sass-rails
   simple-navigation-bootstrap

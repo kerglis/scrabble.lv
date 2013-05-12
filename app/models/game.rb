@@ -9,6 +9,8 @@ class Game < ActiveRecord::Base
   after_create        :setup_cells
   after_create        :setup_chars
 
+  attr_reader         :the_chars
+
   state_machine :initial => :new do
     event :start do
       transition :to => :playing, :from => :new, :if => lambda { |game| game.can_start? }

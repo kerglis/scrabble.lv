@@ -5,9 +5,20 @@ class Dictionary
   delegate    :check?, :stem, :suggest, :add, :remove, :to => :dict
 
   class << self
+
+    attr_accessor :the_chars
+
     def language_code(locale = nil)
       locale ||= I18n.locale
       "#{locale.to_s.downcase}_#{locale.to_s.upcase}"
+    end
+
+    def word_value(word, locale)
+      @the_chars ||= {}
+      @the_chars[locale] ||= Hash[Char.for_locale(locale).map{|ch| [ch.char, ch.pts]}]
+      word.chars.map do |ch|
+        @the_chars[locale][ch]
+      end.sum
     end
 
     def max_length(prepositions = {})
@@ -43,11 +54,9 @@ class Dictionary
         from = prepositions[:from] || 0
         to = prepositions[:to] || 14
 
-        max_length = [max_length(prepositions)-prepositions[:chars].size, word.length].min
+        max_offset = [max_length(prepositions)-prepositions[:chars].size, word.length].min
 
-        # binding.pry
-
-        (from..to-max_length-1).map do |offset|
+        (from..to-max_offset-1).map do |offset|
           new_word = word.dup
           modified = false
 
@@ -55,14 +64,13 @@ class Dictionary
             new_pos = pos - offset
 
             # binding.pry
-            if new_pos >= 0 and new_pos <= new_word.length
+            if new_pos >= 0 and new_pos <= new_word.length and prepositions[:chars][new_pos-1].blank?
               new_word = new_word.chars.to_a.insert(new_pos, ch).join
               modified = true
-            # elsif modified
-            #   new_word = nil
             end
           end
-          modified ? new_word : nil
+          modified ? "#{new_word}@#{offset}" : nil
+          # modified ? new_word : nil
         end.compact
       else
         word
@@ -77,7 +85,9 @@ class Dictionary
   def valid_words_from_chars(chars, prepositions = {})
     chars = chars.chars.to_a unless chars.is_a?(Array)
     Dictionary.find_possible_words_from_chars(chars, prepositions).select do |word|
-      check?(word)
+      the_word, pos = word.split("@")
+
+      check?(the_word)
     end
   end
 
