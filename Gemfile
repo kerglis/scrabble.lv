@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
-# gem 'keg_engine', :github => 'kerglis/keg_engine.git'
-gem 'keg_engine', :path => 'vendor/engines/keg_engine'
+gem 'keg_engine', :github => 'kerglis/keg_engine'
+# gem 'keg_engine', :path => 'vendor/engines/keg_engine'
 
 gem 'ffi-hunspell', '~> 0.3.0'
 
