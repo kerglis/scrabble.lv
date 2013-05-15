@@ -21,12 +21,6 @@ class Dictionary
       end.sum
     end
 
-    def max_length(prepositions = {})
-      from = prepositions[:from] || 0
-      to = prepositions[:to] || 14
-      to - from + 1
-    end
-
     def find_possible_words_from_chars(chars, prepositions = {})
       chars = chars.chars.to_a unless chars.is_a?(Array)
 
@@ -35,12 +29,12 @@ class Dictionary
 
       if prepositions[:chars].present?
         1.upto(chars.size).flat_map do |l|
-          chars.permutation(l).to_a.flat_map{|x| apply_prepositions(x.join, prepositions) }.uniq
-        end.uniq
+          chars.permutation(l).to_a.flat_map{|x| apply_prepositions(x.join, prepositions) }
+        end.compact.uniq
       else
         2.upto(chars.size).flat_map do |l|
-          chars.permutation(l).to_a.flat_map{|x| x.join}.uniq
-        end.uniq
+          chars.permutation(l).to_a.flat_map{|x| x.join}
+        end.compact.uniq
       end
     end
 
@@ -54,23 +48,14 @@ class Dictionary
         from = prepositions[:from] || 0
         to = prepositions[:to] || 14
 
-        max_offset = [max_length(prepositions)-prepositions[:chars].size, word.length].min
-
-        (from..to-max_offset-1).map do |offset|
+        from.upto(to - word.length).map do |offset|
           new_word = word.dup
-          modified = false
 
-          prepositions[:chars].each do |pos, ch|
-            new_pos = pos - offset
-
-            # binding.pry
-            if new_pos >= 0 and new_pos <= new_word.length and prepositions[:chars][new_pos-1].blank?
-              new_word = new_word.chars.to_a.insert(new_pos, ch).join
-              modified = true
+          if new_word.insert_chars_at!(- offset, prepositions[:chars])
+            if new_word.length + offset <= to + 1
+              "#{new_word}@#{offset}"
             end
           end
-          modified ? "#{new_word}@#{offset}" : nil
-          # modified ? new_word : nil
         end.compact
       else
         word
@@ -89,6 +74,39 @@ class Dictionary
 
       check?(the_word)
     end
+  end
+
+end
+
+class String
+  def insert_chars_at(offset, chars = {})
+    new_str = self.dup
+
+    chars.each do |pos, ch|
+      new_pos = pos + offset.to_i
+      return new_str if new_pos == -1 # don't glue to previous letter
+      new_str.insert_ch!(new_pos, ch) if new_pos >= 0
+    end
+
+    new_str
+  end
+
+  def insert_chars_at!(offset, chars = {})
+    new_str = self.dup.insert_chars_at(offset, chars)
+    return nil if new_str == self
+    replace(new_str)
+    true
+  end
+
+  def insert_ch(pos, ch)
+    return self if pos > self.length or pos.to_i < 0
+    self.chars.to_a.insert(pos,ch).join()
+  end
+
+  def insert_ch!(pos, ch)
+    return nil if pos > self.length or pos.to_i < 0
+    replace(self.insert_ch(pos, ch))
+    true
   end
 
 end

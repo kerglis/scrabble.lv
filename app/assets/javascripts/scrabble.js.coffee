@@ -9,7 +9,8 @@ $ ->
 
   $("a.scrabble-results").on
     click: ->
-      $($(this).data("form"))[0].reset()
+      # $($(this).data("form"))[0].reset()
+      $($(this).data("form")).trigger('reset');
 
       $pos = $(this).data("pos") + 0
       $word = $(this).data("word")
