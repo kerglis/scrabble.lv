@@ -7,7 +7,7 @@ class GameChar < ActiveRecord::Base
 
   acts_as_list column: :pos_on_hand, scope: [:game_id, :player_id]
 
-#  default_scope order: :pos_on_hand
+  #default_scope order: :pos_on_hand
 
   state_machine initial: :free do
     event :to_player do
@@ -36,9 +36,10 @@ class GameChar < ActiveRecord::Base
     self.player = player
     self.move = move
     self.to_player
+    self.move_to_bottom
   end
 
-  def to_board(x, y)
+  def put_to_board(x, y)
     if move and cell = game.cells.free.by_pos(x, y).first
       cell.add_char(game_char)
     end

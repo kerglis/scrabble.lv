@@ -13,10 +13,14 @@ class Game < ActiveRecord::Base
 
   state_machine initial: :new do
     event :start do
-      transition to: :playing, from: :new, if: lambda { |game| game.can_start? }
+      transition to: :starting, from: :new, if: lambda { |game| game.can_start? }
     end
 
     after_transition on: :start, do: :first_move
+
+    event :play do
+      transition to: :playing, from: :starting
+    end
 
     event :finish do
       transition to: :finished
@@ -209,6 +213,7 @@ private
       move = create_move_for_player(player)
       move.finish
     end
+    play
     next_move
   end
 

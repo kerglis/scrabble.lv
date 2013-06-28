@@ -26,11 +26,17 @@ describe GameChar do
     context "use some of chars" do
       before do
         @move = @game.current_move
-        @on_hand = @move.player.chars_on_hand
+        @on_hand = @move.player.chars_on_hand.order(:pos_on_hand)
         @move.char_to_board(@on_hand[0], 8,8)
         @move.char_to_board(@on_hand[1], 8,9)
         @move.char_to_board(@on_hand[2], 8,10)
-        @next_move = @game.next_move
+
+        @move2 = @game.next_move
+        @on_hand2 = @move2.player.chars_on_hand.order(:pos_on_hand)
+        @move2.char_to_board(@on_hand2[0], 7,8)
+        @move2.char_to_board(@on_hand2[1], 9,8)
+        @move2.char_to_board(@on_hand2[2], 10,8)
+
         @next_move = @game.next_move
       end
 
@@ -42,8 +48,8 @@ describe GameChar do
   end
 
   context "char position" do
-    specify { @p1.chars_on_hand.first.pos_on_hand.should == 1 }
-    specify { @p1.chars_on_hand.last.pos_on_hand.should == Game.chars_per_move }
+    specify { @p1.chars_on_hand.order(:pos_on_hand).first.pos_on_hand.should == 1 }
+    specify { @p1.chars_on_hand.order(:pos_on_hand).last.pos_on_hand.should == Game.chars_per_move }
   end
 
 end

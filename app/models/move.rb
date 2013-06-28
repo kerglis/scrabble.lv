@@ -16,6 +16,7 @@ class Move < ActiveRecord::Base
   end
 
   def valid_move?
+    return true if game.starting?
     return false unless one_axis?
     true
   end
@@ -34,7 +35,7 @@ class Move < ActiveRecord::Base
 
   def char_to_board(game_char, x, y)
     if cell = game.cells.free.by_pos(x, y).first
-      # self.game_chars << game_char
+      self.game_chars << game_char
       cell.add_char(game_char)
     end
   end

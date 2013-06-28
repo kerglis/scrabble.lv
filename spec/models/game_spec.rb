@@ -18,13 +18,13 @@ describe Game do
   context "on initialization" do
     specify { @game.locale.should == :lv }
     specify { @game.players.count.should == 0 }
-    specify { @game.new?.should == true }
+    specify { @game.should be_new }
     specify { @game.max_move_time.should == 5.minutes }
 
     specify { @game.players.empty?.should == true }
     specify { @game.can_start?.should == false }
-    specify { @game.chars.empty?.should == false }
-    specify { @game.moves.empty?.should == true }
+    specify { @game.chars.should_not be_empty }
+    specify { @game.moves.should be_empty }
 
     context "add users" do
       before { @game.add_player(@user_1) }
@@ -45,12 +45,12 @@ describe Game do
         @game.add_player(@user_2)
         @game.start
       end
-      specify { @game.playing?.should == true }
+      specify { @game.should be_playing }
     end
 
     context "game cells" do
       specify { Game.board.flatten.count.should == 15*15 }
-      specify { @game.cells.empty?.should == false }
+      specify { @game.cells.should_not be_empty }
       specify { @game.cells.count.should == Game.board.flatten.count }
     end
   end

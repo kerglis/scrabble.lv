@@ -2,7 +2,7 @@ class Dictionary
 
   attr_reader :dict
 
-  delegate    :check?, :stem, :suggest, :add, :remove, :to => :dict
+  delegate    :check?, :stem, :suggest, :add, :remove, to: :dict
 
   class << self
 
@@ -42,7 +42,7 @@ class Dictionary
       # options for prepositions
       # :from - from boundry, default - 0
       # :to - to boundry, default - 14
-      # :chars => {1 => "a", 3 => "s", ... position => char (zero based) }
+      # chars: {1 => "a", 3 => "s", ... position => char (zero based) }
 
       if prepositions[:chars].present?
         from = prepositions[:from] || 0
