@@ -11,6 +11,8 @@ gem 'haml-rails'
 gem 'stringex'
 gem 'cancan'
 gem 'redactor-rails'
+gem 'carrierwave'
+gem 'mini_magick'
 
 gem 'omniauth-facebook'
 
