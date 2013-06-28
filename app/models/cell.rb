@@ -7,6 +7,8 @@ class Cell < ActiveRecord::Base
 
   default_scope   order: [:y, :x]
 
+  attr_accessor   :neighbor_ids
+
   state_machine initial: :free do
 
     event :use do
@@ -23,6 +25,12 @@ class Cell < ActiveRecord::Base
   scope :free, -> { where(state: :free) }
   scope :used, -> { where(state: :used) }
   scope :by_pos, lambda { |x, y| where(x: x, y: y) }
+
+  class << self
+    def directions
+      %w{ n w s e }
+    end
+  end
 
   def have_char?
     game_char.present?
@@ -42,8 +50,13 @@ class Cell < ActiveRecord::Base
     game.cells.by_pos(pos[0], pos[1]).first
   end
 
+  def neighbor_ids
+    @neighbor_ids ||= Hash[ Cell.directions.map{|direction| [direction.to_sym, neighbor(direction).try(:id) ] } ]
+    @neighbor_ids
+  end
+
   def neighbors
-    Hash[ %w{ n w s e }.map{|direction| [direction.to_sym, neighbor(direction)] } ]
+    Hash[ Cell.directions.map{|direction| [direction.to_sym, Cell.find_by_id(neighbor_ids[direction.to_sym]) ] } ]
   end
 
   def char
@@ -59,11 +72,8 @@ class Cell < ActiveRecord::Base
       l2: "cyan",
       cc: "yellow"
     }
-
     color = colors[cell_type.to_sym]
-
     color ? "<#{color}>#{cell_type}</#{color}>" : cell_type
-
   end
 
   def add_char(game_char)
