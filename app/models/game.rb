@@ -1,9 +1,9 @@
 class Game < ActiveRecord::Base
 
-  has_many            :players,     :dependent => :destroy
-  has_many            :moves,       :dependent => :destroy
-  has_many            :cells,       :dependent => :destroy
-  has_many            :game_chars,  :dependent => :destroy
+  has_many            :players,     dependent: :destroy
+  has_many            :moves,       dependent: :destroy
+  has_many            :cells,       dependent: :destroy
+  has_many            :game_chars,  dependent: :destroy
 
   before_validation   :setup_defaults
   after_create        :setup_cells
@@ -11,15 +11,15 @@ class Game < ActiveRecord::Base
 
   attr_reader         :the_chars
 
-  state_machine :initial => :new do
+  state_machine initial: :new do
     event :start do
-      transition :to => :playing, :from => :new, :if => lambda { |game| game.can_start? }
+      transition to: :playing, from: :new, if: lambda { |game| game.can_start? }
     end
 
-    after_transition :on => :start, :do => :first_move
+    after_transition on: :start, do: :first_move
 
     event :finish do
-      transition :to => :finished
+      transition to: :finished
     end
   end
 
@@ -101,13 +101,13 @@ class Game < ActiveRecord::Base
 
   def char(ch)
     ch = ch.mb_chars.downcase.to_s[0]
-    chars.where(:char => ch)
+    chars.where(char: ch)
     {
-      :char => char.ch,
-      :total => char.total,
-      :pts => char.pts,
-      :used => char_use_times(ch),
-      :left => char.total - char_use_times(ch)
+      char: char.ch,
+      total: char.total,
+      pts: char.pts,
+      used: char_use_times(ch),
+      left: char.total - char_use_times(ch)
     } if char
   end
 
@@ -132,7 +132,7 @@ class Game < ActiveRecord::Base
     elsif self.players.count >= Game.max_players
       errors.add(:game, "too many players - max = #{Game.max_players}")
     else
-      player = Player.create(:game => self, :user => user)
+      player = Player.create(game: self, user: user)
       self.players << player
       player
     end
@@ -172,7 +172,7 @@ class Game < ActiveRecord::Base
 
   def create_move_for_player(player)
     if player
-      move = Move.create :game => self, :player => player
+      move = Move.create game: self, player: player
       get_random_chars(player, move)
       move
     end
@@ -188,7 +188,7 @@ private
   def setup_cells
     Game.board.each_with_index do |line, y|
       line.each_with_index do |cell, x|
-        Cell.create :game => self, :x => x, :y => y, :cell_type => Game.cell_type(cell)
+        Cell.create game: self, x: x, y: y, cell_type: Game.cell_type(cell)
       end
     end
   end
@@ -198,7 +198,7 @@ private
 
     the_chars.each do |char|
       char.total.times do
-        GameChar.create :game => self, :char => char.char, :pts => char.pts
+        GameChar.create game: self, char: char.char, pts: char.pts
       end
     end
   end

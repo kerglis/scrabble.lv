@@ -1,7 +1,5 @@
 class Char < ActiveRecord::Base
 
-  def self.for_locale(locale)
-    where(:locale => locale)
-  end
+  scope :for_locale, lambda {|locale| where(locale: locale) }
 
 end

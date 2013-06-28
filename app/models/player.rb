@@ -10,10 +10,10 @@ class Player < ActiveRecord::Base
 
   validates_presence_of   :game, :user
 
-  acts_as_list  :scope => :game
+  acts_as_list  scope: :game
 
   def chars_on_hand
-    game_chars.where(:state => :on_hand)
+    game_chars.where(state: :on_hand)
   end
 
 private

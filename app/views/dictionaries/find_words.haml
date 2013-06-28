@@ -5,7 +5,7 @@
 %h1= t("word.find_words")
 
 = simple_form_for :search, url: find_words_dictionary_path, html: { method: :post, id: "scrabble-find-form"} do |f|
-  = f.input :chars, input_html: { maxlength: Game.chars_per_move }
+  = f.input :chars, input_html: { maxlength: Game.chars_per_move }, label: t("word.chars")
 
   %table.table.table-condensed.scrabble-find{style: "width: 0px"}
     %thead

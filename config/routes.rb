@@ -1,5 +1,7 @@
 ScrabbleLv::Application.routes.draw do
 
+  mount RedactorRails::Engine => '/redactor_rails'
+
   match '/users/auth/:provider' => 'oauth_callbacks#passthru'
   match '/admin' => 'admin/users#index', locale: :lv
 

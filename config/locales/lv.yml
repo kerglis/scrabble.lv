@@ -12,3 +12,8 @@ lv:
     out_of_boundries: Vārda garums 2 līdz 15 simoli
     found: "Vārds <span>%{word}</span> ir atrasts mūsu vārdnīcā"
     not_found: "Vārds <span>%{word}</span> nav atrasts mūsu vārdnīcā"
+    chars: Burti
+    find_words: Piemeklēt vārdus
+    find: Piemeklēt
+    reset: Atiestatīt
+
