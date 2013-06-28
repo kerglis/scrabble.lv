@@ -3,5 +3,20 @@
 FactoryGirl.define do
   factory :game do
     locale :lv
+
+    factory :game_initialized do
+
+      ignore do
+        players_cnt 4
+      end
+
+      after(:create) do |game, evaluator|
+        evaluator.players_cnt.times do
+          game.add_player(FactoryGirl.create :user)
+        end
+        game.start
+      end
+    end
+
   end
 end

@@ -5,7 +5,6 @@ describe Player do
   before do
     @game = FactoryGirl.create :game
     @user_1 = FactoryGirl.create :user
-    @user_2 = FactoryGirl.create :user
   end
 
   context "clone user >> player values" do

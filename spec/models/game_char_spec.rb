@@ -5,12 +5,9 @@ describe GameChar do
   fixtures :chars
 
   before do
-    @game = FactoryGirl.create :game
-    @user_1 = FactoryGirl.create :user
-    @user_2 = FactoryGirl.create :user
-    @p1 = @game.add_player(@user_1)
-    @p2 = @game.add_player(@user_2)
-    @game.start
+    @game = FactoryGirl.create :game_initialized, players_cnt: 2
+    @p1 = @game.players.first
+    @p2 = @game.players.last
   end
 
   context "chars-on-hand" do
