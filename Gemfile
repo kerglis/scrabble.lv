@@ -55,4 +55,12 @@ group :test do
   gem 'factory_girl_rails'
   gem 'awesome_print'
   gem 'simplecov', :require => false
+
+  gem 'headless'
+  gem 'capybara', '~> 1.1.3'
+  gem 'launchy', '~> 2.1.2'
+  gem 'poltergeist', '~> 1.0.2', require: false
+  gem 'rack-contrib', '~> 1.1.0'
+  gem 'headless'
+
 end

@@ -4,14 +4,16 @@ describe Player do
 
   before do
     @game = FactoryGirl.create :game
-    @user_1 = FactoryGirl.create :user
+    @user = FactoryGirl.create :user
   end
 
-  context "clone user >> player values" do
-    before { @player_1 = @game.add_player(@user_1) }
+  specify { @user.should be_valid }
 
-    specify { @player_1.full_name.should == @user_1.full_name }
-    specify { @player_1.email.should == @user_1.email }
+  context "clone user >> player values" do
+    before { @player_1 = @game.add_player(@user) }
+
+    specify { @player_1.full_name.should == @user.full_name }
+    specify { @player_1.email.should == @user.email }
   end
 
 end

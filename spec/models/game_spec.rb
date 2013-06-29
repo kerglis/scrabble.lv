@@ -7,13 +7,11 @@ describe Game do
   before do
     @game = FactoryGirl.create :game
     @user_1 = FactoryGirl.create :user
-    @user_2 = FactoryGirl.create :user
-    @user_3 = FactoryGirl.create :user
-    @user_4 = FactoryGirl.create :user
   end
 
   specify { Game.min_players.should == 2 }
   specify { Game.max_players.should == 4 }
+  specify { @game.board.should be_present }
 
   context "on initialization" do
     specify { @game.locale.should == :lv }
@@ -31,20 +29,37 @@ describe Game do
       specify { @game.players.count.should == 1 }
       specify { @game.players.first.position.should == 1 }
 
+      context "same user again" do
+        before { @game.add_player(@user_1) }
+        specify { @game.errors.should be_present }
+        specify { @game.players.count.should == 1 }
+      end
+
       context "add second user" do
-        before { @game.add_player(@user_2) }
+        before { @game.add_player(FactoryGirl.create :user) }
         specify { @game.players.count.should == 2 }
         specify { @game.players.last.position.should == 2 }
         specify { @game.can_start?.should == true }
+      end
+
+      context "too many" do
+        before do
+          4.times do
+            @game.add_player(FactoryGirl.create :user)
+          end
+        end
+
+        specify { @game.errors.should be_present }
+        specify { @game.players.count.should == 4 }
+
       end
     end
 
     context "shall start when ready" do
       before do
-        @game.add_player(@user_1)
-        @game.add_player(@user_2)
-        @game.start
+        @game = FactoryGirl.create :game_initialized, players_cnt: 2
       end
+
       specify { @game.should be_playing }
     end
 
@@ -57,14 +72,10 @@ describe Game do
 
   context "on play" do
     before do
-      @game.add_player(@user_1)
-      @game.add_player(@user_2)
-      @game.add_player(@user_3)
-      @game.add_player(@user_4)
+      @game = FactoryGirl.create :game_initialized
     end
 
     context "players get their initial chars" do
-      before { @game.start }
       specify { @game.moves.count.should == @game.players.count + 1 }
       specify { @game.current_move.player.should == @game.players.first }
       specify { @game.current_move.player.chars_on_hand.count.should == Game.chars_per_move }

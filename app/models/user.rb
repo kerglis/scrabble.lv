@@ -59,8 +59,4 @@ class User < ActiveRecord::Base
     [first_name, last_name].compact.join(" ")
   end
 
-  def age
-    (! birth_date.blank?) ? (Time.now.to_date - birth_date.to_date).to_i/365 : 0
-  end
-
 end

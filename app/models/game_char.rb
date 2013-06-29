@@ -40,7 +40,7 @@ class GameChar < ActiveRecord::Base
   end
 
   def put_to_board(x, y)
-    if move and cell = game.cells.free.by_pos(x, y).first
+    if move and cell = game.cells.free.by_pos(x, y)
       cell.add_char(game_char)
     end
   end

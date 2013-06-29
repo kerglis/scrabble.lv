@@ -24,11 +24,14 @@ class Cell < ActiveRecord::Base
 
   scope :free, -> { where(state: :free) }
   scope :used, -> { where(state: :used) }
-  scope :by_pos, lambda { |x, y| where(x: x, y: y) }
 
   class << self
     def directions
       %w{ n w s e }
+    end
+
+    def by_pos(x, y)
+      find_by_x_and_y(x, y)
     end
   end
 
@@ -47,7 +50,7 @@ class Cell < ActiveRecord::Base
     when :e # east
       pos = [x+1, y]
     end
-    game.cells.by_pos(pos[0], pos[1]).first
+    game.cells.by_pos(pos[0], pos[1])
   end
 
   def neighbor_ids
@@ -62,6 +65,10 @@ class Cell < ActiveRecord::Base
   def char
     return "<on_green><white> " + game_char.char.mb_chars.upcase + " </white></on_green>" if game_char
     cell_type_str
+  end
+
+  def to_s
+    game_char.char.mb_chars if game_char
   end
 
   def cell_type_str
