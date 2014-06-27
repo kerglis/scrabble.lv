@@ -1,14 +1,13 @@
-site_fullname:          "Scrabble"
-site_name:              "Scrabble.lv"
-host:                   "Scrabble.lv"
-host_nice:              "Scrabble.lv"
-email_from:             "Scrabble <info@scrabble>"
+site_fullname:          "Scrab"
+site_name:              "Scrab.us"
+host:                   "Scrab.us"
+host_nice:              "Scrab.us"
+email_from:             "Scrab <info@scrab.us>"
 rpp:                    20
 locales:
   - lv
 
 ga_account:             "UA-xxxxxx-1"
-
 
 facebook:
   key:      "282544095144850"
