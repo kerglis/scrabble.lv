@@ -2,7 +2,7 @@ development: &dev
   adapter: mysql2
   encoding: utf8
   database: scrabble_dev
-  username: scrabble_dev 
+  username: scrabble_dev
   password: bvAETBM4ayhRG5sJ
   host: localhost
 
@@ -16,7 +16,7 @@ test:
   username: scrabble_test
   password: bvAETBM4ayhRG5sJ
   host: localhost
-  
+
 production:
   adapter: mysql2
   encoding: utf8
