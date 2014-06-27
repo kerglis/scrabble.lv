@@ -7,39 +7,48 @@ u = User.where(
 ).first_or_create
 u.update_attributes(admin: true)
 
+puts u.inspect
+
 sql = ActiveRecord::Base.connection()
 sql.execute 'ALTER TABLE `chars` CHANGE `char` `char` VARCHAR( 1 ) BINARY CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL DEFAULT NULL'
 
-Char.create char: "a", total: 11,  pts: 1
-Char.create char: "i", total: 9,   pts: 1
-Char.create char: "e", total: 6,   pts: 1
-Char.create char: "s", total: 8,   pts: 1
-Char.create char: "n", total: 4,   pts: 2
-Char.create char: "o", total: 3,   pts: 3
-Char.create char: "ā", total: 4,   pts: 2
-Char.create char: "t", total: 6,   pts: 1
-Char.create char: "m", total: 4,   pts: 2
-Char.create char: "j", total: 2,   pts: 4
-Char.create char: "u", total: 5,   pts: 1
-Char.create char: "p", total: 3,   pts: 2
-Char.create char: "š", total: 1,   pts: 6
-Char.create char: "r", total: 5,   pts: 1
-Char.create char: "ē", total: 2,   pts: 4
-Char.create char: "k", total: 4,   pts: 2
-Char.create char: "z", total: 2,   pts: 3
-Char.create char: "l", total: 3,   pts: 2
-Char.create char: "d", total: 3,   pts: 3
-Char.create char: "ī", total: 2,   pts: 4
-Char.create char: "v", total: 3,   pts: 3
-Char.create char: "g", total: 1,   pts: 5
-Char.create char: "b", total: 1,   pts: 5
-Char.create char: "c", total: 1,   pts: 5
-Char.create char: "ķ", total: 1,   pts: 10
-Char.create char: "ū", total: 1,   pts: 6
-Char.create char: "ļ", total: 1,   pts: 8
-Char.create char: "ņ", total: 1,   pts: 6
-Char.create char: "ž", total: 1,   pts: 8
-Char.create char: "f", total: 1,   pts: 10
-Char.create char: "č", total: 1,   pts: 10
-Char.create char: "ģ", total: 1,   pts: 10
-Char.create char: "h", total: 1,   pts: 10
+chars = [
+  [ "a", 11, 1 ],
+  [ "i", 9,  1 ],
+  [ "e", 6,  1 ],
+  [ "s", 8,  1 ],
+  [ "n", 4,  2 ],
+  [ "o", 3,  3 ],
+  [ "ā", 4,  2 ],
+  [ "t", 6,  1 ],
+  [ "m", 4,  2 ],
+  [ "j", 2,  4 ],
+  [ "u", 5,  1 ],
+  [ "p", 3,  2 ],
+  [ "š", 1,  6 ],
+  [ "r", 5,  1 ],
+  [ "ē", 2,  4 ],
+  [ "k", 4,  2 ],
+  [ "z", 2,  3 ],
+  [ "l", 3,  2 ],
+  [ "d", 3,  3 ],
+  [ "ī", 2,  4 ],
+  [ "v", 3,  3 ],
+  [ "g", 1,  5 ],
+  [ "b", 1,  5 ],
+  [ "c", 1,  5 ],
+  [ "ū", 1,  6 ],
+  [ "ļ", 1,  8 ],
+  [ "ņ", 1,  6 ],
+  [ "ž", 1,  8 ],
+  [ "ķ", 1,  10 ],
+  [ "f", 1,  10 ],
+  [ "č", 1,  10 ],
+  [ "ģ", 1,  10 ],
+  [ "h", 1,  10 ]
+]
+
+chars.each do |char, total, pts|
+  ch = Char.where(char: char, total: total,  pts: pts).first_or_create
+  puts ch.inspect
+end
