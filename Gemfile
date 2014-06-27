@@ -6,6 +6,7 @@ gem 'ffi-hunspell', '~> 0.3.0'
 
 gem 'mysql2'
 gem 'jquery-rails'
+gem 'jquery-ui-rails'
 gem 'haml-rails'
 gem 'stringex'
 gem 'cancan'
@@ -17,8 +18,12 @@ gem 'devise', '2.2.4'
 gem 'omniauth-facebook'
 
 gem 'prefered'
-gem 'less-rails'
-gem 'twitter-bootstrap-rails'
+
+gem 'bootstrap-sass', '< 3.0'
+gem 'bootstrap_flash_messages'
+gem 'font-awesome-rails'
+gem 'sass-rails'
+
 gem 'simple_form'
 gem 'simple-navigation-bootstrap'
 
@@ -26,6 +31,7 @@ gem 'hirb'
 gem 'hirb-unicode'
 gem 'hirb-colors'
 gem 'termcolor'
+gem 'meta_search'
 
 group :development, :test do
   gem 'pry'
@@ -34,7 +40,6 @@ group :development, :test do
 end
 
 group :assets do
-  gem 'sass-rails'
   gem 'coffee-rails'
   gem 'uglifier'
   gem 'libv8', '~> 3.11.8'

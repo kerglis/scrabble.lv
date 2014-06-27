@@ -1,5 +1,1 @@
 mail_host:              "localhost:3000"
-
-facebook:
-  key:      "368393066598026"
-  secret:   "b03c0dfb46e6eb4a9b6749c43b36893d"

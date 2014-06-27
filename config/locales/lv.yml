@@ -1,8 +1,8 @@
 lv:
 
   navi:
-    check_word: "<i class='icon-search'></i><span> Pārbaudīt</span>"
-    find_words: "<i class='icon-eye-open'></i><span> Piemeklēt</span>"
+    check_word: "<i class='fa fa-search'></i><span> Pārbaudīt</span>"
+    find_words: "<i class='fa fa-crosshairs'></i><span> Piemeklēt</span>"
 
   word:
     enter: Ievadi vārdu
