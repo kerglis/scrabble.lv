@@ -9,7 +9,7 @@ if defined?(Bundler)
   # Bundler.require(:default, :assets, Rails.env)
 end
 
-require "keg_engine"
+# require "keg_engine"
 
 module ScrabbleLv
   class Application < Rails::Application

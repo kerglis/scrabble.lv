@@ -1,21 +1,15 @@
 class Admin::BaseController < ApplicationController
 
   include KegAdminController
-  load_and_authorize_resource
 
-  rescue_from CanCan::AccessDenied do |exception|
-    render(:file => 'shared/exception', :layout => 'admin', :status => :not_found, :locals => {:alert => exception.message } )
-  end
+  include SetLocale
 
-  protected
+  before_filter :rescue_no_resource, only: [ :edit ]
 
-  def authenticate_admin
-    authenticate_user!
+private
 
-    unless user_signed_in?
-      flash[:error] = I18n.t("errors.messages.permission_denied")
-      redirect_to root_url
-    end
+  def rescue_no_resource
+    raise ActiveRecord::RecordNotFound unless resource
   end
 
 end

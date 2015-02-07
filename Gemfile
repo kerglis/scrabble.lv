@@ -1,6 +1,8 @@
 source 'https://rubygems.org'
 
-gem 'keg_engine', github: 'kerglis/keg_engine', branch: :master
+gem 'rails', '~> 4.1'
+
+gem 'keg_engine2', github: 'kerglis/keg_engine2', branch: :master
 
 gem 'ffi-hunspell', '~> 0.3.0'
 
@@ -14,7 +16,7 @@ gem 'redactor-rails'
 gem 'carrierwave'
 gem 'mini_magick'
 
-gem 'devise', '2.2.4'
+gem 'devise'
 gem 'omniauth-facebook'
 
 gem 'prefered'
@@ -31,7 +33,7 @@ gem 'hirb'
 gem 'hirb-unicode'
 gem 'hirb-colors'
 gem 'termcolor'
-gem 'meta_search'
+gem 'ransack'
 
 group :development, :test do
   gem 'pry'
@@ -42,10 +44,7 @@ end
 group :assets do
   gem 'coffee-rails'
   gem 'uglifier'
-  gem 'libv8', '~> 3.11.8'
-  gem 'therubyracer', '~> 0.11.1'
   gem 'quiet_assets', group: :development
-  gem 'turbo-sprockets-rails3'
 end
 
 group :development do

@@ -2,12 +2,12 @@ ScrabbleLv::Application.routes.draw do
 
   mount RedactorRails::Engine => '/redactor_rails'
 
-  match '/users/auth/:provider' => 'oauth_callbacks#passthru'
-  match '/admin' => 'admin/users#index', locale: :lv
+  get '/users/auth/:provider' => 'oauth_callbacks#passthru'
+  get '/admin' => 'admin/users#index', locale: :lv
+
+  devise_for :users, controllers: { omniauth_callbacks: "omniauth_callbacks", sessions: 'sessions' }
 
   scope "/:locale", locale: /lv|en/ do
-
-    devise_for :users, controllers: { omniauth_callbacks: "oauth_callbacks" }
 
     namespace :admin do
 
@@ -38,11 +38,9 @@ ScrabbleLv::Application.routes.draw do
       end
     end
 
-    #resources :games
-    #match "/*path" => "contents#index"
-    root :to => 'welcome#index'
+    root to: 'welcome#index'
   end
 
-  match '/' => 'welcome#index', :locale => :lv
+  get '/' => 'welcome#index', locale: :lv
 
 end

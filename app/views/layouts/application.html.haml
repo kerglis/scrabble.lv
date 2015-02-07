@@ -1,11 +1,10 @@
 !!!
-%html{:xmlns => "http://www.w3.org/1999/xhtml", "xml:lang" => "en", :lang => "en"}
+%html{xmlns: "http://www.w3.org/1999/xhtml", "xml:lang" => "en", lang: "en"}
   %head
-    %meta{:name => "author", :content => "Ambicode http://www.ambicode.com" }
-    %meta{"http-equiv" => "Content-Type", :content => "text/html;charset=UTF-8"}/
+    %meta{name: "author", content: "Ambicode http://www.ambicode.com" }
+    %meta{"http-equiv" => "Content-Type", content: "text/html;charset=UTF-8"}/
     %title= "#{AppConfig[:site_fullname]}"
-    %meta{:name => "viewport", :content => "width=device-width, initial-scale=1.0" }
-
+    %meta{name: "viewport", content: "width=device-width, initial-scale=1.0" }
 
     = stylesheet_link_tag "application"
     = javascript_include_tag "application"
@@ -16,13 +15,15 @@
   %body
     .container-fluid
       #header
-        = render :partial => "shared/header"
+        = render "header"
 
       #content
-        = render :partial => "shared/flash_panel"
+        #flash_messages
+          = flash_messages(:close, :fade)
+
         = yield
 
       #footer
-        = render :partial => "shared/footer"
+        = render "footer"
 
-      = render :partial => "shared/google_analytics"
+      = render "google_analytics"
