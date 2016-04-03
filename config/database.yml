@@ -1,26 +1,15 @@
-development: &dev
-  adapter: mysql2
-  encoding: utf8
-  database: scrabble_dev
-  username: scrabble_dev
-  password: bvAETBM4ayhRG5sJ
-  host: localhost
-
-demo:
-  <<: *dev
-
-test:
-  adapter: mysql2
-  encoding: utf8
-  database: scrabble_test
-  username: scrabble_test
-  password: bvAETBM4ayhRG5sJ
-  host: localhost
-
-production:
+development: &common
   adapter: mysql2
   encoding: utf8
   database: scrabble
   username: scrabble
   password: bvAETBM4ayhRG5sJ
   host: localhost
+
+test:
+  <<: *common
+  database: scrabble_test
+  username: scrabble_test
+
+production:
+  <<: *common

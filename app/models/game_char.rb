@@ -7,8 +7,6 @@ class GameChar < ActiveRecord::Base
 
   acts_as_list column: :pos_on_hand, scope: [:game_id, :player_id]
 
-  #default_scope order: :pos_on_hand
-
   state_machine initial: :free do
     event :to_player do
       transition to: :on_hand, from: [ :free, :on_hand ]
@@ -28,7 +26,7 @@ class GameChar < ActiveRecord::Base
 
   end
 
-  scope :free, ->     { where(state: :free) }
+  scope :free, -> { where(state: :free) }
   scope :on_hand, ->  { where(state: :on_hand) }
   scope :on_board, -> { where(state: :on_board) }
 
