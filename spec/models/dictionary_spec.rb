@@ -1,85 +1,139 @@
-# encoding: UTF-8
-
 require 'spec_helper'
+
 describe Dictionary do
+  let!(:dict) { Dictionary.new(:xx) }
 
-  before :all do
-    @dict = Dictionary.new(:xx)
-  end
+  describe 'distinct a from ā, etc' do
+    it do
+      dict.add('āēīū')
+      dict.add('aeiu')
+      dict.add('ģķļņ')
+      dict.add('gkln')
 
-  context "distinct a from ā, etc" do
-    before do
-      @dict.add("āēīū")
-      @dict.add("aeiu")
-      @dict.add("ģķļņ")
-      @dict.add("gkln")
+      expect(dict.check?('āēīū')).to be true
+      expect(dict.check?('ģķļņ')).to be true
+      expect(dict.check?('āēiu')).to be false
+      expect(dict.check?('ģķln')).to be false
+      expect(dict.valid_words_from_chars('āēīūxyz').count).to eq 1
     end
-
-    specify { @dict.check?("āēīū").should be_true }
-    specify { @dict.check?("ģķļņ").should be_true }
-    specify { @dict.check?("āēiu").should be_false }
-    specify { @dict.check?("ģķln").should be_false }
-    specify { @dict.valid_words_from_chars("āēīūxyz").count.should == 1 }
   end
 
-  specify { Dictionary.find_possible_words_from_chars("abcdefgi").count.should == Dictionary.find_possible_words_from_chars("abcdefg").count }
+  describe '#find_possible_words_from_chars' do
+    it do
+      expect(
+        Dictionary.find_possible_words_from_chars('abcdefgi').count
+      ).to eq(
+        Dictionary.find_possible_words_from_chars('abcdefg').count
+      )
+    end
+  end
 
-  context "string functions" do
-    context "insert_ch" do
-      specify { "abc".insert_ch(0, "x").should == "xabc" }
-      specify { "abc".insert_ch(1, "x").should == "axbc" }
-      specify { "abc".insert_ch(4, "x").should == "abc" }
-
-      it "bang! version" do
-        @abc = "abc"
-        @abc.insert_ch!(4, "x").should == nil
-        @abc.should == "abc"
-        @abc.insert_ch!(3, "x").should == true
-        @abc.should == "abcx"
+  describe 'string functions' do
+    describe '#insert_ch' do
+      it do
+        expect('abc'.insert_ch(0, 'x')).to eq 'xabc'
+        expect('abc'.insert_ch(1, 'x')).to eq 'axbc'
+        expect('abc'.insert_ch(4, 'x')).to eq 'abc'
       end
     end
 
-    context "insert_chars_at" do
-      before do
-        @chars = {1 => "x", 3 => "y"}
-      end
-
-      specify { "abc".insert_chars_at(0, @chars).should == "axbyc" }
-      specify { "abc".insert_chars_at(1, @chars).should == "abxcy" }
-      specify { "abc".insert_chars_at(2, @chars).should == "abcx" }
-      specify { "abc".insert_chars_at(3, @chars).should == "abc" }
-
-      it "bang! version" do
-        @abc = "abc"
-        @abc.insert_chars_at!(0, @chars).should be true
-        @abc.should == "axbyc"
-
-        @abc = "abc"
-        @abc.insert_chars_at!(3, @chars).should be_nil
-        @abc.should == "abc"
+    describe '#insert_ch!' do
+      let!(:abc) { 'abc' }
+      it do
+        expect(abc.insert_ch!(4, 'x')).to be_nil
+        expect(abc).to eq 'abc'
+        expect(abc.insert_ch!(3, 'x')).to be true
+        expect(abc).to eq 'abcx'
       end
     end
 
-  end
+    describe '#insert_chars_at' do
+      let!(:chars) { { 1 => 'x', 3 => 'y' } }
 
-  context "apply prepositions" do
-    specify { Dictionary.apply_prepositions("abcd").should == "abcd" }
-    specify { Dictionary.apply_prepositions("abcd", { chars: { 2 => "x", 5 => "y" }, from: 0, to: 5}).map{|x| x.split("@").first }.should == ["abxcdy"] }
-    specify { Dictionary.apply_prepositions("ab",   { chars: { 2 => "x", 5 => "y" }, from: 0, to: 5}).map{|x| x.split("@").first }.should == ["abx", "axb", "xaby"] }
-    specify { Dictionary.apply_prepositions("ab",   { chars: { 2 => "x", 3 => "y" }, from: 0, to: 3}).map{|x| x.split("@").first }.should == ["abxy"] }
-    specify { Dictionary.apply_prepositions("ab",   { chars: { 0 => "x", 1 => "y" }, from: 0, to: 3}).map{|x| x.split("@").first }.should == ["xyab"] }
-    specify { Dictionary.apply_prepositions("abc",  { chars: { 0 => "x", 2 => "y", 4 => "z" }, from: 0, to: 6}).map{|x| x.split("@").first }.should == ["xaybzc", "yazbc"] }
-  end
-
-  context "find valid words" do
-    before do
-      @dict.add("xay")
-      @dict.add("xaybz")
-      @dict.add("xey")
-      @dict.add("ybz")
+      it do
+        expect('abc'.insert_chars_at(0, chars)).to eq 'axbyc'
+        expect('abc'.insert_chars_at(1, chars)).to eq 'abxcy'
+        expect('abc'.insert_chars_at(2, chars)).to eq 'abcx'
+        expect('abc'.insert_chars_at(3, chars)).to eq 'abc'
+      end
     end
 
-    specify { @dict.valid_words_from_chars("abcdefi", { chars: { 0 => "x", 2 => "y", 4 => "z" }, from: 0, to: 5 }).count.should == 4 }
+    describe '#insert_chars_at!' do
+      let!(:abc) { 'abc' }
+      let!(:chars) { { 1 => 'x', 3 => 'y' } }
+
+      it do
+        expect(abc.insert_chars_at!(0, chars)).to be true
+        expect(abc).to eq 'axbyc'
+      end
+
+      it do
+        expect(abc.insert_chars_at!(3, chars)).to be_nil
+        expect(abc).to eq 'abc'
+      end
+    end
   end
 
+  describe '#apply_prepositions' do
+    subject do
+      Dictionary.apply_prepositions(word, chars: chars, from: 0, to: to).map do |x|
+        x.split('@').first
+      end
+    end
+
+    it { expect(Dictionary.apply_prepositions('abcd')).to eq 'abcd' }
+
+    context 'abxcdy' do
+      let(:word) { 'abcd' }
+      let(:chars) { { 2 => 'x', 5 => 'y' } }
+      let(:to) { 5 }
+      it { is_expected.to eq ['abxcdy'] }
+    end
+
+    context 'abx, axb, xaby' do
+      let(:word) { 'ab' }
+      let(:chars) { { 2 => 'x', 5 => 'y' } }
+      let(:to) { 5 }
+      it { is_expected.to eq %w(abx axb xaby) }
+    end
+
+    context 'abxy' do
+      let(:word) { 'ab' }
+      let(:chars) { { 2 => 'x', 3 => 'y' } }
+      let(:to) { 3 }
+      it { is_expected.to eq ['abxy'] }
+    end
+
+    context 'xyab' do
+      let(:word) { 'ab' }
+      let(:chars) { { 0 => 'x', 1 => 'y' } }
+      let(:to) { 3 }
+      it { is_expected.to eq ['xyab'] }
+    end
+
+    context 'xaybzc, yazbc' do
+      let(:word) { 'abc' }
+      let(:chars) { { 0 => 'x', 2 => 'y', 4 => 'z' } }
+      let(:to) { 6 }
+      it { is_expected.to eq %w(xaybzc yazbc) }
+    end
+  end
+
+  describe '#valid_words_from_chars' do
+    it do
+      dict.add('xay')
+      dict.add('xaybz')
+      dict.add('xey')
+      dict.add('ybz')
+
+      expect(
+        dict.valid_words_from_chars(
+          'abcdefi',
+          chars: { 0 => 'x', 2 => 'y', 4 => 'z' },
+          from: 0,
+          to: 5
+        ).count
+      ).to eq 4
+    end
+  end
 end

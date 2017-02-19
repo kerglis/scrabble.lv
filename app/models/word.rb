@@ -1,5 +1,4 @@
 class Word
-
   attr_accessor :cells
 
   def initialize(cells = [])
@@ -9,5 +8,4 @@ class Word
   def to_s
     cells.map(&:to_s).join
   end
-
 end

@@ -1,11 +1,11 @@
 class Move < ActiveRecord::Base
 
-  belongs_to    :game
-  belongs_to    :player
-  has_many      :game_chars
-  has_many      :cells, through: :game_chars
+  belongs_to  :game
+  belongs_to  :player
+  has_many  :game_chars
+  has_many  :cells, through: :game_chars
 
-  acts_as_list   scope: :game
+  acts_as_list scope: :game
 
   state_machine initial: :new do
     event :finish do
@@ -17,12 +17,13 @@ class Move < ActiveRecord::Base
 
   def valid_move?
     return true if game.starting?
-    return false unless one_axis?
+    return false if !one_axis?
     true
   end
 
   def one_axis?
-    cells.map(&:x).uniq.size == 1 or cells.map(&:y).uniq.size == 1
+    cells.map(&:x).uniq.size == 1 ||
+    cells.map(&:y).uniq.size == 1
   end
 
   def find_created_words
@@ -109,7 +110,7 @@ class Move < ActiveRecord::Base
   end
 
   def finish_move
-    game_chars.each{ |gc| gc.finalize }
+    game_chars.each(&:finalize)
   end
 
 end

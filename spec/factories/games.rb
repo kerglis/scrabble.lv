@@ -6,13 +6,13 @@ FactoryGirl.define do
 
     factory :game_initialized do
 
-      ignore do
+      transient do
         players_cnt 4
       end
 
       after(:create) do |game, evaluator|
         evaluator.players_cnt.times do
-          game.add_player(FactoryGirl.create :user)
+          game.add_player(create :user)
         end
         game.start
       end

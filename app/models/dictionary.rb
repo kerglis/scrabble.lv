@@ -1,8 +1,9 @@
 class Dictionary
+  require 'string'
 
   attr_reader :dict
 
-  delegate    :check?, :stem, :suggest, :add, :remove, to: :dict
+  delegate  :check?, :stem, :suggest, :add, :remove, to: :dict
 
   class << self
 
@@ -74,39 +75,6 @@ class Dictionary
 
       check?(the_word)
     end
-  end
-
-end
-
-class String
-  def insert_chars_at(offset, chars = {})
-    new_str = self.dup
-
-    chars.each do |pos, ch|
-      new_pos = pos + offset.to_i
-      return new_str if new_pos == -1 # don't glue to previous letter
-      new_str.insert_ch!(new_pos, ch) if new_pos >= 0
-    end
-
-    new_str
-  end
-
-  def insert_chars_at!(offset, chars = {})
-    new_str = self.dup.insert_chars_at(offset, chars)
-    return nil if new_str == self
-    replace(new_str)
-    true
-  end
-
-  def insert_ch(pos, ch)
-    return self if pos > self.length or pos.to_i < 0
-    self.chars.to_a.insert(pos,ch).join()
-  end
-
-  def insert_ch!(pos, ch)
-    return nil if pos > self.length or pos.to_i < 0
-    replace(self.insert_ch(pos, ch))
-    true
   end
 
 end

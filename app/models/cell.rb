@@ -1,16 +1,15 @@
 class Cell < ActiveRecord::Base
 
-  belongs_to      :game
-  belongs_to      :char
-  belongs_to      :player
-  belongs_to      :game_char, foreign_key: :char_id
+  belongs_to  :game
+  belongs_to  :char
+  belongs_to  :player
+  belongs_to  :game_char, foreign_key: :char_id
 
-  default_scope   order: [:y, :x]
+  default_scope order: [:y, :x]
 
-  attr_accessor   :neighbor_ids
+  attr_accessor :neighbor_ids
 
   state_machine initial: :free do
-
     event :use do
       transition to: :used, from: :free, if: :have_char?
     end
@@ -18,7 +17,6 @@ class Cell < ActiveRecord::Base
     event :free do
       transition to: :free, from: :used
     end
-
     after_transition on: :free, do: :remove_char
   end
 
@@ -27,7 +25,7 @@ class Cell < ActiveRecord::Base
 
   class << self
     def directions
-      %w{ n w s e }
+      %w(n w s e)
     end
 
     def by_pos(x, y)
@@ -55,7 +53,6 @@ class Cell < ActiveRecord::Base
 
   def neighbor_ids
     @neighbor_ids ||= Hash[ Cell.directions.map{|direction| [direction.to_sym, neighbor(direction).try(:id) ] } ]
-    @neighbor_ids
   end
 
   def neighbors

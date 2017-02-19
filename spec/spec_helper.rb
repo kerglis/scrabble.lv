@@ -4,10 +4,7 @@ require File.expand_path('../simplecov_helper', __FILE__)
 ENV["RAILS_ENV"] ||= 'test'
 require File.expand_path("../../config/environment", __FILE__)
 require 'rspec/rails'
-require 'rspec/autorun'
-
 require 'capybara/rspec'
-require 'capybara/poltergeist'
 
 # Requires supporting ruby files with custom matchers and macros, etc,
 # in spec/support/ and its subdirectories.
@@ -36,7 +33,19 @@ RSpec.configure do |config|
   config.infer_base_class_for_anonymous_controllers = false
   config.include TranslationHelper, capybara_feature: true
 
+  # FactoryGirl
+  config.include FactoryGirl::Syntax::Methods
+
+  config.before(:suite) do
+    DatabaseCleaner.strategy = :transaction
+    DatabaseCleaner.clean_with(:truncation)
+  end
+
+  config.around(:each) do |example|
+    DatabaseCleaner.cleaning do
+      example.run
+    end
+  end
 end
 
-Capybara.javascript_driver = :poltergeist
-Capybara.default_wait_time = 5
+Capybara.default_max_wait_time = 5

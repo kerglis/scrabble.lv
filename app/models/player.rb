@@ -1,14 +1,13 @@
 class Player < ActiveRecord::Base
 
-  belongs_to              :game
-  belongs_to              :user
+  belongs_to  :game
+  belongs_to  :user
+  has_many  :moves
+  has_many  :game_chars
 
-  has_many                :moves
-  has_many                :game_chars
+  before_create :clone_values
 
-  before_create           :clone_values
-
-  validates_presence_of   :game, :user
+  validates_presence_of :game, :user
 
   acts_as_list  scope: :game
 

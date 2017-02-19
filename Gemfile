@@ -4,7 +4,7 @@ gem 'rails', '~> 4.1'
 
 gem 'keg_engine2', github: 'kerglis/keg_engine2', branch: :master
 
-gem 'ffi-hunspell', '~> 0.3.0'
+gem "ffi-hunspell", github: "postmodern/ffi-hunspell"
 
 gem 'mysql2', '~> 0.3.18'
 gem 'jquery-rails'

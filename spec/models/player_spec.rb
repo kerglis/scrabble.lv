@@ -1,19 +1,19 @@
 require 'spec_helper'
 
 describe Player do
+  let!(:game) { create :game }
+  let!(:user) { create :user }
 
-  before do
-    @game = FactoryGirl.create :game
-    @user = FactoryGirl.create :user
+  it { expect(user).to be_valid }
+
+  describe '#add_player' do
+    let(:player_1) { game.add_player(user) }
+
+    it 'clone user props to player' do
+      aggregate_failures do
+        expect(player_1.full_name).to eq user.full_name
+        expect(player_1.email).to eq user.email
+      end
+    end
   end
-
-  specify { @user.should be_valid }
-
-  context "clone user >> player values" do
-    before { @player_1 = @game.add_player(@user) }
-
-    specify { @player_1.full_name.should == @user.full_name }
-    specify { @player_1.email.should == @user.email }
-  end
-
 end
