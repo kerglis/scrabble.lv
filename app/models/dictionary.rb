@@ -3,10 +3,9 @@ class Dictionary
 
   attr_reader :dict
 
-  delegate  :check?, :stem, :suggest, :add, :remove, to: :dict
+  delegate :check?, :stem, :suggest, :add, :remove, to: :dict
 
   class << self
-
     attr_accessor :the_chars
 
     def language_code(locale = nil)
@@ -71,8 +70,7 @@ class Dictionary
   def valid_words_from_chars(chars, prepositions = {})
     chars = chars.chars.to_a unless chars.is_a?(Array)
     Dictionary.find_possible_words_from_chars(chars, prepositions).select do |word|
-      the_word, pos = word.split("@")
-
+      the_word, _pos = word.split("@")
       check?(the_word)
     end
   end

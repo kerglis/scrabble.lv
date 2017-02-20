@@ -1,19 +1,18 @@
 class Game < ActiveRecord::Base
+  has_many :players, dependent: :destroy
+  has_many :moves, dependent: :destroy
+  has_many :cells, dependent: :destroy
+  has_many :game_chars, dependent: :destroy
 
-  has_many            :players,     dependent: :destroy
-  has_many            :moves,       dependent: :destroy
-  has_many            :cells,       dependent: :destroy
-  has_many            :game_chars,  dependent: :destroy
+  before_validation :setup_defaults
+  after_create :setup_cells
+  after_create :setup_chars
 
-  before_validation   :setup_defaults
-  after_create        :setup_cells
-  after_create        :setup_chars
-
-  attr_reader         :the_chars
+  attr_reader :the_chars
 
   state_machine initial: :new do
     event :start do
-      transition to: :starting, from: :new, if: lambda { |game| game.can_start? }
+      transition to: :starting, from: :new, if: :can_start?
     end
 
     after_transition on: :start, do: :first_move
@@ -40,42 +39,43 @@ class Game < ActiveRecord::Base
       7
     end
 
-    def board
+    def board_template
       # cc - center cell
       # l2 - letter x 2
       # l3 - letter x 3
       # w2 - word x 2
       # w3 - word x 3
+      # __ - empty cell
 
       out = []
-      out << %w{ w3 __ __ l2 __ __ __ w3 __ __ __ l2 __ __ w3 }
-      out << %w{ __ w2 __ __ __ l3 __ __ __ l3 __ __ __ w2 __ }
-      out << %w{ __ __ w2 __ __ __ l2 __ l2 __ __ __ w2 __ __ }
-      out << %w{ l2 __ __ w2 __ __ __ l2 __ __ __ w2 __ __ l2 }
-      out << %w{ __ __ __ __ w2 __ __ __ __ __ w2 __ __ __ __ }
-      out << %w{ __ l3 __ __ __ l3 __ __ __ l3 __ __ __ l3 __ }
-      out << %w{ __ __ l2 __ __ __ l2 __ l2 __ __ __ l2 __ __ }
-      out << %w{ w3 __ __ l2 __ __ __ cc __ __ __ l2 __ __ w3 }
-      out << %w{ __ __ l2 __ __ __ l2 __ l2 __ __ __ l2 __ __ }
-      out << %w{ __ l3 __ __ __ l3 __ __ __ l3 __ __ __ l3 __ }
-      out << %w{ __ __ __ __ w2 __ __ __ __ __ w2 __ __ __ __ }
-      out << %w{ l2 __ __ w2 __ __ __ l2 __ __ __ w2 __ __ l2 }
-      out << %w{ __ __ w2 __ __ __ l2 __ l2 __ __ __ w2 __ __ }
-      out << %w{ __ w2 __ __ __ l3 __ __ __ l3 __ __ __ w2 __ }
-      out << %w{ w3 __ __ l2 __ __ __ w3 __ __ __ l2 __ __ w3 }
+      out << %w(w3 __ __ l2 __ __ __ w3 __ __ __ l2 __ __ w3)
+      out << %w(__ w2 __ __ __ l3 __ __ __ l3 __ __ __ w2 __)
+      out << %w(__ __ w2 __ __ __ l2 __ l2 __ __ __ w2 __ __)
+      out << %w(l2 __ __ w2 __ __ __ l2 __ __ __ w2 __ __ l2)
+      out << %w(__ __ __ __ w2 __ __ __ __ __ w2 __ __ __ __)
+      out << %w(__ l3 __ __ __ l3 __ __ __ l3 __ __ __ l3 __)
+      out << %w(__ __ l2 __ __ __ l2 __ l2 __ __ __ l2 __ __)
+      out << %w(w3 __ __ l2 __ __ __ cc __ __ __ l2 __ __ w3)
+      out << %w(__ __ l2 __ __ __ l2 __ l2 __ __ __ l2 __ __)
+      out << %w(__ l3 __ __ __ l3 __ __ __ l3 __ __ __ l3 __)
+      out << %w(__ __ __ __ w2 __ __ __ __ __ w2 __ __ __ __)
+      out << %w(l2 __ __ w2 __ __ __ l2 __ __ __ w2 __ __ l2)
+      out << %w(__ __ w2 __ __ __ l2 __ l2 __ __ __ w2 __ __)
+      out << %w(__ w2 __ __ __ l3 __ __ __ l3 __ __ __ w2 __)
+      out << %w(w3 __ __ l2 __ __ __ w3 __ __ __ l2 __ __ w3)
       out
     end
 
     def board_size_x
-      board.first.size
+      board_template.first.size
     end
 
     def board_size_y
-      board.size
+      board_template.size
     end
 
     def cell_type(str)
-      (str == "__") ? "" : str
+      (str == '__') ? '' : str
     end
 
     def char_list(locale = nil)
@@ -190,7 +190,7 @@ private
   end
 
   def setup_cells
-    Game.board.each_with_index do |line, y|
+    Game.board_template.each_with_index do |line, y|
       line.each_with_index do |cell, x|
         Cell.create game: self, x: x, y: y, cell_type: Game.cell_type(cell)
       end

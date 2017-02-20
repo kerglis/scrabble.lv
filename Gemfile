@@ -34,6 +34,7 @@ gem 'hirb-unicode'
 gem 'hirb-colors'
 gem 'termcolor'
 gem 'ransack'
+gem 'draper', '~> 1.3'
 
 group :assets do
   # gem 'less-rails'
