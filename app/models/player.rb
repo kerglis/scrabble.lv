@@ -4,21 +4,21 @@ class Player < ActiveRecord::Base
   has_many  :moves
   has_many  :game_chars
 
-  before_create :clone_values
+  before_validation :copy_needed_attributes
 
   validates_presence_of :game, :user
 
   acts_as_list scope: :game
 
   def chars_on_hand
-    game_chars.where(state: :on_hand)
+    game_chars.on_hand
   end
 
   private
 
-  def clone_values
+  def copy_needed_attributes
     [:email, :full_name].each do |key|
-      self[key] = user.send(key)
+      self[key] ||= user.send(key)
     end
   end
 end

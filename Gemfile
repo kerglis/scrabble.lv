@@ -1,10 +1,7 @@
 source 'https://rubygems.org'
 
 gem 'rails', '~> 4.1'
-
-gem 'keg_engine2', github: 'kerglis/keg_engine2', branch: :master
-
-gem "ffi-hunspell", github: "postmodern/ffi-hunspell"
+gem 'ffi-hunspell', github: 'postmodern/ffi-hunspell'
 
 gem 'mysql2', '~> 0.3.18'
 gem 'jquery-rails'
@@ -19,11 +16,14 @@ gem 'mini_magick'
 gem 'devise', '~> 3.4'
 gem 'omniauth-facebook'
 
+gem 'aasm'
 gem 'prefered'
+gem 'config_spartan'
+gem 'acts_as_list'
 
-gem 'bootstrap-sass', '< 3.0'
+gem 'bootstrap-sass'
 gem 'bootstrap_flash_messages'
-gem 'font-awesome-rails', '~> 4.5'
+gem 'font-awesome-rails'
 gem 'sass-rails'
 
 gem 'simple_form'

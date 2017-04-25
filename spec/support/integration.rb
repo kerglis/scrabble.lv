@@ -17,8 +17,6 @@ module HelperMethods
   def logout
     click_link I18n.t("devise.logout")
   end
-
 end
 
 RSpec.configuration.include HelperMethods, capybara_feature: true
-RSpec.configuration.include TranslationHelper, capybara_feature: true

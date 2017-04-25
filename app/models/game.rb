@@ -10,19 +10,22 @@ class Game < ActiveRecord::Base
 
   attr_reader :the_chars
 
-  state_machine initial: :new do
-    event :start do
-      transition to: :starting, from: :new, if: :can_start?
+  include AASM
+
+  aasm(:state) do
+    state :new, initial: true
+    state :starting, :playing, :finished
+
+    event :start, after: :first_move do
+      transitions to: :starting, from: :new, guard: :can_start?
     end
 
-    after_transition on: :start, do: :first_move
-
     event :play do
-      transition to: :playing, from: :starting
+      transitions to: :playing, from: :starting
     end
 
     event :finish do
-      transition to: :finished
+      transitions to: :finished
     end
   end
 
@@ -75,7 +78,7 @@ class Game < ActiveRecord::Base
     end
 
     def cell_type(str)
-      (str == '__') ? '' : str
+      str == '__' ? '' : str
     end
 
     def char_list(locale = nil)
@@ -85,18 +88,18 @@ class Game < ActiveRecord::Base
 
   def board
     out = []
-    (0..Game.board_size_y-1).each do |y|
+    (0..Game.board_size_y - 1).each do |y|
       out[y] = ["<gray>#{y + 1}</gray>".termcolor]
     end
 
     cells.each do |cell|
-      out[cell.y][cell.x+1] = cell.char.termcolor
+      out[cell.y][cell.x + 1] = cell.char.termcolor
     end
     out
   end
 
   def draw_board_txt
-    puts Hirb::Helpers::AutoTable.render( board )
+    puts Hirb::Helpers::AutoTable.render(board)
   end
 
   def chars
@@ -106,34 +109,34 @@ class Game < ActiveRecord::Base
   def char(ch)
     ch = ch.mb_chars.downcase.to_s[0]
     chars.where(char: ch)
+    return unless char
     {
       char: char.ch,
       total: char.total,
       pts: char.pts,
       used: char_use_times(ch),
       left: char.total - char_use_times(ch)
-    } if char
+    }
   end
 
-  def char_use_times(ch)
+  def char_use_times(_ch)
     0
   end
 
   def cell(x, y) # x, y -- zero-based
-    board[y][x] rescue nil
+    board[y][x]
   end
 
   def can_start?
-    return false unless valid?
-    return false unless new?
-    return true if players.count >= Game.min_players and players.count <= Game.max_players
-    false
+    return false unless valid? || new?
+    players.count >= Game.min_players &&
+      players.count <= Game.max_players
   end
 
   def add_player(user)
-    if self.players.map(&:user).include?(user)
+    if players.map(&:user).include?(user)
       errors.add(:game, "player with user.id = #{user.id} already added")
-    elsif self.players.count >= Game.max_players
+    elsif players.count >= Game.max_players
       errors.add(:game, "too many players - max = #{Game.max_players}")
     else
       player = Player.create(game: self, user: user)
@@ -153,7 +156,7 @@ class Game < ActiveRecord::Base
   def get_random_chars(player, move)
     add_count = Game.chars_per_move - player.chars_on_hand.count
     add_count.times do
-      char = game_chars.free.order("rand()").first
+      char = game_chars.free.order('rand()').first
       char.add_to_player(player, move)
     end
   end
@@ -166,7 +169,7 @@ class Game < ActiveRecord::Base
   end
 
   def next_move
-    if current_move and !current_move.finished?
+    if current_move && !current_move.finished?
       return unless current_move.finish
     end
 
@@ -175,14 +178,13 @@ class Game < ActiveRecord::Base
   end
 
   def create_move_for_player(player)
-    if player
-      move = Move.create game: self, player: player
-      get_random_chars(player, move)
-      move
-    end
+    return unless player
+    move = Move.create game: self, player: player
+    get_random_chars(player, move)
+    move
   end
 
-private
+  private
 
   def setup_defaults
     self.locale ||= :lv
@@ -216,5 +218,4 @@ private
     play
     next_move
   end
-
 end

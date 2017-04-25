@@ -1,5 +1,4 @@
 class Move < ActiveRecord::Base
-
   belongs_to  :game
   belongs_to  :player
   has_many  :game_chars
@@ -7,23 +6,25 @@ class Move < ActiveRecord::Base
 
   acts_as_list scope: :game
 
-  state_machine initial: :new do
-    event :finish do
-      transition to: :finished, if: :valid_move?
-    end
+  include AASM
 
-    after_transition on: :finished, do: :finish_move
+  aasm(:state) do
+    state :new, initial: true
+    state :finished
+
+    event :finish, after: :finish_move do
+      transitions to: :finished, guard: :valid_move?
+    end
   end
 
   def valid_move?
     return true if game.starting?
-    return false if !one_axis?
-    true
+    one_axis?
   end
 
   def one_axis?
     cells.map(&:x).uniq.size == 1 ||
-    cells.map(&:y).uniq.size == 1
+      cells.map(&:y).uniq.size == 1
   end
 
   def find_created_words
@@ -92,17 +93,16 @@ class Move < ActiveRecord::Base
 
   def direction_by_user
     return :one if cells.size == 1
-    if one_axis?
-      return :ns if cells[0].x == cells[1].x
-      return :we if cells[0].y == cells[1].y
-    end
+    return unless one_axis?
+    return :ns if cells[0].x == cells[1].x
+    return :we if cells[0].y == cells[1].y
   end
 
   def char_to_board(game_char, x, y)
-    if cell = game.cells.free.by_pos(x, y)
-      self.game_chars << game_char
-      cell.add_char(game_char)
-    end
+    cell = game.cells.free.by_pos(x, y)
+    retrn unless cell
+    self.game_chars << game_char
+    cell.add_char(game_char)
   end
 
   def char_from_board(game_char)
@@ -112,5 +112,4 @@ class Move < ActiveRecord::Base
   def finish_move
     game_chars.each(&:finalize)
   end
-
 end

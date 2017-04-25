@@ -6,21 +6,22 @@ class Cell < ActiveRecord::Base
 
   attr_accessor :neighbor_ids
 
-  state_machine initial: :free do
+  include AASM
+
+  aasm(:state) do
+    state :free, initial: :true
+    state :used
+
     event :use do
-      transition to: :used, from: :free, if: :char_set?
+      transitions to: :used, from: :free, guard: :char_set?
     end
 
-    event :free do
-      transition to: :free, from: :used
+    event :free, after: :remove_char do
+      transitions to: :free, from: :used
     end
-
-    after_transition on: :free, do: :remove_char
   end
 
   scope :ordered, -> { order(:y, :x) }
-  scope :free, -> { where(state: :free) }
-  scope :used, -> { where(state: :used) }
 
   class << self
     def directions

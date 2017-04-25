@@ -1,10 +1,4 @@
 class GameCharService < Struct.new(:game_char, :player, :move)
-  class << self
-    def assign
-      new(game_char, player, move).assign
-    end
-  end
-
   def assign
     game_char.update_attributes(
       player: player,
