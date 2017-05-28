@@ -5,6 +5,10 @@ class Dictionary
 
   delegate :check?, :stem, :suggest, :add, :remove, to: :dict
 
+  def initialize(locale = nil)
+    @dict = FFI::Hunspell.dict(Dictionary.language_code(locale))
+  end
+
   class << self
     attr_accessor :the_chars
 
@@ -15,7 +19,11 @@ class Dictionary
 
     def word_value(word, locale)
       @the_chars ||= {}
-      @the_chars[locale] ||= Hash[Char.for_locale(locale).map{|ch| [ch.char, ch.pts]}]
+      @the_chars[locale] ||= Hash[
+        Char.for_locale(locale).map do |ch|
+          [ch.char, ch.pts]
+        end
+      ]
       word.chars.map do |ch|
         @the_chars[locale][ch]
       end.sum
@@ -29,11 +37,13 @@ class Dictionary
 
       if prepositions[:chars].present?
         1.upto(chars.size).flat_map do |l|
-          chars.permutation(l).to_a.flat_map{|x| apply_prepositions(x.join, prepositions) }
+          chars.permutation(l).to_a.flat_map do |x|
+            apply_prepositions(x.join, prepositions)
+          end
         end.compact.uniq
       else
         2.upto(chars.size).flat_map do |l|
-          chars.permutation(l).to_a.flat_map{|x| x.join}
+          chars.permutation(l).to_a.flat_map { |x| x.join }
         end.compact.uniq
       end
     end
@@ -63,16 +73,13 @@ class Dictionary
     end
   end
 
-  def initialize(locale = nil)
-    @dict = FFI::Hunspell.dict(Dictionary.language_code(locale))
-  end
-
   def valid_words_from_chars(chars, prepositions = {})
     chars = chars.chars.to_a unless chars.is_a?(Array)
-    Dictionary.find_possible_words_from_chars(chars, prepositions).select do |word|
-      the_word, _pos = word.split("@")
-      check?(the_word)
-    end
+    Dictionary
+      .find_possible_words_from_chars(chars, prepositions)
+      .select do |word|
+        the_word, _pos = word.split('@')
+        check?(the_word)
+      end
   end
-
 end

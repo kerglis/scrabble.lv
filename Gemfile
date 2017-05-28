@@ -2,16 +2,14 @@ source 'https://rubygems.org'
 
 gem 'rails', '~> 4.1'
 gem 'ffi-hunspell', github: 'postmodern/ffi-hunspell'
+gem 'soundex'
 
-gem 'mysql2', '~> 0.3.18'
+gem 'mysql2' #, '~> 0.3.18'
 gem 'jquery-rails'
 gem 'jquery-ui-rails'
 gem 'haml-rails'
 gem 'stringex'
 gem 'cancan'
-gem 'redactor-rails'
-gem 'carrierwave'
-gem 'mini_magick'
 
 gem 'devise', '~> 3.4'
 gem 'omniauth-facebook'

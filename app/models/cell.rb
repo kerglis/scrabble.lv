@@ -22,33 +22,21 @@ class Cell < ActiveRecord::Base
   end
 
   scope :ordered, -> { order(:y, :x) }
+  scope :by_pos, ->(x, y) { find_by(x: x, y: y) }
 
-  class << self
-    def directions
-      %w(n w s e)
-    end
-
-    def by_pos(x, y)
-      find_by_x_and_y(x, y)
-    end
-  end
+  DIRECTIONS = {
+    n: 'north',
+    e: 'east',
+    s: 'south',
+    w: 'west'
+  }.freeze
 
   def char_set?
     game_char.present?
   end
 
   def find_neighbor(direction)
-    pos = case direction.downcase.to_sym
-          when :n # north
-            [x, y - 1]
-          when :s # south
-            [x, y + 1]
-          when :w # west
-            [x - 1, y]
-          when :e # east
-            [x + 1, y]
-          end
-    game.cells.by_pos(pos[0], pos[1])
+    send("cell_#{DIRECTIONS[direction]}")
   end
 
   def neighbor_ids
@@ -79,5 +67,23 @@ class Cell < ActiveRecord::Base
 
   def remove_char
     CellService.remove_char(self, game_char)
+  end
+
+  private
+
+  def cell_north
+    game.cells.by_pos(x, y - 1)
+  end
+
+  def cell_east
+    game.cells.by_pos(x + 1, y)
+  end
+
+  def cell_south
+    game.cells.by_pos(x, y + 1)
+  end
+
+  def cell_west
+    game.cells.by_pos(x - 1, y)
   end
 end

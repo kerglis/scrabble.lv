@@ -1,5 +1,4 @@
 class SessionsController < Devise::SessionsController
-
   def create
     user = User.find_by_email(params[:user][:email].downcase)
 
@@ -8,9 +7,8 @@ class SessionsController < Devise::SessionsController
       sign_in(:user, user)
       redirect_to after_sign_in_path_for(user)
     else
-      flash[:alert] = I18n.t("devise.failure.invalid")
+      flash[:alert] = I18n.t('devise.failure.invalid')
       redirect_to new_user_session_path
     end
   end
-
 end

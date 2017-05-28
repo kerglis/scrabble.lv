@@ -1,10 +1,8 @@
 /*
 *= require_self
-*= require redactor-rails
 *= require bootstrap
 *= require bootstrap/responsive
 *= require font-awesome
-*= require keg_engine2
 *= require bootstrap-slider
 *= require scrabble
 */

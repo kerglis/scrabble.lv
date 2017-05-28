@@ -6,14 +6,13 @@ class CreateCells < ActiveRecord::Migration
       t.integer     :y
       t.integer     :char_id
       t.integer     :player_id
-      t.string      :cell_type, :limit => 2
-      t.string      :state, :limit => 10
+      t.string      :cell_type, limit: 2
+      t.string      :state, limit: 10
     end
 
-    add_index :cells, [:game_id, :x, :y], :unique => true
+    add_index :cells, [:game_id, :x, :y], unique: true
     add_index :cells, :char_id
     add_index :cells, :player_id
     add_index :cells, :state
-
   end
 end
