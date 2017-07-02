@@ -24,15 +24,15 @@ describe GameChar do
       before do
         @move = @game.current_move
         @on_hand = @move.player.chars_on_hand.order(:pos_on_hand)
-        @move.char_to_board(@on_hand[0], 8,8)
-        @move.char_to_board(@on_hand[1], 8,9)
-        @move.char_to_board(@on_hand[2], 8,10)
+        @move.add_char_to_board(@on_hand[0], 8,8)
+        @move.add_char_to_board(@on_hand[1], 8,9)
+        @move.add_char_to_board(@on_hand[2], 8,10)
 
         @move2 = @game.next_move
         @on_hand2 = @move2.player.chars_on_hand.order(:pos_on_hand)
-        @move2.char_to_board(@on_hand2[0], 7,8)
-        @move2.char_to_board(@on_hand2[1], 9,8)
-        @move2.char_to_board(@on_hand2[2], 10,8)
+        @move2.add_char_to_board(@on_hand2[0], 7,8)
+        @move2.add_char_to_board(@on_hand2[1], 9,8)
+        @move2.add_char_to_board(@on_hand2[2], 10,8)
 
         @next_move = @game.next_move
       end

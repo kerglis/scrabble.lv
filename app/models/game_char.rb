@@ -33,9 +33,4 @@ class GameChar < ActiveRecord::Base
   def add_to_player(player, move)
     GameCharService.new(self, player, move).assign
   end
-
-  def put_on_board(x, y)
-    cell = game.cells.free.by_pos(x, y)
-    CellService.add_char(cell, self) if move && cell
-  end
 end

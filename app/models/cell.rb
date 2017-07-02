@@ -1,6 +1,5 @@
 class Cell < ActiveRecord::Base
   belongs_to  :game
-  belongs_to  :char
   belongs_to  :player
   belongs_to  :game_char, foreign_key: :char_id
 
@@ -22,7 +21,10 @@ class Cell < ActiveRecord::Base
   end
 
   scope :ordered, -> { order(:y, :x) }
-  scope :by_pos, ->(x, y) { find_by(x: x, y: y) }
+
+  def self.by_pos(x, y)
+    find_by(x: x, y: y)
+  end
 
   DIRECTIONS = {
     n: 'north',
@@ -30,6 +32,10 @@ class Cell < ActiveRecord::Base
     s: 'south',
     w: 'west'
   }.freeze
+
+  def to_s
+    game_char.char if char_set?
+  end
 
   def char_set?
     game_char.present?
