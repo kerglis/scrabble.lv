@@ -1,18 +1,10 @@
-require 'rvm/capistrano'
-require 'bundler/capistrano'
+lock '3.11.0'
 
 set :application, 'scrabble'
-set :repository, 'git@bitbucket.org:kristaps_erglis/scrabble.lv.git'
-set :scm, :git
-set :deploy_via, :remote_cache
-set :rvm_ruby_string, :local
+set :repo_url, 'git@github.com:kerglis/scrabble.lv.git'
+set :log_level, :info
+set :linked_files, %w{ tmp/restart.txt }
+set :linked_dirs, %w{ bin log tmp/pids tmp/cache tmp/sockets vendor/bundle public/system public/uploads }
 
-set :stages, %w(demo production)
-set :default_stage, 'demo'
-
-require 'capistrano/ext/multistage'
-
-set :keep_releases, 5
-after 'deploy:update_code', 'deploy:migrate'
-after 'deploy', 'symlinks:tmp'
-after 'deploy', 'deploy:cleanup'
+set :rvm_ruby_version, '2.3.7@scrabble'
+set :passenger_restart_with_touch, true
