@@ -1,4 +1,4 @@
-ScrabbleLv::Application.routes.draw do
+Rails.application.routes.draw do
   get '/users/auth/:provider' => 'oauth_callbacks#passthru'
 
   devise_for :users, controllers: {

@@ -1,5 +1,5 @@
-mail_host:              "scrab.us"
+mail_host:  "scrabble.lv"
 
 facebook:
-  key:      "622394924534243"
-  secret:   "c3283ba2b3fc95d5fa640c807c658463"
+  key:      <%= ENV['scrabble_lv_facebook_key'] %>
+  secret:   <%= ENV['scrabble_lv_facebook_secret'] %>

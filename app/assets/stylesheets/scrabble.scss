@@ -13,11 +13,17 @@ td, th
   &.c { text-align: center }
 }
 
-#footer
-{
+
+#content {
+  min-height: 400px;
+}
+
+#footer {
+  text-align: center;
   border-top: 1px solid $green_mid;
   padding: 0.5em 0;
-  p { font-size: 11px; }
+  font-size: 1em;
+  color: #666;
 }
 
 .navbar
@@ -65,4 +71,9 @@ h1, h2
     font-size: 24px;
     font-weight: bold;
   }
+}
+
+a.scrabble-results
+{
+  cursor: pointer;
 }

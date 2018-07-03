@@ -2,21 +2,17 @@ lv:
   activerecord:
     models:
       user:
-        one: "Lietotājs"
-        other: "Lietotāji"
-      page:
-        one: "Lapa"
-        other: "Lapas"
+        one: Lietotājs
+        other: Lietotāji
 
     attributes:
       user:
-        first_name: "Vārds"
-        last_name: "Uzvārds"
-        email: "E-pasts"
-        password: "Parole"
-        password_confirmation: "Parole vēlreiz"
-        gender: "Dzimums"
-        birth_date: "Dzimšanas datums"
-      page:
-        name: "Nosaukums"
-        content: "Saturs"
+        first_name: Vārds
+        last_name: Uzvārds
+        full_name: Vārds Uzvārds
+        email: E-pasts
+        password: Parole
+        password_confirmation: Parole vēlreiz
+        remember_me: Atcerēties mani
+        edit_profile: Labot profilu
+        logout: Iziet

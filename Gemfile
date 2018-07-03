@@ -10,6 +10,7 @@ gem 'jquery-ui-rails'
 gem 'haml-rails'
 gem 'stringex'
 gem 'cancan'
+gem 'inherited_resources'
 
 gem 'devise', '~> 3.4'
 gem 'omniauth-facebook'

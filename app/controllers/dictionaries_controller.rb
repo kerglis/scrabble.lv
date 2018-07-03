@@ -28,7 +28,6 @@ class DictionariesController < ApplicationController
     end
   end
 
-
   def find_words
     in_params = params['search'] || { chars: '', from_to: '1,15' }
 
@@ -40,7 +39,7 @@ class DictionariesController < ApplicationController
 
     chars = {}
     (1..15).each do |i|
-      ff = 'ch_#{i}'
+      ff = "ch_#{i}"
       unless  in_params[ff].blank?
         chars[i-1] = in_params[ff].mb_chars.downcase
       end
