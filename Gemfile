@@ -20,7 +20,7 @@ gem 'prefered'
 gem 'config_spartan'
 gem 'acts_as_list'
 
-gem 'bootstrap-sass'
+gem 'bootstrap-sass', '< 3.0'
 gem 'bootstrap_flash_messages'
 gem 'font-awesome-rails'
 gem 'sass-rails'
