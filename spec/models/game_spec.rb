@@ -4,8 +4,8 @@ describe Game do
 
   fixtures :chars
 
-  let(:game) { FactoryGirl.create :game }
-  let(:user_1) { FactoryGirl.create :user }
+  let(:game) { FactoryBot.create :game }
+  let(:user_1) { FactoryBot.create :user }
 
   it { expect(Game.min_players).to eq 2 }
   it { expect(Game.max_players).to eq 4 }
@@ -49,7 +49,7 @@ describe Game do
       end
 
       context "add second user" do
-        let(:user_2) { FactoryGirl.create :user }
+        let(:user_2) { FactoryBot.create :user }
         before { game.add_player(user_2) }
 
         it do
@@ -65,7 +65,7 @@ describe Game do
       context "attempt to add too many players" do
         before do
           4.times do
-            game.add_player(FactoryGirl.create :user)
+            game.add_player(FactoryBot.create :user)
           end
         end
 
@@ -79,7 +79,7 @@ describe Game do
     end
 
     describe "shall start when ready" do
-      subject! { FactoryGirl.create :game_initialized, players_cnt: 2 }
+      subject! { FactoryBot.create :game_initialized, players_cnt: 2 }
       it { is_expected.to be_playing }
     end
 
@@ -90,7 +90,7 @@ describe Game do
   end
 
   describe "on play" do
-    let(:game) { FactoryGirl.create :game_initialized }
+    let(:game) { FactoryBot.create :game_initialized }
 
     it "players get their initial chars" do
       aggregate_failures do
