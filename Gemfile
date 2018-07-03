@@ -40,7 +40,7 @@ group :assets do
 end
 
 group :development, :test do
-  gem 'capistrano'
+  gem 'capistrano', '3.7.2'
   gem 'capistrano-rails'
   gem 'capistrano-rvm'
   gem 'capistrano-bundler'

@@ -1,4 +1,4 @@
-lock '3.11.0'
+lock '3.7.2'
 
 set :application, 'scrabble'
 set :repo_url, 'git@github.com:kerglis/scrabble.lv.git'
