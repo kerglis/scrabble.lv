@@ -43,7 +43,7 @@ group :development, :test do
   gem 'capistrano', '3.7.2'
   gem 'capistrano-rails'
   gem 'capistrano-rvm'
-  gem 'capistrano-bundler'
+  # gem 'capistrano-bundler'
   gem 'capistrano-passenger'
 
   gem 'pry'

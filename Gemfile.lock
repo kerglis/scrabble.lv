@@ -321,7 +321,6 @@ DEPENDENCIES
   bootstrap_flash_messages
   cancan
   capistrano (= 3.7.2)
-  capistrano-bundler
   capistrano-passenger
   capistrano-rails
   capistrano-rvm
