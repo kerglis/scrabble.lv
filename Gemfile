@@ -40,13 +40,6 @@ group :assets do
 end
 
 group :development, :test do
-  gem 'capistrano', '3.7.2'
-  gem 'capistrano-rails'
-  gem 'capistrano-rvm'
-  # gem 'capistrano-bundler'
-  gem 'capistrano-passenger'
-
-  gem 'pry'
   gem 'rspec-rails'
   gem 'rspec-collection_matchers'
 
@@ -55,8 +48,17 @@ group :development, :test do
   gem 'shoulda-matchers'
   gem 'simplecov', require: false
   gem 'simplecov-rcov'
+  gem 'database_cleaner'
+end
+
+group :development do
+  gem 'capistrano'
+  gem 'capistrano-rails'
+  gem 'capistrano-rvm'
+  gem 'capistrano-passenger'
+
+  gem 'pry'
 
   gem 'better_errors'
   gem 'binding_of_caller'
-  gem 'database_cleaner'
 end
