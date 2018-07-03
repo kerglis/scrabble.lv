@@ -8,3 +8,5 @@ set :linked_dirs, %w{ bin log tmp/pids tmp/cache tmp/sockets public/system publi
 
 set :rvm_ruby_version, '2.3.7@scrabble'
 set :passenger_restart_with_touch, true
+
+append :linked_dirs, '.bundle'
