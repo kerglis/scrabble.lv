@@ -3,12 +3,9 @@ site_name:              "scrabble.lv"
 host:                   "scrabble.lv"
 host_nice:              "scrabble.lv"
 email_from:             "scrabble <info@scrabble.lv>"
-rpp:                    20
 locales:
   - lv
 
-ga_account:             "UA-xxxxxx-1"
-
 facebook:
-  key:      "--"
-  secret:   "--"
+  key:      <%= ENV['SCRABBLE_LV_FACEBOOK_KEY'] %>
+  secret:   <%= ENV['SCRABBLE_LV_FACEBOOK_SECRET'] %>

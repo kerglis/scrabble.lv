@@ -1,16 +1,12 @@
-# encoding: UTF-8
-
-u = User.where(
-  first_name: 'Kristaps',
-  last_name: 'Ērglis',
-  email: 'kristaps.erglis@gmail.com',
-).first_or_create
-
-u.update_attributes(
-  password: '12341234',
-  admin: true
+# create demo account
+User.create(
+  first_name: 'Scrabble',
+  last_name: 'Demo',
+  email: 'demo@scrabble.lv',
+  password: '12341234'
 )
 
+# initialize Chars for LV locale
 chars_LV = [
   # char, total chars, pts
   ['a',   11,          1],
@@ -49,7 +45,6 @@ chars_LV = [
   ['*',   2,           0], # wild card
 ]
 
-# initialize for LV
 locale = :lv
 Char.for_locale(locale).destroy_all
 chars_LV.each do |char, total, pts|

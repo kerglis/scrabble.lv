@@ -2,28 +2,8 @@
 
 My attempt to make famous game Scrabble to be playable in Latvian language.
 By the moment - it allows to check, whether the word is usable or not.
-
-== Getting Started
-
-1. At the command prompt, check out project from GitHub repo:
-    git clone https://github.com/kerglis/scrabble.lv.git
-
-2. Change directory to <tt>scrabble.lv</tt>:
-    cd scrabble.lv
-
-3. Prepare RVM environment:
-    rvm --rvmrc --create 1.9.3@scrabble.lv
-
-4. Bundle gems
-    bundle install
-
-5. Setup database
-    rake db:migrate
-    rake db:test:prepare
-
-6. Run tests
-    rspec spec
+And to guess best fit available from given letters.
 
 == Demo
 
-Try online on: http://demo.scrabble.lv (in latvian)
+Try online on: http://scrabble.spy.lv (in latvian)

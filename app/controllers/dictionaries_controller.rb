@@ -1,7 +1,8 @@
 class DictionariesController < ApplicationController
   require 'ostruct'
 
-  before_filter :authenticate_user!
+  # disable auth for now
+  # before_filter :authenticate_user!
 
   def show
     redirect_to check_word_dictionary_path

@@ -13,3 +13,4 @@ test:
 
 production:
   <<: *common
+  password: <%= ENV['SCRABBLE_DB_PASSWORD'] %>
