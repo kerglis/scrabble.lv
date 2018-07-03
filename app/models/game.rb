@@ -93,7 +93,7 @@ class Game < ActiveRecord::Base
     end
 
     cells.each do |cell|
-      out[cell.y][cell.x + 1] = cell.char.termcolor
+      out[cell.y][cell.x + 1] = cell.game_char&.termcolor
     end
     out
   end
@@ -165,7 +165,7 @@ class Game < ActiveRecord::Base
     return players.first unless current_move
     next_player_position = current_move.player.position + 1
     next_player_position = 1 if next_player_position > players.count
-    players.find_by_position(next_player_position)
+    players.find_by(position: next_player_position)
   end
 
   def next_move

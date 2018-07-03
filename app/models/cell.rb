@@ -42,37 +42,21 @@ class Cell < ActiveRecord::Base
   end
 
   def find_neighbor(direction)
-    send("cell_#{DIRECTIONS[direction]}")
-  end
-
-  def neighbor_ids
-    @neighbor_ids ||= Hash[
-      Cell.directions.map do |direction|
-        [
-          direction.to_sym,
-          neighbor(direction).try(:id)
-        ]
-      end
-    ]
+    neighbors[direction]
   end
 
   def neighbors
-    Hash[
-      Cell.directions.map do |direction|
-        [
-          direction.to_sym,
-          Cell.find_by_id(neighbor_ids[direction.to_sym])
-        ]
-      end
-    ]
+    @neighbors ||= DIRECTIONS.each_with_object({}) do |(key, direction), hash|
+      hash[key] = send("cell_#{direction}")
+    end
   end
 
   def add_char(game_char)
-    CellService.add_char(self, game_char)
+    CellService.new(cell: self, game_char: game_char).add_char
   end
 
   def remove_char
-    CellService.remove_char(self, game_char)
+    CellService.new(cell: self, game_char: game_char).remove_char
   end
 
   private

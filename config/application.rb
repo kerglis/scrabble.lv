@@ -45,6 +45,7 @@ module ScrabbleLv
     # This is necessary if your schema can't be completely dumped by the schema dumper,
     # like if you have constraints or database-specific column types
     config.active_record.schema_format = :sql
+    config.active_record.raise_in_transactional_callbacks = true
 
     # Enforce whitelist mode for mass assignment.
     # This will create an empty whitelist of attributes available for mass-assignment for all models

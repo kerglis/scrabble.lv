@@ -1,25 +1,33 @@
 require 'spec_helper'
 
 describe Dictionary do
-  let!(:dict) { Dictionary.new(:xx) }
+  let!(:dict) { Dictionary.new(:lv) }
 
-  describe 'distinct a from ā, etc' do
+  describe 'diacritical letters should have exact match' do
+    let(:chars) { 'āēīūģķļ' }
+
     it do
       dict.add('āēīū')
       dict.add('aeiu')
-      dict.add('ģķļņ')
-      dict.add('gkln')
+      dict.add('ģķļ')
+      dict.add('gkl')
 
-      expect(dict.check?('āēīū')).to be true
-      expect(dict.check?('ģķļņ')).to be true
-      expect(dict.check?('āēiu')).to be false
-      expect(dict.check?('ģķln')).to be false
-      expect(dict.valid_words_from_chars('āēīūxyz').count).to eq 1
+      aggregate_failures do
+        expect(dict.check?('āēīū')).to be true
+        expect(dict.check?('ģķļ')).to be true
+        expect(dict.check?('āeīu')).to be false
+        expect(dict.check?('gķl')).to be false
+
+        expect(dict.valid_words_from_chars(chars)).to include('āēīū', 'āķē', 'āķī', 'ūķī')
+        expect(dict.valid_words_from_chars(chars)).to_not include('aeiu')
+        expect(dict.valid_words_from_chars(chars)).to include('ģķļ')
+        expect(dict.valid_words_from_chars(chars)).to_not include('gkl')
+      end
     end
   end
 
   describe '#find_possible_words_from_chars' do
-    it do
+    it 'take only first 7 into account' do
       expect(
         Dictionary.find_possible_words_from_chars('abcdefgi').count
       ).to eq(
@@ -31,19 +39,23 @@ describe Dictionary do
   describe 'string functions' do
     describe '#insert_ch' do
       it do
-        expect('abc'.insert_ch(0, 'x')).to eq 'xabc'
-        expect('abc'.insert_ch(1, 'x')).to eq 'axbc'
-        expect('abc'.insert_ch(4, 'x')).to eq 'abc'
+        aggregate_failures do
+          expect('abc'.insert_ch(0, 'x')).to eq 'xabc'
+          expect('abc'.insert_ch(1, 'x')).to eq 'axbc'
+          expect('abc'.insert_ch(4, 'x')).to eq 'abc'
+        end
       end
     end
 
     describe '#insert_ch!' do
       let!(:abc) { 'abc' }
       it do
-        expect(abc.insert_ch!(4, 'x')).to be_nil
-        expect(abc).to eq 'abc'
-        expect(abc.insert_ch!(3, 'x')).to be true
-        expect(abc).to eq 'abcx'
+        aggregate_failures do
+          expect(abc.insert_ch!(4, 'x')).to be_nil
+          expect(abc).to eq 'abc'
+          expect(abc.insert_ch!(3, 'x')).to be true
+          expect(abc).to eq 'abcx'
+        end
       end
     end
 
@@ -51,10 +63,12 @@ describe Dictionary do
       let!(:chars) { { 1 => 'x', 3 => 'y' } }
 
       it do
-        expect('abc'.insert_chars_at(0, chars)).to eq 'axbyc'
-        expect('abc'.insert_chars_at(1, chars)).to eq 'abxcy'
-        expect('abc'.insert_chars_at(2, chars)).to eq 'abcx'
-        expect('abc'.insert_chars_at(3, chars)).to eq 'abc'
+        aggregate_failures do
+          expect('abc'.insert_chars_at(0, chars)).to eq 'axbyc'
+          expect('abc'.insert_chars_at(1, chars)).to eq 'abxcy'
+          expect('abc'.insert_chars_at(2, chars)).to eq 'abcx'
+          expect('abc'.insert_chars_at(3, chars)).to eq 'abc'
+        end
       end
     end
 
@@ -63,13 +77,17 @@ describe Dictionary do
       let!(:chars) { { 1 => 'x', 3 => 'y' } }
 
       it do
-        expect(abc.insert_chars_at!(0, chars)).to be true
-        expect(abc).to eq 'axbyc'
+        aggregate_failures do
+          expect(abc.insert_chars_at!(0, chars)).to be true
+          expect(abc).to eq 'axbyc'
+        end
       end
 
       it do
-        expect(abc.insert_chars_at!(3, chars)).to be_nil
-        expect(abc).to eq 'abc'
+        aggregate_failures do
+          expect(abc.insert_chars_at!(3, chars)).to be_nil
+          expect(abc).to eq 'abc'
+        end
       end
     end
   end
@@ -120,7 +138,7 @@ describe Dictionary do
   end
 
   describe '#valid_words_from_chars' do
-    it do
+    it 'find valid words with existing chars on board' do
       dict.add('xay')
       dict.add('xaybz')
       dict.add('xey')

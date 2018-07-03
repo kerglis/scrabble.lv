@@ -34,11 +34,11 @@ class Move < ActiveRecord::Base
 
   def add_char_to_board(game_char, x, y)
     cell = game.cells.free.by_pos(x, y)
-    CellService.add_char(cell, self, game_char)
+    CellService.new(cell: cell, move: self, game_char: game_char).add_char
   end
 
-  def remove_char_from_board
-    CellService.remove_char(cell)
+  def remove_char_from_board(game_char)
+    game_char&.cell&.free!
   end
 
   def finish_move

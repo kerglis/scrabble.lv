@@ -74,11 +74,13 @@ describe Cell do
     let!(:move) { game.current_move }
     let!(:on_hand) { move.player.chars_on_hand }
 
-    it do
+    before do
       (0..2).each do |i|
         move.add_char_to_board(on_hand[i], 8, 8 + i)
       end
+    end
 
+    it do
       aggregate_failures do
         expect(game.cells.free.count).to eq 222
         expect(game.cells.used.count).to eq 3
@@ -88,7 +90,7 @@ describe Cell do
 
     context 'recall char from board' do
       it do
-        move.char_from_board(on_hand[0])
+        move.remove_char_from_board(on_hand[0])
         aggregate_failures do
           expect(game.cells.free.count).to eq 223
           expect(game.cells.used.count).to eq 2
