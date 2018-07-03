@@ -4,7 +4,6 @@ require File.expand_path('../simplecov_helper', __FILE__)
 ENV["RAILS_ENV"] ||= 'test'
 require File.expand_path("../../config/environment", __FILE__)
 require 'rspec/rails'
-require 'capybara/rspec'
 
 # Requires supporting ruby files with custom matchers and macros, etc,
 # in spec/support/ and its subdirectories.
@@ -31,10 +30,9 @@ RSpec.configure do |config|
   # automatically. This will be the default behavior in future versions of
   # rspec-rails.
   config.infer_base_class_for_anonymous_controllers = false
-  # config.include TranslationHelper, capybara_feature: true
 
-  # FactoryGirl
-  config.include FactoryGirl::Syntax::Methods
+  # FactoryBot
+  config.include FactoryBot::Syntax::Methods
 
   config.before(:suite) do
     DatabaseCleaner.strategy = :transaction
@@ -47,5 +45,3 @@ RSpec.configure do |config|
     end
   end
 end
-
-Capybara.default_max_wait_time = 5

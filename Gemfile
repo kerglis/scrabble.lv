@@ -4,7 +4,7 @@ gem 'rails', '~> 4.1'
 gem 'ffi-hunspell', github: 'postmodern/ffi-hunspell'
 gem 'soundex'
 
-gem 'mysql2' #, '~> 0.3.18'
+gem 'mysql2', '< 0.5'
 gem 'jquery-rails'
 gem 'jquery-ui-rails'
 gem 'haml-rails'
@@ -32,11 +32,8 @@ gem 'hirb'
 gem 'hirb-unicode'
 gem 'hirb-colors'
 gem 'termcolor'
-gem 'ransack'
-gem 'draper', '~> 1.3'
 
 group :assets do
-  # gem 'less-rails'
   gem 'coffee-rails'
   gem 'uglifier'
   gem 'quiet_assets', group: :development
@@ -52,23 +49,14 @@ group :development, :test do
   gem 'pry'
   gem 'rspec-rails'
   gem 'rspec-collection_matchers'
-  gem 'anticipate'
 
-  gem 'cucumber-rails', require: false
-  gem 'site_prism'
-  gem 'selenium-webdriver'
-
-  gem 'factory_girl_rails'
+  gem 'factory_bot_rails'
   gem 'faker'
   gem 'shoulda-matchers'
-  gem 'timecop'
   gem 'simplecov', require: false
   gem 'simplecov-rcov'
 
   gem 'better_errors'
   gem 'binding_of_caller'
-
-  gem 'letter_opener'
-
   gem 'database_cleaner'
 end

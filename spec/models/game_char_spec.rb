@@ -3,7 +3,7 @@ require 'spec_helper'
 describe GameChar do
   fixtures :chars
 
-  let(:game) { FactoryGirl.create :game_initialized, players_cnt: 2 }
+  let(:game) { FactoryBot.create :game_initialized, players_cnt: 2 }
   let(:p1) { game.players.first }
   let(:p2) { game.players.last }
 

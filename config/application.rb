@@ -57,7 +57,7 @@ module ScrabbleLv
     config.generators do |g|
       g.template_engine :haml
       g.test_framework :rspec, fixture: false
-      g.fixture_replacement :factory_girl
+      g.fixture_replacement :factory_bot
       g.stylesheets   false
       g.helper        false
     end
