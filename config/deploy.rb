@@ -6,5 +6,5 @@ set :log_level, :info
 set :linked_files, %w{ tmp/restart.txt }
 set :linked_dirs, %w{ bin log tmp/pids tmp/cache tmp/sockets public/system public/uploads }
 
-set :rvm_ruby_version, '2.3.3@scrabble'
+set :rvm_ruby_version, '2.3.7@scrabble'
 set :passenger_restart_with_touch, true
